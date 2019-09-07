@@ -1,0 +1,10 @@
+.jigsaw_shuffled_board {
+  display: flex;
+  margin: auto;
+  flex-wrap: wrap;
+  width: 95%;
+}
+
+.image {
+  max-width: 100%;
+}
