@@ -1,17 +1,19 @@
 import React, { Component } from "react";
 import "./Jigsaw.css";
+import Piece from "../Piece/Piece";
 
 export default class Jigsaw extends Component {
   state = {
     pieces: [],
-    shuffled: [],
-    size: 3
+    shuffled: []
   };
 
   componentDidMount() {
-    const pieces = [...Array(this.state.size * this.state.size)].map(
+    const pieces = [...Array(this.props.size * this.props.size)].map(
       (_, i) => ({
-        img: require(`./images/img_${("0" + (i + 1)).substr(-2)}.png`),
+        img: require(`../../../public/images/${this.props.id}/${
+          this.props.size
+        }/img_${("0" + (i + 1)).substr(-2)}.png`),
         order: i - 1
       })
     );
@@ -25,32 +27,33 @@ export default class Jigsaw extends Component {
   }
 
   render() {
+    let imgStyle = {
+      width: `${100 / this.props.size}%`
+    };
     return (
       <div className="jigsaw_shuffled_board">
-        {this.state.shuffled.map((piece, i) =>
-          this.renderPieceContainer(piece, i)
-        )}
+        {this.state.shuffled.map((piece, index) => (
+          <Piece
+            key={index}
+            piece={piece}
+            imgStyle={imgStyle}
+            onClickPiece={() => this.clickPiece(piece, index)}
+          />
+        ))}
       </div>
     );
   }
 
-  renderPieceContainer(piece, index) {
-    let imgStyle = {
-      width: `${100 / this.state.size}%`
-    };
-    if (piece) {
-      return (
-        <img
-          key={index}
-          onClick={() => this.clickPiece(piece, index)}
-          className="image"
-          alt=""
-          style={imgStyle}
-          src={piece.img}
-        />
-      );
+  isComplete() {
+    if (this.state.shuffled[0] == undefined) {
+      for (let i = 1; i < this.state.shuffled.length; i++) {
+        if (this.state.shuffled[i].order != i - 1) {
+          return false;
+        }
+      }
+      return true;
     } else {
-      return <div style={imgStyle} className="image"></div>;
+      return false;
     }
   }
 
@@ -66,10 +69,10 @@ export default class Jigsaw extends Component {
       });
       if (
         (undefinedIndex - 1 == index &&
-          undefinedIndex % this.state.size != 0) ||
-        (undefinedIndex + 1 == index && index % this.state.size != 0) ||
-        undefinedIndex + this.state.size == index ||
-        undefinedIndex - this.state.size == index
+          undefinedIndex % this.props.size != 0) ||
+        (undefinedIndex + 1 == index && index % this.props.size != 0) ||
+        undefinedIndex + this.props.size == index ||
+        undefinedIndex - this.props.size == index
       ) {
         if (pieceData) {
           shuffledData[shuffledData.indexOf(pieceData)] = undefined;
@@ -80,19 +83,6 @@ export default class Jigsaw extends Component {
           }
         }
       }
-    }
-  }
-
-  isComplete() {
-    if (this.state.shuffled[0] == undefined) {
-      for (let i = 1; i < this.state.shuffled.length; i++) {
-        if (this.state.shuffled[i].order != i - 1) {
-          return false;
-        }
-      }
-      return true;
-    } else {
-      return false;
     }
   }
 
