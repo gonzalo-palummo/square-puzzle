@@ -1,11 +1,11 @@
 import React from "react";
 import "./App.css";
-import Jigsaw from "./components/Jigsaw/Jigsaw";
+import Navbar from "./components/Navbar/Navbar";
 
 function App() {
   return (
     <div className="App">
-      <Jigsaw id="1834" size={3} />
+      <Navbar />
     </div>
   );
 }
