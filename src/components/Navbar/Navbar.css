@@ -1,10 +1,17 @@
-.MuiBottomNavigationAction-root {
-  max-width: 100% !important;
-}
-.MuiBottomNavigation-root {
+.menu {
   position: fixed;
   bottom: 0;
-  width: 100%;
-  right: 0;
-  left: 0;
+}
+
+.list {
+  list-style-type: none;
+}
+
+a.unlink {
+  color: inherit;
+}
+a.unlink:hover {
+  color: inherit;
+  text-decoration: inherit;
+  cursor: auto;
 }
