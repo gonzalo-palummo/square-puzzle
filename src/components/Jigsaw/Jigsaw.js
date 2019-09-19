@@ -9,14 +9,15 @@ export default class Jigsaw extends Component {
   };
 
   componentDidMount() {
-    const pieces = [...Array(this.props.size * this.props.size)].map(
-      (_, i) => ({
-        img: require(`../../../public/images/${this.props.id}/${
-          this.props.size
-        }/img_${("0" + (i + 1)).substr(-2)}.png`),
-        order: i - 1
-      })
-    );
+    console.log(this.props.match.params);
+    const pieces = [
+      ...Array(this.props.match.params.size * this.props.match.params.size)
+    ].map((_, i) => ({
+      img: require(`../../../public/images/${
+        this.props.match.params.jigsawId
+      }/${this.props.match.params.size}/img_${("0" + (i + 1)).substr(-2)}.png`),
+      order: i - 1
+    }));
     pieces.shift();
     let shuffleData = this.shufflePieces(pieces);
 
@@ -28,7 +29,7 @@ export default class Jigsaw extends Component {
 
   render() {
     let imgStyle = {
-      width: `${100 / this.props.size}%`
+      width: `${100 / this.props.match.params.size}%`
     };
     return (
       <div className="jigsaw_shuffled_board">
@@ -69,10 +70,11 @@ export default class Jigsaw extends Component {
       });
       if (
         (undefinedIndex - 1 == index &&
-          undefinedIndex % this.props.size != 0) ||
-        (undefinedIndex + 1 == index && index % this.props.size != 0) ||
-        undefinedIndex + this.props.size == index ||
-        undefinedIndex - this.props.size == index
+          undefinedIndex % this.props.match.params.size != 0) ||
+        (undefinedIndex + 1 == index &&
+          index % this.props.match.params.size != 0) ||
+        undefinedIndex + this.props.match.params.size == index ||
+        undefinedIndex - this.props.match.params.size == index
       ) {
         if (pieceData) {
           shuffledData[shuffledData.indexOf(pieceData)] = undefined;

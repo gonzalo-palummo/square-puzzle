@@ -10,7 +10,7 @@ function App() {
     <div className="App">
       <Router>
         <Navbar />
-        <Route path="/" exact component={Play} />
+        <Route path="/play" exact component={Play} />
         <Route path="/profile/" component={Profile} />
       </Router>
     </div>

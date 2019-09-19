@@ -9,8 +9,8 @@ function Navbar() {
       <nav>
         <ul className="row list justify-content-center p-0">
           <li className="col-xs-6 text-center p-2">
-            <Link to="/" className="unlink">
-              Game <PlayArrow className="d-block m-auto" />
+            <Link to="/play" className="unlink">
+              Play <PlayArrow className="d-block m-auto" />
             </Link>
           </li>
           <li className="col-xs-6 text-center p-2">
