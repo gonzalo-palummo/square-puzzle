@@ -1,22 +1,26 @@
 import React from "react";
-import Jigsaw from "../components/Jigsaw/Jigsaw";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 function Play({ match }) {
   console.log(match.url);
   console.log(match.url);
-  let jigsawId = 1834;
-  let size = 3;
+  // TODO: USE STATE
+  let puzzles = [
+    {
+      jigsawId: 1834
+    }
+  ];
   return (
     <div>
       <ul>
-        <li>
-          <Link to={`${match.url}/${jigsawId}/${size}`}>Go to puzzle</Link>
-        </li>
+        {puzzles.map((puzzle, index) => (
+          <li key={index}>
+            <Link to={`/play/sizes/${puzzle.jigsawId}`}>
+              Puzzle {`${puzzle.jigsawId}`}
+            </Link>
+          </li>
+        ))}
       </ul>
-
-      {/* <Route path={`${match.path}:jigsawId/:size`} component={Jigsaw} /> */}
-      <Route path={"/play/:jigsawId/:size"} component={Jigsaw} />
     </div>
   );
 }
