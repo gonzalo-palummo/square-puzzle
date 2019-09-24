@@ -12,9 +12,12 @@ function ModalDialog(props) {
         </Modal.Header>
         <Modal.Body>{props.message}</Modal.Body>
         <Modal.Footer>
-          <Link to="/" className="btn btn-secondary my-2 border-rounded">
+          <button
+            onClick={props.onRequestClose}
+            className="btn btn-secondary my-2 border-rounded"
+          >
             Close
-          </Link>
+          </button>
         </Modal.Footer>
       </Modal>
     </div>

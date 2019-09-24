@@ -22,7 +22,7 @@ function JigsawSizes(props) {
           <li key={index} className="size border-rounded mx-auto my-3">
             <Link
               to={`/play/sizes/${puzzle.jigsawId}/${puzzle.size}`}
-              className="text-primary font-weight-light h1"
+              className="text-white font-weight-light h1"
             >
               {puzzle.size}
             </Link>

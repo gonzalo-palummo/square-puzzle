@@ -40,14 +40,11 @@ class Play extends Component {
         <h1 className="d-none">Puzzles list</h1>
         <ul className="list-unstyled text-center w-50 m-auto">
           {this.state.puzzles.map((puzzle, index) => (
-            <li
-              key={index}
-              className="p-2 border border-primary rounded my-2 text-white"
-            >
+            <li key={index} className="puzzle-item p-2 rounded my-2 text-white">
               <Link to={`/play/sizes/${puzzle.jigsawId}`}>
                 <img
                   src={puzzle.imgUrl}
-                  class="puzzle-preview"
+                  className="puzzle-preview"
                   alt="Preview of Puzzle"
                 />
               </Link>

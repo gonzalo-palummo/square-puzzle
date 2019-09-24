@@ -2,22 +2,22 @@ import React, { Component } from "react";
 import "./Jigsaw.css";
 import Piece from "../Piece/Piece";
 import ModalDialog from "../ModalDialog/ModalDialog";
+import { withRouter } from "react-router-dom";
 
-export default class Jigsaw extends Component {
+class Jigsaw extends Component {
   constructor(props) {
     super(props);
     this.state = {
       pieces: [],
       shuffled: [],
-      size: parseInt(this.props.match.params.size),
-      jigsawId: parseInt(this.props.match.params.jigsawId),
+      size: parseInt(this.props.size),
+      jigsawId: parseInt(this.props.jigsawId),
       isModalOpen: false
     };
     this.handleRequestCloseModal = this.handleRequestCloseModal.bind(this);
   }
 
   componentDidMount() {
-    console.log(this.props.match.params);
     const pieces = [...Array(this.state.size * this.state.size)].map(
       (_, i) => ({
         img: require(`../../images/${this.state.jigsawId}/${
@@ -63,6 +63,7 @@ export default class Jigsaw extends Component {
 
   handleRequestCloseModal() {
     this.setState({ isModalOpen: false });
+    this.props.history.push("/");
   }
 
   isComplete() {
@@ -99,6 +100,7 @@ export default class Jigsaw extends Component {
           shuffledData[shuffledData.indexOf(pieceData)] = undefined;
           shuffledData[undefinedIndex] = pieceData;
           this.setState({ shuffled: shuffledData });
+          this.props.onMove();
           if (this.isComplete()) {
             setTimeout(() => {
               this.setState({ isModalOpen: true });
@@ -122,3 +124,4 @@ export default class Jigsaw extends Component {
     return shuffled;
   }
 }
+export default withRouter(Jigsaw);

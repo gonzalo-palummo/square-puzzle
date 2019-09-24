@@ -1,3 +1,7 @@
 .puzzle-preview {
   max-width: 100%;
 }
+
+.puzzle-item {
+  border: 1px solid #007bff;
+}

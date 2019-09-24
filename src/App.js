@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import { BrowserRouter, Route } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
-import Jigsaw from "./components/Jigsaw/Jigsaw";
+import Jigsaw from "./pages/Jigsaw/Jigsaw";
 import JigsawSizes from "./pages/JigsawSizes/JigsawSizes";
 import Play from "./pages/Play/Play";
 import Profile from "./pages/Profile/Profile";

@@ -18,7 +18,7 @@ a.unlink:hover {
 
 .size {
   display: block;
-  background: black;
+  background: #007bff;
   height: 60px;
   width: 60px;
 }
