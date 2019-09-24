@@ -1,23 +1,31 @@
 import React, { Component } from "react";
 import "./Jigsaw.css";
 import Piece from "../Piece/Piece";
+import ModalDialog from "../ModalDialog/ModalDialog";
 
 export default class Jigsaw extends Component {
-  state = {
-    pieces: [],
-    shuffled: []
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      pieces: [],
+      shuffled: [],
+      size: parseInt(this.props.match.params.size),
+      jigsawId: parseInt(this.props.match.params.jigsawId),
+      isModalOpen: false
+    };
+    this.handleRequestCloseModal = this.handleRequestCloseModal.bind(this);
+  }
 
   componentDidMount() {
     console.log(this.props.match.params);
-    const pieces = [
-      ...Array(this.props.match.params.size * this.props.match.params.size)
-    ].map((_, i) => ({
-      img: require(`../../../public/images/${
-        this.props.match.params.jigsawId
-      }/${this.props.match.params.size}/img_${("0" + (i + 1)).substr(-2)}.png`),
-      order: i - 1
-    }));
+    const pieces = [...Array(this.state.size * this.state.size)].map(
+      (_, i) => ({
+        img: require(`../../images/${this.state.jigsawId}/${
+          this.state.size
+        }/img_${("0" + (i + 1)).substr(-2)}.png`),
+        order: i - 1
+      })
+    );
     pieces.shift();
     let shuffleData = this.shufflePieces(pieces);
 
@@ -29,26 +37,38 @@ export default class Jigsaw extends Component {
 
   render() {
     let imgStyle = {
-      width: `${100 / this.props.match.params.size}%`
+      width: `${100 / this.state.size}%`
     };
     return (
-      <div className="jigsaw_shuffled_board">
-        {this.state.shuffled.map((piece, index) => (
-          <Piece
-            key={index}
-            piece={piece}
-            imgStyle={imgStyle}
-            onClickPiece={() => this.clickPiece(piece, index)}
-          />
-        ))}
+      <div>
+        <div className="jigsaw_shuffled_board">
+          {this.state.shuffled.map((piece, index) => (
+            <Piece
+              key={index}
+              piece={piece}
+              imgStyle={imgStyle}
+              onClickPiece={() => this.handleClickPiece(piece, index)}
+            />
+          ))}
+        </div>
+        <ModalDialog
+          title="Congratulations!"
+          message="You have completed the puzzle."
+          isOpen={this.state.isModalOpen}
+          onRequestClose={this.handleRequestCloseModal}
+        ></ModalDialog>
       </div>
     );
   }
 
+  handleRequestCloseModal() {
+    this.setState({ isModalOpen: false });
+  }
+
   isComplete() {
-    if (this.state.shuffled[0] == undefined) {
+    if (this.state.shuffled[0] === undefined) {
       for (let i = 1; i < this.state.shuffled.length; i++) {
-        if (this.state.shuffled[i].order != i - 1) {
+        if (this.state.shuffled[i].order !== i - 1) {
           return false;
         }
       }
@@ -58,30 +78,31 @@ export default class Jigsaw extends Component {
     }
   }
 
-  clickPiece(piece, index) {
+  handleClickPiece(piece, index) {
     if (piece) {
       const pieceData = this.state.pieces.find(p => p.order === piece.order);
       let shuffledData = this.state.shuffled;
       let undefinedIndex;
       shuffledData.find(function(piece, index) {
-        if (piece == undefined) {
+        if (piece === undefined) {
           undefinedIndex = index;
         }
       });
       if (
-        (undefinedIndex - 1 == index &&
-          undefinedIndex % this.props.match.params.size != 0) ||
-        (undefinedIndex + 1 == index &&
-          index % this.props.match.params.size != 0) ||
-        undefinedIndex + this.props.match.params.size == index ||
-        undefinedIndex - this.props.match.params.size == index
+        (undefinedIndex - 1 === index &&
+          undefinedIndex % this.state.size !== 0) ||
+        (undefinedIndex + 1 === index && index % this.state.size !== 0) ||
+        undefinedIndex + this.state.size === index ||
+        undefinedIndex - this.state.size === index
       ) {
         if (pieceData) {
           shuffledData[shuffledData.indexOf(pieceData)] = undefined;
           shuffledData[undefinedIndex] = pieceData;
           this.setState({ shuffled: shuffledData });
           if (this.isComplete()) {
-            alert("Congratulations!");
+            setTimeout(() => {
+              this.setState({ isModalOpen: true });
+            }, 0);
           }
         }
       }

@@ -1,23 +1,27 @@
 import React from "react";
 import "./App.css";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Jigsaw from "./components/Jigsaw/Jigsaw";
-import JigsawSizes from "./components/JigsawSizes/JigsawSizes";
-import Play from "./pages/Play";
-import Profile from "./pages/Profile";
+import JigsawSizes from "./pages/JigsawSizes/JigsawSizes";
+import Play from "./pages/Play/Play";
+import Profile from "./pages/Profile/Profile";
+import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
 
 function App() {
   return (
-    <div className="App">
-      <Router>
+    <BrowserRouter>
+      <div className="App">
         <Navbar />
-        <Route path="/play" exact component={Play} />
+        <Route path="/" exact component={Play} />
         <Route path="/profile/" component={Profile} />
         <Route path="/play/sizes/:jigsawId/" exact component={JigsawSizes} />
         <Route path="/play/sizes/:jigsawId/:size" component={Jigsaw} />
-      </Router>
-    </div>
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
+      </div>
+    </BrowserRouter>
   );
 }
 

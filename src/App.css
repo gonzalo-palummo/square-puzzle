@@ -3,4 +3,27 @@
 body {
   max-width: 1920px;
   margin: auto;
+  padding: 5%;
+  margin-bottom: 4rem !important;
+}
+
+.border-rounded {
+  border-radius: 1000px !important;
+}
+
+textarea:hover,
+input:hover,
+textarea:active,
+input:active,
+textarea:focus,
+input:focus,
+button:focus,
+button:active,
+button:hover,
+label:focus,
+.btn:active,
+.btn.active {
+  outline: 0px !important;
+  -webkit-appearance: none;
+  box-shadow: none !important;
 }
