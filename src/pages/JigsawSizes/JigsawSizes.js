@@ -12,6 +12,10 @@ function JigsawSizes(props) {
     {
       jigsawId: jigsawId,
       size: 3
+    },
+    {
+      jigsawId: jigsawId,
+      size: 4
     }
   ];
   return (

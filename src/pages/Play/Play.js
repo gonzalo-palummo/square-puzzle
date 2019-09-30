@@ -15,20 +15,12 @@ class Play extends Component {
     this.setState({
       puzzles: [
         {
-          imgUrl: require("../../images/1834/complete.png"),
+          imgUrl: require("../../images/1834/complete.jpg"),
           jigsawId: 1834
         },
         {
-          imgUrl: require("../../images/1834/complete.png"),
-          jigsawId: 1834
-        },
-        {
-          imgUrl: require("../../images/1834/complete.png"),
-          jigsawId: 1834
-        },
-        {
-          imgUrl: require("../../images/1834/complete.png"),
-          jigsawId: 1834
+          imgUrl: require("../../images/1835/complete.jpg"),
+          jigsawId: 1835
         }
       ]
     });
@@ -44,7 +36,7 @@ class Play extends Component {
               <Link to={`/play/sizes/${puzzle.jigsawId}`}>
                 <img
                   src={puzzle.imgUrl}
-                  className="puzzle-preview"
+                  className="puzzle-preview rounded"
                   alt="Preview of Puzzle"
                 />
               </Link>

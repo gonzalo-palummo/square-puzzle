@@ -4,3 +4,8 @@
   width: 200px;
   background: #0054ae;
 }
+
+#timer {
+  display: inline-block;
+  width: 50%;
+}

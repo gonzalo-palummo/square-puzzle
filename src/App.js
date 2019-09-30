@@ -8,6 +8,7 @@ import Play from "./pages/Play/Play";
 import Profile from "./pages/Profile/Profile";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
+import Complete from "./pages/Complete/Complete";
 
 function App() {
   return (
@@ -18,6 +19,11 @@ function App() {
         <Route path="/profile/" component={Profile} />
         <Route path="/play/sizes/:jigsawId/" exact component={JigsawSizes} />
         <Route path="/play/sizes/:jigsawId/:size" component={Jigsaw} />
+        <Route
+          path="/play/complete/:time/:movements"
+          exact
+          component={Complete}
+        />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
       </div>

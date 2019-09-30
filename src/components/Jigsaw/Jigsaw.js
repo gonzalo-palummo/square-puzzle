@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./Jigsaw.css";
 import Piece from "../Piece/Piece";
-import ModalDialog from "../ModalDialog/ModalDialog";
 import { withRouter } from "react-router-dom";
 
 class Jigsaw extends Component {
@@ -11,10 +10,8 @@ class Jigsaw extends Component {
       pieces: [],
       shuffled: [],
       size: parseInt(this.props.size),
-      jigsawId: parseInt(this.props.jigsawId),
-      isModalOpen: false
+      jigsawId: parseInt(this.props.jigsawId)
     };
-    this.handleRequestCloseModal = this.handleRequestCloseModal.bind(this);
   }
 
   componentDidMount() {
@@ -22,7 +19,7 @@ class Jigsaw extends Component {
       (_, i) => ({
         img: require(`../../images/${this.state.jigsawId}/${
           this.state.size
-        }/img_${("0" + (i + 1)).substr(-2)}.png`),
+        }/img_${("0" + (i + 1)).substr(-2)}.jpg`),
         order: i - 1
       })
     );
@@ -40,30 +37,17 @@ class Jigsaw extends Component {
       width: `${100 / this.state.size}%`
     };
     return (
-      <div>
-        <div className="jigsaw_shuffled_board">
-          {this.state.shuffled.map((piece, index) => (
-            <Piece
-              key={index}
-              piece={piece}
-              imgStyle={imgStyle}
-              onClickPiece={() => this.handleClickPiece(piece, index)}
-            />
-          ))}
-        </div>
-        <ModalDialog
-          title="Congratulations!"
-          message="You have completed the puzzle."
-          isOpen={this.state.isModalOpen}
-          onRequestClose={this.handleRequestCloseModal}
-        ></ModalDialog>
+      <div className="jigsaw_shuffled_board">
+        {this.state.shuffled.map((piece, index) => (
+          <Piece
+            key={index}
+            piece={piece}
+            imgStyle={imgStyle}
+            onClickPiece={() => this.handleClickPiece(piece, index)}
+          />
+        ))}
       </div>
     );
-  }
-
-  handleRequestCloseModal() {
-    this.setState({ isModalOpen: false });
-    this.props.history.push("/");
   }
 
   isComplete() {
@@ -102,9 +86,7 @@ class Jigsaw extends Component {
           this.setState({ shuffled: shuffledData });
           this.props.onMove();
           if (this.isComplete()) {
-            setTimeout(() => {
-              this.setState({ isModalOpen: true });
-            }, 0);
+            this.props.onComplete();
           }
         }
       }

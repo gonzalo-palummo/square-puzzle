@@ -1,7 +1,6 @@
 import React from "react";
 import "./ModalDialog.css";
 import { Modal } from "react-bootstrap";
-import { Link } from "react-router-dom";
 
 function ModalDialog(props) {
   return (
