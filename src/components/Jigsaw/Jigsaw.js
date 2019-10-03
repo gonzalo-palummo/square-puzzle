@@ -98,23 +98,20 @@ class Jigsaw extends Component {
 
     shuffle();
 
-    if (!isSolvable(shuffled)) {
+    while (!isSolvable(shuffled, this.state.size)) {
       shuffle();
-      // AFTER SHUFFLE Y BEFORE SHUFFLE ARE EQUAL
     }
 
     function shuffle() {
-      console.log("BEFORE SHUFFLE", shuffled);
       for (let i = shuffled.length - 1; i > 0; i--) {
         let j = Math.floor(Math.random() * (i + 1));
         let tmp = shuffled[i];
         shuffled[i] = shuffled[j];
         shuffled[j] = tmp;
       }
-      console.log("AFTER SHUFFLE", shuffled);
     }
 
-    function isSolvable(shuffledPieces) {
+    function isSolvable(shuffledPieces, size) {
       let inversionCount = 0;
 
       for (let i = 0; i < shuffledPieces.length; i++) {
@@ -129,7 +126,10 @@ class Jigsaw extends Component {
       }
 
       console.log(inversionCount);
-      if (inversionCount % 2 == 1) {
+      if (
+        (size % 2 == 1 && inversionCount % 2 == 1) ||
+        (size % 2 == 0 && inversionCount % 2 == 0)
+      ) {
         return false;
       } else {
         return true;
