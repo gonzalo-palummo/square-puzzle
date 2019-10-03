@@ -96,11 +96,44 @@ class Jigsaw extends Component {
   shufflePieces(pieces) {
     const shuffled = [...pieces];
 
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      let j = Math.floor(Math.random() * (i + 1));
-      let tmp = shuffled[i];
-      shuffled[i] = shuffled[j];
-      shuffled[j] = tmp;
+    shuffle();
+
+    if (!isSolvable(shuffled)) {
+      shuffle();
+      // AFTER SHUFFLE Y BEFORE SHUFFLE ARE EQUAL
+    }
+
+    function shuffle() {
+      console.log("BEFORE SHUFFLE", shuffled);
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        let tmp = shuffled[i];
+        shuffled[i] = shuffled[j];
+        shuffled[j] = tmp;
+      }
+      console.log("AFTER SHUFFLE", shuffled);
+    }
+
+    function isSolvable(shuffledPieces) {
+      let inversionCount = 0;
+
+      for (let i = 0; i < shuffledPieces.length; i++) {
+        for (let j = i + 1; j < shuffledPieces.length; j++) {
+          if (shuffledPieces[i].order > shuffledPieces[j].order) {
+            console.log(
+              shuffledPieces[i].order + " is > " + shuffledPieces[j].order
+            );
+            inversionCount++;
+          }
+        }
+      }
+
+      console.log(inversionCount);
+      if (inversionCount % 2 == 1) {
+        return false;
+      } else {
+        return true;
+      }
     }
 
     return shuffled;
