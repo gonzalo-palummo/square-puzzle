@@ -33,8 +33,23 @@ class Jigsaw extends Component {
   }
 
   render() {
+    // Otra opción: En el resize del browser/load tomar el ancho de la pantalla,
+    // restarle el padding/borde/margin que no sea el puzzle.
+    // A eso lo dividís por 3 o 4 (cantidad de fichas), y tenés el ancho de la pieza.
+    // A partir de ahí, multiplicás por el ratio y tenés el alto en px.
+
+    // ref (react) => cada pieza
+    // El ancho sigue con porcentaje
+    // Una vez inyectada en la página en el DOM, preguntás al nodo (via ref)
+    // el computedWidth final.
+    // Eso lo multiplicás por el ratio y te va a dar el alto en px.
+    // Con eso, le ponés el alto en px a la imagen.
+    const ratio = 1008 / 691; // width / height
+    const pieceWidth = 100 / this.state.size;
+    const pieceHeight = pieceWidth * ratio;
     let imgStyle = {
-      width: `${100 / this.state.size}%`
+      width: `${pieceWidth}%`,
+      height: `${pieceHeight}%`
     };
     return (
       <div className="jigsaw_shuffled_board">
