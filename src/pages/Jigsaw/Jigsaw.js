@@ -53,23 +53,16 @@ class Jigsaw extends Component {
   render() {
     return (
       <div>
+        <p className="timer mx-auto text-center font-weight-light mt-2 pb-2 rounded">
+          <span id="timer">{this.secondsElapsed()}</span> |{" "}
+          {this.state.movements}
+        </p>
         <JigsawComponent
           size={this.props.match.params.size}
           jigsawId={this.props.match.params.jigsawId}
           onMove={this.handleMove}
           onComplete={() => this.onComplete()}
         />
-        <p className="timer mx-auto text-center font-weight-light mt-2 pb-2 rounded">
-          <span id="timer">{this.secondsElapsed()}</span> |{" "}
-          {this.state.movements}
-        </p>
-
-        <ModalDialog
-          title="Congratulations!"
-          message="You have completed the puzzle."
-          isOpen={this.state.isModalOpen}
-          onRequestClose={this.handleRequestCloseModal}
-        ></ModalDialog>
       </div>
     );
   }

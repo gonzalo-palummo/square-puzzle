@@ -21,6 +21,10 @@ class Play extends Component {
         {
           imgUrl: require("../../images/1835/complete.jpg"),
           jigsawId: 1835
+        },
+        {
+          imgUrl: require("../../images/1836/complete.jpg"),
+          jigsawId: 1836
         }
       ]
     });

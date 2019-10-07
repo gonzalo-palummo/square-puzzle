@@ -1,6 +1,6 @@
 import React from "react";
 import "./Navbar.css";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { PlayArrow, Person } from "@material-ui/icons";
 
 function Navbar() {
@@ -9,14 +9,19 @@ function Navbar() {
       <nav>
         <ul className="row list justify-content-center p-0 m-0">
           <li className="col-xs-6 text-center p-2">
-            <Link to="/" className="unlink">
+            <NavLink
+              to="/"
+              className="unlink"
+              activeClassName="active"
+              exact={true}
+            >
               Play <PlayArrow className="d-block m-auto" />
-            </Link>
+            </NavLink>
           </li>
           <li className="col-xs-6 text-center p-2">
-            <Link to="/profile/" className="unlink">
+            <NavLink to="/profile/" className="unlink" activeClassName="active">
               Profile <Person className="d-block m-auto" />
-            </Link>
+            </NavLink>
           </li>
         </ul>
       </nav>

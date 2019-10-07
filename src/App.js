@@ -13,7 +13,7 @@ import Complete from "./pages/Complete/Complete";
 function App() {
   return (
     <BrowserRouter>
-      <div className="App">
+      <div className="app container">
         <Navbar />
         <Route path="/" exact component={Play} />
         <Route path="/profile/" component={Profile} />

@@ -10,11 +10,13 @@ class Jigsaw extends Component {
       pieces: [],
       shuffled: [],
       size: parseInt(this.props.size),
-      jigsawId: parseInt(this.props.jigsawId)
+      jigsawId: parseInt(this.props.jigsawId),
+      imageWidth: window.innerWidth - 30
     };
   }
 
   componentDidMount() {
+    window.addEventListener("resize", this.updateDimensions);
     const pieces = [...Array(this.state.size * this.state.size)].map(
       (_, i) => ({
         img: require(`../../images/${this.state.jigsawId}/${
@@ -32,11 +34,18 @@ class Jigsaw extends Component {
     });
   }
 
+  updateDimensions = () => {
+    this.setState({
+      imageWidth: window.innerWidth - 30
+    });
+  };
+
   render() {
+    // Opciones para ponerle alto en píxeles:
     // Otra opción: En el resize del browser/load tomar el ancho de la pantalla,
     // restarle el padding/borde/margin que no sea el puzzle.
     // A eso lo dividís por 3 o 4 (cantidad de fichas), y tenés el ancho de la pieza.
-    // A partir de ahí, multiplicás por el ratio y tenés el alto en px.
+    // A partir de ahí, multiplicás por el ratio (width / height) y tenés el alto en px.
 
     // ref (react) => cada pieza
     // El ancho sigue con porcentaje
@@ -44,13 +53,18 @@ class Jigsaw extends Component {
     // el computedWidth final.
     // Eso lo multiplicás por el ratio y te va a dar el alto en px.
     // Con eso, le ponés el alto en px a la imagen.
-    const ratio = 1008 / 691; // width / height
-    const pieceWidth = 100 / this.state.size;
-    const pieceHeight = pieceWidth * ratio;
-    let imgStyle = {
+    const pieceWidth = this.state.imageWidth / this.state.size;
+    /*let imgStyle = {
       width: `${pieceWidth}%`,
       height: `${pieceHeight}%`
+    };*/
+
+    let imgStyle = {
+      width: `${pieceWidth}px`,
+      height: `${pieceWidth}px`,
+      outline: "1px solid"
     };
+
     return (
       <div className="jigsaw_shuffled_board">
         {this.state.shuffled.map((piece, index) => (
@@ -132,9 +146,6 @@ class Jigsaw extends Component {
       for (let i = 0; i < shuffledPieces.length; i++) {
         for (let j = i + 1; j < shuffledPieces.length; j++) {
           if (shuffledPieces[i].order > shuffledPieces[j].order) {
-            console.log(
-              shuffledPieces[i].order + " is > " + shuffledPieces[j].order
-            );
             inversionCount++;
           }
         }

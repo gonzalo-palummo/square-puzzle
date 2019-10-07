@@ -4,6 +4,7 @@
   left: 0;
   right: 0;
   background: white;
+  z-index: 100;
 }
 
 .list {
@@ -17,4 +18,8 @@ a.unlink:hover {
   color: inherit;
   text-decoration: inherit;
   cursor: auto;
+}
+
+.active {
+  color: #0089ff !important;
 }

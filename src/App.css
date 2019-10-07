@@ -3,8 +3,8 @@
 body {
   max-width: 1920px;
   margin: auto;
-  padding: 5%;
   margin-bottom: 4rem !important;
+  font-family: "Roboto Mono", sans-serif;
 }
 
 .border-rounded {
@@ -26,4 +26,9 @@ label:focus,
   outline: 0px !important;
   -webkit-appearance: none;
   box-shadow: none !important;
+}
+
+.app {
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
