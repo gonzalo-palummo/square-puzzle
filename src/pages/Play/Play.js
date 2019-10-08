@@ -1,33 +1,11 @@
 import React, { Component } from "react";
 import "./Play.css";
 import { Link } from "react-router-dom";
+import environment from "./../../environment/environment.js";
 
 class Play extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      puzzles: []
-    };
-  }
-
-  componentDidMount() {
-    // TODO: AJAX REQUEST
-    this.setState({
-      puzzles: [
-        {
-          imgUrl: require("../../images/1834/complete.jpg"),
-          jigsawId: 1834
-        },
-        {
-          imgUrl: require("../../images/1835/complete.jpg"),
-          jigsawId: 1835
-        },
-        {
-          imgUrl: require("../../images/1836/complete.jpg"),
-          jigsawId: 1836
-        }
-      ]
-    });
   }
 
   render() {
@@ -35,11 +13,11 @@ class Play extends Component {
       <div>
         <h1 className="d-none">Puzzles list</h1>
         <ul className="list-unstyled text-center w-50 m-auto">
-          {this.state.puzzles.map((puzzle, index) => (
+          {this.props.puzzles.map((puzzle, index) => (
             <li key={index} className="puzzle-item p-2 rounded my-2 text-white">
-              <Link to={`/play/sizes/${puzzle.jigsawId}`}>
+              <Link to={`/play/sizes/${puzzle.id}`}>
                 <img
-                  src={puzzle.imgUrl}
+                  src={`require(${environment.apiUrl}/${puzzle.url}/complete.jpg)`}
                   className="puzzle-preview rounded"
                   alt="Preview of Puzzle"
                 />

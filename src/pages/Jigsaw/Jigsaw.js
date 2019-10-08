@@ -1,18 +1,15 @@
 import React, { Component } from "react";
 import "./Jigsaw.css";
 import JigsawComponent from "../../components/Jigsaw/Jigsaw";
-import ModalDialog from "../../components/ModalDialog/ModalDialog";
 class Jigsaw extends Component {
   constructor(props) {
     super(props);
     this.state = {
       movements: 0,
-      isModalOpen: false,
       elapsed: 0,
       start: Date.now()
     };
     this.handleMove = this.handleMove.bind(this);
-    this.handleRequestCloseModal = this.handleRequestCloseModal.bind(this);
   }
 
   secondsElapsed() {
@@ -28,14 +25,6 @@ class Jigsaw extends Component {
   onComplete() {
     let time = this.secondsElapsed();
     this.props.history.push(`/play/complete/${time}/${this.state.movements}`);
-    setTimeout(() => {
-      this.setState({ isModalOpen: true });
-    }, 0);
-  }
-
-  handleRequestCloseModal() {
-    this.setState({ isModalOpen: false });
-    this.props.history.push("/");
   }
 
   componentDidMount() {
