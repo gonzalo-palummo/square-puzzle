@@ -10,6 +10,7 @@ import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import Complete from "./pages/Complete/Complete";
 import environment from "./environment/environment";
+import AuthRoute from "./components/AuthRoute/AuthRoute";
 
 class App extends Component {
   constructor(props) {
@@ -32,19 +33,25 @@ class App extends Component {
   }
 
   render() {
+    let navbar = <Navbar />;
     return (
       <BrowserRouter>
         <div className="app container">
-          <Navbar />
-          <Route
+          {navbar}
+
+          <AuthRoute
             path="/"
             exact
-            render={() => <Play puzzles={this.state.puzzles} />}
+            render={props => <Play puzzles={this.state.puzzles} {...props} />}
           />
-          <Route path="/profile/" component={Profile} />
-          <Route path="/play/sizes/:jigsawId/" exact component={JigsawSizes} />
-          <Route path="/play/sizes/:jigsawId/:size" component={Jigsaw} />
-          <Route
+          <AuthRoute path="/profile/" component={Profile} />
+          <AuthRoute
+            path="/play/sizes/:jigsawId/"
+            exact
+            component={JigsawSizes}
+          />
+          <AuthRoute path="/play/sizes/:jigsawId/:size" component={Jigsaw} />
+          <AuthRoute
             path="/play/complete/:time/:movements"
             exact
             component={Complete}

@@ -28,7 +28,7 @@ class Register extends Component {
   }
   render() {
     return (
-      <div>
+      <main>
         <h1 className="h4">Register</h1>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
@@ -88,7 +88,7 @@ class Register extends Component {
             Go to Login
           </Link>
         </form>
-      </div>
+      </main>
     );
   }
 }

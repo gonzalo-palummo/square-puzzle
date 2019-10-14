@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 function Complete(props) {
   return (
-    <div className="text-center">
+    <main className="text-center">
       <h1 className="h4 mb-4">Results</h1>
       <p>Time: {props.match.params.time} seconds</p>
       <p>Movements: {props.match.params.movements}</p>
@@ -14,7 +14,7 @@ function Complete(props) {
       >
         Go to Home
       </Link>
-    </div>
+    </main>
   );
 }
 export default Complete;

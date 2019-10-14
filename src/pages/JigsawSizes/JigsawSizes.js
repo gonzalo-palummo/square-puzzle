@@ -19,7 +19,7 @@ function JigsawSizes(props) {
     }
   ];
   return (
-    <div className="text-center">
+    <main className="text-center">
       <h1 className="h3 mb-4">Choose size</h1>
       <ul className="list-unstyled w-50 m-auto">
         {puzzles.map((puzzle, index) => (
@@ -33,7 +33,7 @@ function JigsawSizes(props) {
           </li>
         ))}
       </ul>
-    </div>
+    </main>
   );
 }
 export default JigsawSizes;

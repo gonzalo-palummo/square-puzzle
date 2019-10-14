@@ -10,14 +10,14 @@ class Play extends Component {
 
   render() {
     return (
-      <div>
+      <main>
         <h1 className="d-none">Puzzles list</h1>
         <ul className="list-unstyled text-center w-50 m-auto">
           {this.props.puzzles.map((puzzle, index) => (
             <li key={index} className="puzzle-item p-2 rounded my-2 text-white">
               <Link to={`/play/sizes/${puzzle.id}`}>
                 <img
-                  src={`require(${environment.apiUrl}/${puzzle.url}/complete.jpg)`}
+                  src={`${environment.publicUrl}/${puzzle.url}/complete.jpg`}
                   className="puzzle-preview rounded"
                   alt="Preview of Puzzle"
                 />
@@ -25,7 +25,7 @@ class Play extends Component {
             </li>
           ))}
         </ul>
-      </div>
+      </main>
     );
   }
 }

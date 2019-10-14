@@ -5,7 +5,7 @@ import Chart from "react-google-charts";
 
 function Profile() {
   return (
-    <div className="text-center">
+    <main className="text-center">
       <div className="row">
         <div className="col-7">
           <h1 className="h4">Profile</h1>
@@ -56,7 +56,7 @@ function Profile() {
         }}
         rootProps={{ "data-testid": "3" }}
       />
-    </div>
+    </main>
   );
 }
 export default Profile;

@@ -1,0 +1,38 @@
+:root {
+    --msg-color-green: #252;
+    --msg-bg-green: #ada;
+    --msg-color-red: #522;
+    --msg-bg-red: #daa;
+}
+
+.NotificationBox {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+}
+
+.NotificationBox-success {
+    background-color: var(--msg-bg-green);
+    color: var(--msg-color-green);
+}
+
+.NotificationBox-error {
+    background-color: var(--msg-bg-red);
+    color: var(--msg-color-red);
+}
+
+.NotificationBox-header {
+    padding-bottom: .25rem;
+    margin-bottom: .25rem;
+    border: none;
+    border-bottom: 1px solid;
+    font-size: 1.2rem;
+}
+
+.NotificationBox-success .NotificationBox-header {
+    border-color: var(--msg-color-green);
+}
+
+.NotificationBox-error .NotificationBox-header {
+    border-color: var(--msg-color-red);
+}

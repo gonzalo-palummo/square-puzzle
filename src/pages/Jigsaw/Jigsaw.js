@@ -41,7 +41,7 @@ class Jigsaw extends Component {
 
   render() {
     return (
-      <div>
+      <main>
         <p className="timer mx-auto text-center font-weight-light mt-2 pb-2 rounded">
           <span id="timer">{this.secondsElapsed()}</span> |{" "}
           {this.state.movements}
@@ -52,7 +52,7 @@ class Jigsaw extends Component {
           onMove={this.handleMove}
           onComplete={() => this.onComplete()}
         />
-      </div>
+      </main>
     );
   }
 }

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./Jigsaw.css";
 import Piece from "../Piece/Piece";
 import { withRouter } from "react-router-dom";
+import environment from "../../environment/environment";
 
 class Jigsaw extends Component {
   constructor(props) {
@@ -19,9 +20,9 @@ class Jigsaw extends Component {
     window.addEventListener("resize", this.updateDimensions);
     const pieces = [...Array(this.state.size * this.state.size)].map(
       (_, i) => ({
-        img: require(`../../images/${this.state.jigsawId}/${
+        img: `${environment.publicUrl}/images/puzzles/${this.state.jigsawId}/${
           this.state.size
-        }/img_${("0" + (i + 1)).substr(-2)}.jpg`),
+        }/img_${("0" + (i + 1)).substr(-2)}.jpg`,
         order: i - 1
       })
     );
@@ -41,23 +42,7 @@ class Jigsaw extends Component {
   };
 
   render() {
-    // Opciones para ponerle alto en píxeles:
-    // Otra opción: En el resize del browser/load tomar el ancho de la pantalla,
-    // restarle el padding/borde/margin que no sea el puzzle.
-    // A eso lo dividís por 3 o 4 (cantidad de fichas), y tenés el ancho de la pieza.
-    // A partir de ahí, multiplicás por el ratio (width / height) y tenés el alto en px.
-
-    // ref (react) => cada pieza
-    // El ancho sigue con porcentaje
-    // Una vez inyectada en la página en el DOM, preguntás al nodo (via ref)
-    // el computedWidth final.
-    // Eso lo multiplicás por el ratio y te va a dar el alto en px.
-    // Con eso, le ponés el alto en px a la imagen.
     const pieceWidth = this.state.imageWidth / this.state.size;
-    /*let imgStyle = {
-      width: `${pieceWidth}%`,
-      height: `${pieceHeight}%`
-    };*/
 
     let imgStyle = {
       width: `${pieceWidth}px`,
@@ -152,7 +137,13 @@ class Jigsaw extends Component {
       }
 
       console.log(inversionCount);
-      if (
+      if (size == 2) {
+        if (inversionCount % 2 == 0) {
+          return true;
+        } else {
+          return false;
+        }
+      } else if (
         (size % 2 == 1 && inversionCount % 2 == 1) ||
         (size % 2 == 0 && inversionCount % 2 == 0)
       ) {

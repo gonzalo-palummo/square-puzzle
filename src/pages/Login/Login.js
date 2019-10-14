@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "./Login.css";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import NotificationBox from "./../../components/NotificationBox/NotificationBox";
+import AuthService from "./../../services/AuthService";
 
 class Login extends Component {
   constructor(props) {
@@ -8,7 +10,14 @@ class Login extends Component {
 
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      message: {
+        header: null,
+        text: null,
+        type: null
+      },
+      success: false,
+      errors: {}
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -23,11 +32,46 @@ class Login extends Component {
 
   handleSubmit(ev) {
     ev.preventDefault();
-    this.props.history.push("/");
+
+    AuthService.login({
+      email: this.state.email,
+      password: this.state.password
+    }).then(userData => {
+      if (typeof userData === "object") {
+        this.setState({
+          success: true
+        });
+        this.props.onAuthenticated(userData);
+      } else {
+        this.setState({
+          message: {
+            header: "Error",
+            text: "The credentials are invalid.",
+            type: "error"
+          }
+        });
+      }
+    });
   }
   render() {
+    if (this.state.success) {
+      return <Redirect to="/" />;
+    }
+
+    const message = this.state.message;
+    let notif = "";
+    if (message.text !== null) {
+      notif = (
+        <NotificationBox
+          type={message.type}
+          header={message.header}
+          text={message.text}
+        />
+      );
+    }
     return (
-      <div>
+      <main>
+        {notif}
         <h1 className="h4">Login</h1>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
@@ -65,7 +109,7 @@ class Login extends Component {
         >
           Go to Register
         </Link>
-      </div>
+      </main>
     );
   }
 }
