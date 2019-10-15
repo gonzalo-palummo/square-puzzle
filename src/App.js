@@ -17,8 +17,16 @@ class App extends Component {
     super(props);
     this.state = {
       puzzles: [],
-      isLoading: true
+      isLoading: true,
+      userData: {
+        id: null,
+        email: null,
+        user_name: null
+      }
     };
+
+    this.handleAuthenticated = this.handleAuthenticated.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
   componentDidMount() {
@@ -29,7 +37,23 @@ class App extends Component {
           puzzles: res.data,
           isLoading: false
         });
-      });
+      }); // TODO: PUT IN A SERVICE
+  }
+
+  handleAuthenticated(user) {
+    this.setState({
+      userData: user
+    });
+  }
+
+  handleLogout(user) {
+    this.setState({
+      userData: {
+        id: null,
+        mail: null,
+        usuario: null
+      }
+    });
   }
 
   render() {
@@ -42,7 +66,7 @@ class App extends Component {
           <AuthRoute
             path="/"
             exact
-            render={props => <Play puzzles={this.state.puzzles} {...props} />}
+            render={props => <Play puzzles={this.state.puzzles} {...props} onLogout={this.handleLogout} />}
           />
           <AuthRoute path="/profile/" component={Profile} />
           <AuthRoute
@@ -56,7 +80,7 @@ class App extends Component {
             exact
             component={Complete}
           />
-          <Route path="/login" component={Login} />
+          <Route path="/login" render={props => <Login onAuthenticated={this.handleAuthenticated} />} />
           <Route path="/register" component={Register} />
         </div>
       </BrowserRouter>

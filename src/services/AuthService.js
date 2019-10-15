@@ -6,15 +6,15 @@ let userData = {
   user_name: null
 };
 
-const login = function(credentials) {
+const login = function (credentials) {
   return fetch(`${environment.apiUrl}/login`, {
     method: "post",
     body: JSON.stringify(credentials),
     headers: {
       "X-Requested-With": "XMLHttpRequest",
       "Content-Type": "application/json"
-    },
-    credentials: "include"
+    }/*,
+    credentials: "include"*/ // TODO : UNCOMMENT
   })
     .then(rta => rta.json())
     .then(rta => {
@@ -28,31 +28,35 @@ const login = function(credentials) {
       } else {
         return false;
       }
+    }).catch(err => {
+      return false;
     });
 };
-const logout = function() {
+const logout = function () {
   return fetch(`${environment.apiUrl}/logout`, {
     method: "post",
     headers: {
       "X-Requested-With": "XMLHttpRequest",
       "Content-Type": "application/json"
-    },
-    credentials: "include"
+    }/*,
+    credentials: "include"*/ // TODO : UNCOMMENT
   })
     .then(rta => rta.json())
     .then(rta => {
       return rta.success;
+    }).catch(err => {
+      return false;
     });
 };
-const isAuthenticated = function() {
+const isAuthenticated = function () {
   return userData.id !== null;
 };
-const getUserData = function() {
+const getUserData = function () {
   return { ...userData };
 };
 
 /**
- * Servicio de autenticación.
+ * Authentication Service.
  * @type {{login: (function(*=): Promise<Response | never>), logout: (function(): Promise<boolean | never>), isAuthenticated: (function(): boolean), getUserData: (function(): {email: null, id: null, user_name: null})}}
  */
 const AuthService = {

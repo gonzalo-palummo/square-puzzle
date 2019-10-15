@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./Register.css";
 import { Link } from "react-router-dom";
+import UserService from "../../services/UserService";
 
 class Register extends Component {
   constructor(props) {
@@ -24,7 +25,21 @@ class Register extends Component {
   }
   handleSubmit(ev) {
     ev.preventDefault();
-    this.props.history.push("/login");
+
+
+    UserService.register({
+      user_name: this.state.user_name,
+      email: this.state.email,
+      password: this.state.password,
+      plays: 0
+    }).then(success => {
+      if (success) {
+        this.props.history.push("/login");
+      } else {
+        // TODO: AN ERROR OCURRED
+        console.log(success);
+      }
+    });
   }
   render() {
     return (

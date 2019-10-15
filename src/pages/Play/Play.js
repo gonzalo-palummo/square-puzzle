@@ -4,9 +4,6 @@ import { Link } from "react-router-dom";
 import environment from "./../../environment/environment.js";
 
 class Play extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     return (
