@@ -11,6 +11,7 @@ import Register from "./pages/Register/Register";
 import Complete from "./pages/Complete/Complete";
 import environment from "./environment/environment";
 import AuthRoute from "./components/AuthRoute/AuthRoute";
+import JigsawRecords from "./pages/JigsawRecords/JigsawRecords";
 
 class App extends Component {
   constructor(props) {
@@ -88,6 +89,11 @@ class App extends Component {
             path="/jigsaws/complete/:time/:movements"
             exact
             component={Complete}
+          />
+          <AuthRoute
+            path="/jigsaws/:jigsawId/:size/records"
+            exact
+            component={JigsawRecords}
           />
           <Route
             path="/login"

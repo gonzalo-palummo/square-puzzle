@@ -3,13 +3,10 @@
   bottom: 0;
 }
 
-.list {
-  list-style-type: none;
-}
-
 a.unlink {
   color: inherit;
 }
+
 a.unlink:hover {
   color: inherit;
   text-decoration: inherit;
