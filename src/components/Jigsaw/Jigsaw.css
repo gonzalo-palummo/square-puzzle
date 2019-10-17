@@ -3,6 +3,7 @@
   margin: auto;
   flex-wrap: wrap;
   max-width: 600px;
+  justify-content: center;
 }
 
 .image {

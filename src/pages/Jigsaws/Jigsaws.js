@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import "./Play.css";
+import "./Jigsaws.css";
 import { Link } from "react-router-dom";
-import environment from "./../../environment/environment.js";
+import environment from "../../environment/environment";
 
-class Play extends Component {
-
+class Jigsaws extends Component {
   render() {
     return (
       <main>
@@ -12,7 +11,7 @@ class Play extends Component {
         <ul className="list-unstyled text-center w-50 m-auto">
           {this.props.puzzles.map((puzzle, index) => (
             <li key={index} className="puzzle-item p-2 rounded my-2 text-white">
-              <Link to={`/play/sizes/${puzzle.id}`}>
+              <Link to={`/jigsaws/${puzzle.id}`}>
                 <img
                   src={`${environment.publicUrl}/${puzzle.url}/complete.jpg`}
                   className="puzzle-preview rounded"
@@ -26,4 +25,4 @@ class Play extends Component {
     );
   }
 }
-export default Play;
+export default Jigsaws;

@@ -6,52 +6,55 @@ let userData = {
   user_name: null
 };
 
-const login = function (credentials) {
+const login = function(credentials) {
   return fetch(`${environment.apiUrl}/login`, {
     method: "post",
     body: JSON.stringify(credentials),
     headers: {
       "X-Requested-With": "XMLHttpRequest",
       "Content-Type": "application/json"
-    }/*,
+    } /*,
     credentials: "include"*/ // TODO : UNCOMMENT
   })
+    .then(rta => {
+      if (!rta.ok) {
+        throw Error(rta.statusText);
+      }
+      return rta;
+    })
     .then(rta => rta.json())
     .then(rta => {
-      if (rta.success) {
-        userData = {
-          email: credentials.email,
-          id: rta.data.id,
-          user_name: rta.data.user_name
-        };
-        return userData;
-      } else {
-        return false;
-      }
-    }).catch(err => {
+      userData = {
+        email: credentials.email,
+        id: rta.id,
+        user_name: rta.user_name
+      };
+      return userData;
+    })
+    .catch(err => {
       return false;
     });
 };
-const logout = function () {
+const logout = function() {
   return fetch(`${environment.apiUrl}/logout`, {
     method: "post",
     headers: {
       "X-Requested-With": "XMLHttpRequest",
       "Content-Type": "application/json"
-    }/*,
+    } /*,
     credentials: "include"*/ // TODO : UNCOMMENT
   })
-    .then(rta => rta.json())
     .then(rta => {
-      return rta.success;
-    }).catch(err => {
+      return rta.ok;
+    })
+    .catch(err => {
       return false;
     });
 };
-const isAuthenticated = function () {
+const isAuthenticated = function() {
   return userData.id !== null;
 };
-const getUserData = function () {
+const getUserData = function() {
   return { ...userData };
 };
 

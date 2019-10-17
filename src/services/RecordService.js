@@ -1,22 +1,21 @@
-import environment from "../environment/environment"
+import environment from "../environment/environment";
 
-const create = function (data) {
-    return fetch(`${environment.apiUrl}/records`, {
-        method: "post",
-        body: JSON.stringify(data),
-        headers: {
-            "X-Requested-With": "XMLHttpRequest",
-            "Content-Type": "application/json"
-        }/*,
+const create = function(data) {
+  return fetch(`${environment.apiUrl}/records`, {
+    method: "post",
+    body: JSON.stringify(data),
+    headers: {
+      "X-Requested-With": "XMLHttpRequest",
+      "Content-Type": "application/json"
+    } /*,
     credentials: "include"*/ // TODO : UNCOMMENT
+  })
+    .then(rta => {
+      return rta.ok;
     })
-        .then(rta => rta.json())
-        .then(rta => {
-            return rta.success;
-        })
-        .catch(err => {
-            return false;
-        });
+    .catch(err => {
+      return false;
+    });
 };
 
 /**
@@ -24,7 +23,7 @@ const create = function (data) {
  * @type {{create: (function(*=): Promise<Response | never>)}}
  */
 const RecordService = {
-    create: create
+  create: create
 };
 
 export default RecordService;

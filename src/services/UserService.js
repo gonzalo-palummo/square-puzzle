@@ -1,57 +1,55 @@
-import environment from "../environment/environment"
+import environment from "../environment/environment";
 
-const getData = function (userId) {
-  return fetch(`${environment.apiUrl}/users/${userId}`, {
+const getOne = function(id) {
+  return fetch(`${environment.apiUrl}/users/${id}`, {
     method: "get",
     headers: {
       "X-Requested-With": "XMLHttpRequest",
       "Content-Type": "application/json"
-    }/*,
-    credentials: "include"*/ // TODO : UNCOMMENT
+    } /*
+    credentials: "include"*/ // TODO: CHECK THIS
   })
-    .then(rta => rta.json())
     .then(rta => {
-      if (rta.success) {
-        return rta.data;
-      } else {
-        return false;
+      if (!rta.ok) {
+        throw Error(rta.statusText);
       }
-    }).catch(err => {
+      return rta;
+    })
+    .then(rta => rta.json())
+    .catch(err => {
       return false;
     });
 };
 
-const incrementPlays = function (userId) {
+const incrementPlays = function(userId) {
   return fetch(`${environment.apiUrl}/users/${userId}/play`, {
     method: "put",
     headers: {
       "X-Requested-With": "XMLHttpRequest",
       "Content-Type": "application/json"
-    }/*,
+    } /*,
     credentials: "include"*/ // TODO : UNCOMMENT
   })
-    .then(rta => rta.json())
     .then(rta => {
-      return rta.success;
+      return rta.ok;
     })
     .catch(err => {
       return false;
     });
 };
 
-const register = function (data) {
+const register = function(data) {
   return fetch(`${environment.apiUrl}/users/register`, {
     method: "post",
     body: JSON.stringify(data),
     headers: {
       "X-Requested-With": "XMLHttpRequest",
       "Content-Type": "application/json"
-    }/*,
+    } /*,
     credentials: "include"*/ // TODO : UNCOMMENT
   })
-    .then(rta => rta.json())
     .then(rta => {
-      return rta.success;
+      return rta.ok;
     })
     .catch(err => {
       return false;
@@ -60,10 +58,10 @@ const register = function (data) {
 
 /**
  * Servicio de autenticación.
- * @type {{getData: (function(*=): Promise<Response | never>), incrementPlays: (function(*=): Promise<Response | never>), register: (function(*=): Promise<Response | never>)}}
+ * @type {{getOne: (function(*=): Promise<Response | never>), incrementPlays: (function(*=): Promise<Response | never>), register: (function(*=): Promise<Response | never>)}}
  */
 const UserService = {
-  getData: getData,
+  getOne: getOne,
   incrementPlays: incrementPlays,
   register: register
 };

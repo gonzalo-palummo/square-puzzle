@@ -17,11 +17,11 @@ class Profile extends Component {
         recordTime: null
       },
       loading: true
-    }
+    };
   }
 
   componentDidMount() {
-    UserService.getData(AuthService.getUserData().id).then(userData => {
+    UserService.getOne(AuthService.getUserData().id).then(userData => {
       if (typeof userData === "object") {
         this.setState({
           loading: false,
@@ -29,7 +29,9 @@ class Profile extends Component {
             plays: userData.plays,
             completed: userData.records.length,
             lost: userData.plays - userData.records.length,
-            recordTime: userData.records.length ? this.getBestRecord(userData.records) : 'None'
+            recordTime: userData.records.length
+              ? this.getBestRecord(userData.records)
+              : "None"
           }
         });
       } else {
@@ -42,11 +44,11 @@ class Profile extends Component {
     let bestRecord;
     records.forEach((record, index) => {
       if (index == 0) {
-        bestRecord = record.time;
+        bestRecord = parseFloat(record.time);
         return;
       }
       if (record.time < bestRecord) {
-        bestRecord = record.time;
+        bestRecord = parseFloat(record.time);
       }
     });
     return bestRecord;

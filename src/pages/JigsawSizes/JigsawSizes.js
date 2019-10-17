@@ -25,7 +25,7 @@ function JigsawSizes(props) {
         {puzzles.map((puzzle, index) => (
           <li key={index} className="size border-rounded mx-auto my-3">
             <Link
-              to={`/play/sizes/${puzzle.jigsawId}/${puzzle.size}`}
+              to={`/jigsaws/${puzzle.jigsawId}/${puzzle.size}`}
               className="text-white font-weight-light h1"
             >
               {puzzle.size}

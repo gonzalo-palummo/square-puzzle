@@ -4,7 +4,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Jigsaw from "./pages/Jigsaw/Jigsaw";
 import JigsawSizes from "./pages/JigsawSizes/JigsawSizes";
-import Play from "./pages/Play/Play";
+import Jigsaws from "./pages/Jigsaws/Jigsaws";
 import Profile from "./pages/Profile/Profile";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
@@ -30,11 +30,18 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch(`${environment.apiUrl}/puzzles`)
+    fetch(`${environment.apiUrl}/puzzles`, {
+      method: "get",
+      headers: {
+        "X-Requested-With": "XMLHttpRequest",
+        "Content-Type": "application/json"
+      } /*,
+      credentials: "include" */ // TODO: CHECK THIS
+    })
       .then(res => res.json())
       .then(res => {
         this.setState({
-          puzzles: res.data,
+          puzzles: res,
           isLoading: false
         });
       }); // TODO: PUT IN A SERVICE
@@ -50,8 +57,8 @@ class App extends Component {
     this.setState({
       userData: {
         id: null,
-        mail: null,
-        usuario: null
+        email: null,
+        user_name: null
       }
     });
   }
@@ -66,21 +73,28 @@ class App extends Component {
           <AuthRoute
             path="/"
             exact
-            render={props => <Play puzzles={this.state.puzzles} {...props} onLogout={this.handleLogout} />}
+            render={props => (
+              <Jigsaws
+                puzzles={this.state.puzzles}
+                {...props}
+                onLogout={this.handleLogout}
+              />
+            )}
           />
           <AuthRoute path="/profile/" component={Profile} />
+          <AuthRoute path="/jigsaws/:jigsawId/" exact component={JigsawSizes} />
+          <AuthRoute path="/jigsaws/:jigsawId/:size" component={Jigsaw} />
           <AuthRoute
-            path="/play/sizes/:jigsawId/"
-            exact
-            component={JigsawSizes}
-          />
-          <AuthRoute path="/play/sizes/:jigsawId/:size" component={Jigsaw} />
-          <AuthRoute
-            path="/play/complete/:time/:movements"
+            path="/jigsaws/complete/:time/:movements"
             exact
             component={Complete}
           />
-          <Route path="/login" render={props => <Login onAuthenticated={this.handleAuthenticated} />} />
+          <Route
+            path="/login"
+            render={props => (
+              <Login onAuthenticated={this.handleAuthenticated} />
+            )}
+          />
           <Route path="/register" component={Register} />
         </div>
       </BrowserRouter>

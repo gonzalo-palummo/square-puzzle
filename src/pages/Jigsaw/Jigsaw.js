@@ -31,7 +31,7 @@ class Jigsaw extends Component {
   onComplete() {
     this.setState({
       isLoading: true
-    })
+    });
     let time = this.secondsElapsed();
 
     RecordService.create({
@@ -39,19 +39,19 @@ class Jigsaw extends Component {
       size: this.props.match.params.size,
       time: time,
       movements: this.state.movements,
-      created_by: getUserData().id,
+      created_by: getUserData().id
     }).then(success => {
       if (success) {
         this.setState({
           isLoading: false
         });
-        this.props.history.push(`/play/complete/${time}/${this.state.movements}`);
+        this.props.history.push(
+          `/jigsaws/complete/${time}/${this.state.movements}`
+        );
       } else {
         this.props.history.push("/login"); // TODO: FIX THIS, SHOULD REDIRECT TO THE ERROR PAGE
       }
     });
-
-
   }
 
   componentDidMount() {
@@ -66,7 +66,6 @@ class Jigsaw extends Component {
         this.props.history.push("/login"); // TODO: FIX THIS, SHOULD REDIRECT TO THE ERROR PAGE
       }
     });
-
   }
 
   componentWillUnmount() {
@@ -79,7 +78,7 @@ class Jigsaw extends Component {
 
   render() {
     if (this.state.isLoading) {
-      return <CSSLoader />
+      return <CSSLoader />;
     }
 
     return (

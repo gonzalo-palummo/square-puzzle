@@ -12,7 +12,7 @@ class Jigsaw extends Component {
       shuffled: [],
       size: parseInt(this.props.size),
       jigsawId: parseInt(this.props.jigsawId),
-      imageWidth: window.innerWidth - 30
+      imageWidth: window.innerWidth >= 576 ? 480 : window.innerWidth - 30
     };
   }
 
@@ -37,7 +37,7 @@ class Jigsaw extends Component {
 
   updateDimensions = () => {
     this.setState({
-      imageWidth: window.innerWidth - 30
+      imageWidth: window.innerWidth >= 576 ? 480 : window.innerWidth - 30
     });
   };
 
@@ -136,7 +136,6 @@ class Jigsaw extends Component {
         }
       }
 
-      console.log(inversionCount);
       if (size == 2) {
         if (inversionCount % 2 == 0) {
           return true;

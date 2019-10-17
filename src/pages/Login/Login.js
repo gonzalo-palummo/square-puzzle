@@ -32,7 +32,6 @@ class Login extends Component {
 
   handleSubmit(ev) {
     ev.preventDefault();
-
     AuthService.login({
       email: this.state.email,
       password: this.state.password

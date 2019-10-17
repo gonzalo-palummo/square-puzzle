@@ -15,7 +15,7 @@ function Navbar() {
               activeClassName="active"
               exact={true}
             >
-              Play <PlayArrow className="d-block m-auto" />
+              Jigsaws <PlayArrow className="d-block m-auto" />
             </NavLink>
           </li>
           <li className="col-xs-6 text-center p-2">
