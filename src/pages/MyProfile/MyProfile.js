@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import "./Profile.css";
+import "./MyProfile.css";
 import { Link } from "react-router-dom";
 import Chart from "react-google-charts";
 import environment from "../../environment/environment";
 import UserService from "../../services/UserService";
 import AuthService from "../../services/AuthService";
 
-class Profile extends Component {
+class MyProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,7 +16,7 @@ class Profile extends Component {
         lost: null,
         recordTime: null
       },
-      loading: true
+      isLoading: true
     };
   }
 
@@ -24,7 +24,7 @@ class Profile extends Component {
     UserService.getOne(AuthService.getUserData().id).then(userData => {
       if (typeof userData === "object") {
         this.setState({
-          loading: false,
+          isLoading: false,
           userData: {
             plays: userData.plays,
             completed: userData.records.length,
@@ -55,6 +55,10 @@ class Profile extends Component {
   }
 
   render() {
+    if (this.state.isLoading) {
+      return <CSSLoader />;
+    }
+
     return (
       <main className="text-center">
         <div className="row">
@@ -111,4 +115,4 @@ class Profile extends Component {
     );
   }
 }
-export default Profile;
+export default MyProfile;

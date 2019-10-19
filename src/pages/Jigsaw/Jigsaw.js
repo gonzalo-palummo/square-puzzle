@@ -13,20 +13,32 @@ class Jigsaw extends Component {
       movements: 0,
       elapsed: 0,
       start: Date.now(),
-      isLoading: true
+      isLoading: true,
+      totalPieces:
+        this.props.match.params.size * this.props.match.params.size - 1,
+      countLoadedPieces: 1
     };
-    this.handleMove = this.handleMove.bind(this);
   }
 
   secondsElapsed() {
     return (Math.round(this.state.elapsed / 100) / 10).toFixed(1);
   }
 
-  handleMove() {
+  handleMove = () => {
     this.setState({
       movements: this.state.movements + 1
     });
-  }
+  };
+
+  handleLoad = () => {
+    this.setState({ countLoadedPieces: this.state.countLoadedPieces + 1 });
+    if (this.state.totalPieces == this.state.countLoadedPieces) {
+      this.setState({
+        start: Date.now(),
+        isLoading: false
+      });
+    }
+  };
 
   onComplete() {
     this.setState({
@@ -58,10 +70,6 @@ class Jigsaw extends Component {
     this.timer = setInterval(this.tick, 50);
     UserService.incrementPlays(getUserData().id).then(success => {
       if (success) {
-        this.setState({
-          ...this,
-          isLoading: false
-        });
       } else {
         this.props.history.push("/login"); // TODO: FIX THIS, SHOULD REDIRECT TO THE ERROR PAGE
       }
@@ -77,12 +85,10 @@ class Jigsaw extends Component {
   };
 
   render() {
-    if (this.state.isLoading) {
-      return <CSSLoader />;
-    }
-
     return (
       <main>
+        {this.state.isLoading ? <CSSLoader /> : ""}
+
         <p className="timer mx-auto text-center font-weight-light mt-2 pb-2 rounded">
           <span id="timer">{this.secondsElapsed()}</span> |{" "}
           {this.state.movements}
@@ -90,8 +96,9 @@ class Jigsaw extends Component {
         <JigsawComponent
           size={this.props.match.params.size}
           jigsawId={this.props.match.params.jigsawId}
+          onLoad={this.handleLoad}
           onMove={this.handleMove}
-          onComplete={() => this.onComplete()}
+          onComplete={this.onComplete}
         />
       </main>
     );

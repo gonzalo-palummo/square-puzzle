@@ -3,21 +3,25 @@ import "./Login.css";
 import { Link, Redirect } from "react-router-dom";
 import NotificationBox from "./../../components/NotificationBox/NotificationBox";
 import AuthService from "./../../services/AuthService";
+import CSSLoader from "./../../components/CSSLoader/CSSLoader";
 
 class Login extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      email: "",
-      password: "",
+      formData: {
+        email: "",
+        password: ""
+      },
       message: {
         header: null,
         text: null,
         type: null
       },
       success: false,
-      errors: {}
+      errors: {},
+      isLoading: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -25,17 +29,18 @@ class Login extends Component {
   handleChange(ev) {
     const elem = ev.target;
     this.setState({
-      ...this.state,
-      [elem.name]: elem.value
+      formData: { ...this.state.formData, [elem.name]: elem.value }
     });
   }
 
   handleSubmit(ev) {
     ev.preventDefault();
+    this.setState({ isLoading: true });
     AuthService.login({
-      email: this.state.email,
-      password: this.state.password
+      email: this.state.formData.email,
+      password: this.state.formData.password
     }).then(userData => {
+      this.setState({ isLoading: false });
       if (typeof userData === "object") {
         this.setState({
           success: true
@@ -55,6 +60,10 @@ class Login extends Component {
   render() {
     if (this.state.success) {
       return <Redirect to="/" />;
+    }
+
+    if (this.state.isLoading) {
+      return <CSSLoader />;
     }
 
     const message = this.state.message;
@@ -80,8 +89,9 @@ class Login extends Component {
               id="email"
               name="email"
               className="form-control border-rounded"
-              value={this.state.email}
+              value={this.state.formData.email}
               onChange={this.handleChange}
+              required
             />
           </div>
           <div className="form-group">
@@ -90,8 +100,9 @@ class Login extends Component {
               type="password"
               id="password"
               name="password"
+              required
               className="form-control border-rounded"
-              value={this.state.password}
+              value={this.state.formData.password}
               onChange={this.handleChange}
             />
           </div>

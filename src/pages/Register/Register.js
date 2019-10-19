@@ -1,49 +1,90 @@
 import React, { Component } from "react";
 import "./Register.css";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import UserService from "../../services/UserService";
+import NotificationBox from "./../../components/NotificationBox/NotificationBox";
+import CSSLoader from "./../../components/CSSLoader/CSSLoader";
 
 class Register extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      user_name: "",
-      email: "",
-      password: "",
-      confirm_password: ""
+      formData: {
+        user_name: "",
+        email: "",
+        password: "",
+        confirm_password: ""
+      },
+      message: {
+        header: null,
+        text: null,
+        type: null
+      },
+      success: false,
+      errors: {},
+      isLoading: false
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
-  handleChange(ev) {
+
+  handleChange = ev => {
     const elem = ev.target;
     this.setState({
-      ...this.state,
-      [elem.name]: elem.value
+      formData: { ...this.state.formData, [elem.name]: elem.value }
     });
-  }
-  handleSubmit(ev) {
+  };
+
+  handleSubmit = ev => {
     ev.preventDefault();
-
-
+    this.setState({
+      isLoading: true
+    });
     UserService.register({
-      user_name: this.state.user_name,
-      email: this.state.email,
-      password: this.state.password,
+      user_name: this.state.formData.user_name,
+      email: this.state.formData.email,
+      password: this.state.formData.password,
       plays: 0
     }).then(success => {
       if (success) {
-        this.props.history.push("/login");
+        this.setState({
+          success: true
+        });
       } else {
-        // TODO: AN ERROR OCURRED
-        console.log(success);
+        this.setState({
+          message: {
+            header: "Error",
+            text: "An error was ocurred. Try again",
+            type: "error"
+          },
+          isLoading: false
+        });
       }
     });
-  }
+  };
   render() {
+    if (this.state.success) {
+      return <Redirect to="/login" />;
+    }
+
+    if (this.state.isLoading) {
+      return <CSSLoader />;
+    }
+
+    const message = this.state.message;
+    let notif = "";
+    if (message.text !== null) {
+      notif = (
+        <NotificationBox
+          type={message.type}
+          header={message.header}
+          text={message.text}
+        />
+      );
+    }
+
     return (
       <main>
+        {notif}
         <h1 className="h4">Register</h1>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
@@ -53,8 +94,9 @@ class Register extends Component {
               id="user_name"
               name="user_name"
               className="form-control border-rounded"
-              value={this.state.user_name}
+              value={this.state.formData.user_name}
               onChange={this.handleChange}
+              required
             />
           </div>
           <div className="form-group">
@@ -64,8 +106,9 @@ class Register extends Component {
               id="email"
               name="email"
               className="form-control border-rounded"
-              value={this.state.email}
+              value={this.state.formData.email}
               onChange={this.handleChange}
+              required
             />
           </div>
           <div className="form-group">
@@ -75,8 +118,9 @@ class Register extends Component {
               id="password"
               name="password"
               className="form-control border-rounded"
-              value={this.state.password}
+              value={this.state.formData.password}
               onChange={this.handleChange}
+              required
             />
           </div>
           <div className="form-group">
@@ -86,8 +130,9 @@ class Register extends Component {
               id="confirm_password"
               name="confirm_password"
               className="form-control border-rounded"
-              value={this.state.confirm_password}
+              value={this.state.formData.confirm_password}
               onChange={this.handleChange}
+              required
             />
           </div>
           <button

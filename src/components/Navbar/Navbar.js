@@ -19,7 +19,11 @@ function Navbar() {
             </NavLink>
           </li>
           <li className="col-xs-6 text-center p-2">
-            <NavLink to="/profile/" className="unlink" activeClassName="active">
+            <NavLink
+              to="/myprofile/"
+              className="unlink"
+              activeClassName="active"
+            >
               Profile <Person className="d-block m-auto" />
             </NavLink>
           </li>

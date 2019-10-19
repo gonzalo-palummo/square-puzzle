@@ -8,6 +8,7 @@ function Piece(props) {
         alt="Piece of puzzle"
         style={props.imgStyle}
         src={props.piece.img}
+        onLoad={() => props.onLoad()}
       />
     );
   } else {

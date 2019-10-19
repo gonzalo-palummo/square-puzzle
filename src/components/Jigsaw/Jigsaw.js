@@ -58,6 +58,7 @@ class Jigsaw extends Component {
             piece={piece}
             imgStyle={imgStyle}
             onClickPiece={() => this.handleClickPiece(piece, index)}
+            onLoad={() => this.props.onLoad()}
           />
         ))}
       </div>

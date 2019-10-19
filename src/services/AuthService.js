@@ -29,6 +29,7 @@ const login = function(credentials) {
         id: rta.id,
         user_name: rta.user_name
       };
+      localStorage.user_data = JSON.stringify(userData);
       return userData;
     })
     .catch(err => {
@@ -36,6 +37,7 @@ const login = function(credentials) {
     });
 };
 const logout = function() {
+  localStorage.removeItem("user_data"); // TODO: MOVE THIS TO THE COMPONENT AFTER
   return fetch(`${environment.apiUrl}/logout`, {
     method: "post",
     headers: {
@@ -52,10 +54,19 @@ const logout = function() {
     });
 };
 const isAuthenticated = function() {
-  return userData.id !== null;
+  if (!!localStorage.user_data) {
+    return !!localStorage.user_data;
+  } else {
+    return userData.id !== null;
+  }
 };
 const getUserData = function() {
-  return { ...userData };
+  if (!(userData.id !== null)) {
+    userData = JSON.parse(localStorage.user_data);
+    return { ...userData};
+  } else {
+    return { ...userData };
+  }
 };
 
 /**

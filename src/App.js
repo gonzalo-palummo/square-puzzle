@@ -5,7 +5,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Jigsaw from "./pages/Jigsaw/Jigsaw";
 import JigsawSizes from "./pages/JigsawSizes/JigsawSizes";
 import Jigsaws from "./pages/Jigsaws/Jigsaws";
-import Profile from "./pages/Profile/Profile";
+import Profile from "./components/Profile/Profile";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import Complete from "./pages/Complete/Complete";
@@ -82,9 +82,18 @@ class App extends Component {
               />
             )}
           />
-          <AuthRoute path="/profile/" component={Profile} />
-          <AuthRoute path="/jigsaws/:jigsawId/" exact component={JigsawSizes} />
-          <AuthRoute path="/jigsaws/:jigsawId/:size" component={Jigsaw} />
+          <AuthRoute
+            path="/myprofile/"
+            exact
+            render={props => <Profile myProfile={true} {...props} />}
+          />
+          <AuthRoute
+            path="/userprofile/:userId"
+            exact
+            render={props => <Profile myProfile={false} {...props} />}
+          />
+          <AuthRoute path="/jigsaws/:jigsawId" exact component={JigsawSizes} />
+          <AuthRoute path="/jigsaws/:jigsawId/:size" exact component={Jigsaw} />
           <AuthRoute
             path="/jigsaws/complete/:time/:movements"
             exact
