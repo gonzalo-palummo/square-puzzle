@@ -1,6 +1,7 @@
 import React from "react";
 import "./Complete.css";
 import { Link } from "react-router-dom";
+import RecordsTable from "../../components/RecordsTable/RecordsTable";
 
 function Complete(props) {
   return (
@@ -14,6 +15,11 @@ function Complete(props) {
       >
         Go to Home
       </Link>
+      <h1 className="h4">Records table</h1>
+      <RecordsTable
+        jigsawId={props.match.params.jigsawId}
+        size={props.match.params.size}
+      />
     </main>
   );
 }

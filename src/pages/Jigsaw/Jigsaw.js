@@ -20,9 +20,9 @@ class Jigsaw extends Component {
     };
   }
 
-  secondsElapsed() {
+  secondsElapsed = () => {
     return (Math.round(this.state.elapsed / 100) / 10).toFixed(1);
-  }
+  };
 
   handleMove = () => {
     this.setState({
@@ -40,10 +40,7 @@ class Jigsaw extends Component {
     }
   };
 
-  onComplete() {
-    this.setState({
-      isLoading: true
-    });
+  onComplete = () => {
     let time = this.secondsElapsed();
 
     RecordService.create({
@@ -58,13 +55,13 @@ class Jigsaw extends Component {
           isLoading: false
         });
         this.props.history.push(
-          `/jigsaws/complete/${time}/${this.state.movements}`
+          `/jigsaws/${this.props.match.params.jigsawId}/${this.props.match.params.size}/complete/${time}/${this.state.movements}`
         );
       } else {
         this.props.history.push("/login"); // TODO: FIX THIS, SHOULD REDIRECT TO THE ERROR PAGE
       }
     });
-  }
+  };
 
   componentDidMount() {
     this.timer = setInterval(this.tick, 50);

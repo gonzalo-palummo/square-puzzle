@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
+import "./styles/buttons.css";
 import { BrowserRouter, Route } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Jigsaw from "./pages/Jigsaw/Jigsaw";
@@ -11,7 +12,7 @@ import Register from "./pages/Register/Register";
 import Complete from "./pages/Complete/Complete";
 import environment from "./environment/environment";
 import AuthRoute from "./components/AuthRoute/AuthRoute";
-import JigsawRecords from "./pages/JigsawRecords/JigsawRecords";
+import JigsawStart from "./pages/JigsawStart/JigsawStart";
 
 class App extends Component {
   constructor(props) {
@@ -95,14 +96,14 @@ class App extends Component {
           <AuthRoute path="/jigsaws/:jigsawId" exact component={JigsawSizes} />
           <AuthRoute path="/jigsaws/:jigsawId/:size" exact component={Jigsaw} />
           <AuthRoute
-            path="/jigsaws/complete/:time/:movements"
+            path="/jigsaws/:jigsawId/:size/complete/:time/:movements"
             exact
             component={Complete}
           />
           <AuthRoute
-            path="/jigsaws/:jigsawId/:size/records"
+            path="/jigsaws/:jigsawId/:size/start"
             exact
-            component={JigsawRecords}
+            component={JigsawStart}
           />
           <Route
             path="/login"

@@ -1,10 +1,10 @@
 /* -- App -- */
+@import url("https://fonts.googleapis.com/css?family=Patrick+Hand+SC&display=swap");
 
 body {
   max-width: 1920px;
   margin: auto;
   margin-bottom: 4rem !important;
-  font-family: "Roboto Mono", sans-serif;
 }
 
 .border-rounded {
@@ -29,6 +29,48 @@ label:focus,
 }
 
 .app {
-  padding-top: 15px;
+  padding-top: 30px;
   padding-bottom: 15px;
+}
+
+* {
+  font-family: "Patrick Hand SC";
+}
+
+a:hover {
+  text-decoration: none !important;
+  color: inherit !important;
+}
+
+td a {
+  color: black !important;
+}
+
+/* ----------------------------------------------
+      Animations
+ * ---------------------------------------- */
+
+.vibrate-2 {
+  animation: vibrate-2 0.3s linear 3 both;
+}
+
+@keyframes vibrate-2 {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(2px, -2px);
+  }
+  40% {
+    transform: translate(2px, 2px);
+  }
+  60% {
+    transform: translate(-2px, 2px);
+  }
+  80% {
+    transform: translate(-2px, -2px);
+  }
+  100% {
+    transform: translate(0);
+  }
 }

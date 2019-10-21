@@ -12,7 +12,7 @@ function JigsawSizes(props) {
         {sizes.map((size, index) => (
           <li key={index} className="size border-rounded mx-auto my-3">
             <Link
-              to={`/jigsaws/${jigsawId}/${size}/records`}
+              to={`/jigsaws/${jigsawId}/${size}/start`}
               className="text-white font-weight-light h1"
             >
               {size}

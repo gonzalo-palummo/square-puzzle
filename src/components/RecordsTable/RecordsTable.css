@@ -1,0 +1,29 @@
+.container-table {
+  position: relative;
+  margin-top: 50px;
+  padding-top: 35px;
+  background-image: linear-gradient(to top, #0276f3 10%, #05c7e5 80%);
+  border-radius: 12px;
+}
+
+.table {
+  color: black;
+  font-weight: bold;
+  margin-bottom: 0;
+}
+
+.container-table img {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  margin-left: -36px;
+}
+
+th {
+  font-size: 23px;
+  border: none !important;
+}
+
+td {
+  border-top-color: #ffffff5c !important;
+}
