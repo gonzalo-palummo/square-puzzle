@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "./JigsawStart.css";
 import { Link } from "react-router-dom";
 import RecordsTable from "../../components/RecordsTable/RecordsTable";
-import { AwesomeButton } from "react-awesome-button";
 
 class JigsawStart extends Component {
   constructor(props) {
@@ -16,12 +15,16 @@ class JigsawStart extends Component {
   render() {
     return (
       <main className="text-center">
-        <AwesomeButton type="primary" size="large" className="vibrate-2">
-          <Link to={`/jigsaws/${this.state.jigsawId}/${this.state.size}`}>
-            Start Game
-          </Link>
-        </AwesomeButton>
+        <Link
+          to={`/jigsaws/${this.state.jigsawId}/${this.state.size}`}
+          className="btn vibrate-2"
+        >
+          Start Game
+        </Link>
         <RecordsTable jigsawId={this.state.jigsawId} size={this.state.size} />
+        <Link to={`/jigsaws/sizes`} className="btn mt-2">
+          <span className="icon-back">&larr;</span>
+        </Link>
       </main>
     );
   }

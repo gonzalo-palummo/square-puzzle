@@ -12,7 +12,7 @@ function Piece(props) {
       />
     );
   } else {
-    return <div style={props.imgStyle} className="image"></div>;
+    return <div style={props.imgStyle} className="image bg-light"></div>;
   }
 }
 

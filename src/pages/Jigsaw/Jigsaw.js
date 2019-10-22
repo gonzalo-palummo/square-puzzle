@@ -5,6 +5,7 @@ import UserService from "./../../services/UserService";
 import { getUserData } from "./../../services/AuthService";
 import CSSLoader from "./../../components/CSSLoader/CSSLoader";
 import RecordService from "../../services/RecordService";
+import { Link } from "react-router-dom";
 
 class Jigsaw extends Component {
   constructor(props) {
@@ -83,7 +84,7 @@ class Jigsaw extends Component {
 
   render() {
     return (
-      <main>
+      <main className="text-center">
         {this.state.isLoading ? <CSSLoader /> : ""}
 
         <p className="timer mx-auto text-center font-weight-light mt-2 pb-2 rounded">
@@ -97,6 +98,9 @@ class Jigsaw extends Component {
           onMove={this.handleMove}
           onComplete={this.onComplete}
         />
+        <Link to={"/"} className="btn mt-2">
+          <span className="icon-back">&larr;</span>
+        </Link>
       </main>
     );
   }

@@ -108,7 +108,7 @@ class Login extends Component {
           </div>
           <button
             type="submit"
-            className="btn btn-primary btn-block my-2 border-rounded"
+            className="btn btn-block my-2 border-rounded"
           >
             Login
           </button>

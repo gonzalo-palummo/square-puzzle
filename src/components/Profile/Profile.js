@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "./Profile.css";
 import { Link } from "react-router-dom";
 import Chart from "react-google-charts";
-import environment from "../../environment/environment";
 import UserService from "../../services/UserService";
 import AuthService from "../../services/AuthService";
 import CSSLoader from "./../../components/CSSLoader/CSSLoader";
@@ -68,42 +67,42 @@ class Profile extends Component {
     return (
       <main className="text-center">
         <div className="row">
-          <div className="col-7">
-            <h1 className="h4">
+          <div className="col">
+            <h1 className="h4 shadow-none font-weight-bold text-dark">
               {this.props.myProfile
                 ? "My Profile"
                 : this.state.userData.userName}
             </h1>
           </div>
-          <div className="col-5">
-            <Link
-              to="/login"
-              className="btn btn-sm btn-primary border-rounded col-sm-4"
-            >
-              Log out
-            </Link>
-          </div>
+
+          {this.props.myProfile ? (
+            <div className="col">
+              <Link to="/login" className="btn btn-sm border-rounded col-sm-4">
+                Log out
+              </Link>
+            </div>
+          ) : null}
         </div>
 
         <ul className="list-unstyled mt-4 row">
           <li className="col-6">
-            <h2 className="h6">Played</h2>
-            <p>{this.state.userData.plays}</p>
+            <h2 className="h3">Played</h2>
+            <p className="h3">{this.state.userData.plays}</p>
           </li>
           <li className="col-6">
-            <h2 className="h6">Completed</h2>
-            <p>{this.state.userData.completed}</p>
+            <h2 className="h3">Completed</h2>
+            <p className="h3">{this.state.userData.completed}</p>
           </li>
           <li className="col-6">
-            <h2 className="h6">Lost</h2>
-            <p className="m-0">{this.state.userData.lost}</p>
+            <h2 className="h3">Lost</h2>
+            <p className="m-0 h3">{this.state.userData.lost}</p>
           </li>
           <li className="col-6">
-            <h2 className="h6">Record Time</h2>
-            <p className="m-0">{this.state.userData.recordTime}</p>
+            <h2 className="h3">Record Time</h2>
+            <p className="m-0 h3">{this.state.userData.recordTime}</p>
           </li>
         </ul>
-        <h2 className="h5 mt-4 mb-0">Effectiveness</h2>
+        <h2 className="h3 mt-4 mb-0">Effectiveness</h2>
         <Chart
           width={"250px"}
           style={{ margin: "auto" }}
@@ -121,6 +120,9 @@ class Profile extends Component {
           }}
           rootProps={{ "data-testid": "3" }}
         />
+        <Link to={"/"} className="btn mt-2">
+          <span className="icon-back">&larr;</span>
+        </Link>
       </main>
     );
   }

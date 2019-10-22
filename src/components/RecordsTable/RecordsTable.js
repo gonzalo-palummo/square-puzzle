@@ -25,7 +25,7 @@ class RecordsTable extends Component {
         });
         this.setState({ isLoading: false });
       } else {
-        this.props.history.push("/login"); // TODO: FIX THIS, SHOULD REDIRECT TO THE ERROR PAGE
+        //this.props.history.push("/login"); // TODO: FIX THIS, SHOULD REDIRECT TO THE ERROR PAGE
       }
     });
   }

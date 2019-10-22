@@ -13,6 +13,7 @@ import Complete from "./pages/Complete/Complete";
 import environment from "./environment/environment";
 import AuthRoute from "./components/AuthRoute/AuthRoute";
 import JigsawStart from "./pages/JigsawStart/JigsawStart";
+import Home from "./pages/Home/Home";
 
 class App extends Component {
   constructor(props) {
@@ -66,14 +67,11 @@ class App extends Component {
   }
 
   render() {
-    let navbar = <Navbar />;
     return (
       <BrowserRouter>
         <div className="app container">
-          {navbar}
-
           <AuthRoute
-            path="/"
+            path="/jigsaws"
             exact
             render={props => (
               <Jigsaws
@@ -105,6 +103,7 @@ class App extends Component {
             exact
             component={JigsawStart}
           />
+          <AuthRoute path="/" exact component={Home} />
           <Route
             path="/login"
             render={props => (

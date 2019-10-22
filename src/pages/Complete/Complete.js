@@ -6,7 +6,7 @@ import RecordsTable from "../../components/RecordsTable/RecordsTable";
 function Complete(props) {
   return (
     <main className="text-center">
-      <h1 className="h4 mb-4">Results</h1>
+      <h1 className="h2 mb-4">Results</h1>
       <p>Time: {props.match.params.time} seconds</p>
       <p>Movements: {props.match.params.movements}</p>
       <Link

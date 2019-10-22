@@ -7,7 +7,7 @@ import Cards from "../../components/Cards/Cards";
 class Jigsaws extends Component {
   render() {
     return (
-      <main>
+      <main className="text-center">
         <h1 className="d-none">Puzzles list</h1>
         <ul className="list-unstyled text-center w-50 m-auto">
           {this.props.puzzles.map((puzzle, index) => (
@@ -22,6 +22,9 @@ class Jigsaws extends Component {
             </li>
           ))}
         </ul>
+        <Link to={"/"} className="btn mt-2">
+          <span className="icon-back">&larr;</span>
+        </Link>
       </main>
     );
   }

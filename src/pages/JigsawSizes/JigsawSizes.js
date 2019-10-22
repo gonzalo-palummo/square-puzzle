@@ -20,6 +20,9 @@ function JigsawSizes(props) {
           </li>
         ))}
       </ul>
+      <Link to={`/jigsaws`} className="btn mt-2">
+        <span className="icon-back">&larr;</span>
+      </Link>
     </main>
   );
 }
