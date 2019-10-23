@@ -37,7 +37,7 @@ label:focus,
   min-height: calc(100vh);
 }
 
-* {
+*:not(input) {
   font-family: "Patrick Hand SC";
   color: white;
   text-shadow: 2px 2px black;

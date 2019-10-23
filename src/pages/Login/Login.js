@@ -4,6 +4,7 @@ import { Link, Redirect } from "react-router-dom";
 import NotificationBox from "./../../components/NotificationBox/NotificationBox";
 import AuthService from "./../../services/AuthService";
 import CSSLoader from "./../../components/CSSLoader/CSSLoader";
+import ModalDialog from "../../components/ModalDialog/ModalDialog";
 
 class Login extends Component {
   constructor(props) {
@@ -57,6 +58,17 @@ class Login extends Component {
       }
     });
   }
+
+  handleRequestClose = () => {
+    this.setState({
+      message: {
+        header: null,
+        text: null,
+        type: null
+      }
+    });
+  };
+
   render() {
     if (this.state.success) {
       return <Redirect to="/" />;
@@ -67,19 +79,20 @@ class Login extends Component {
     }
 
     const message = this.state.message;
-    let notif = "";
+    let modal = "";
     if (message.text !== null) {
-      notif = (
-        <NotificationBox
-          type={message.type}
-          header={message.header}
-          text={message.text}
-        />
+      modal = (
+        <ModalDialog
+          isOpen={true}
+          onRequestClose={this.handleRequestClose}
+          title={this.state.message.header}
+          message={this.state.message.text}
+        ></ModalDialog>
       );
     }
     return (
       <main>
-        {notif}
+        {modal}
         <h1 className="h4">Login</h1>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
@@ -106,10 +119,7 @@ class Login extends Component {
               onChange={this.handleChange}
             />
           </div>
-          <button
-            type="submit"
-            className="btn btn-block my-2 border-rounded"
-          >
+          <button type="submit" className="btn btn-block my-2 border-rounded">
             Login
           </button>
         </form>

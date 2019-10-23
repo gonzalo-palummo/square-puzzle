@@ -2,3 +2,11 @@
 .modal-footer {
   border: none !important;
 }
+
+.close span,
+.modal-body,
+.modal-title,
+.modal-footer {
+  color: black !important;
+  text-shadow: none;
+}
