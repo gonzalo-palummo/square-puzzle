@@ -1,6 +1,28 @@
 import environment from "../environment/environment";
 
-const getOne = function(id) {
+
+const getAll = function () {
+  return fetch(`${environment.apiUrl}/puzzles`, {
+    method: "get",
+    headers: {
+      "X-Requested-With": "XMLHttpRequest",
+      "Content-Type": "application/json"
+    }/*,
+    credentials: "include"*/ // TODO: UNCOMMENT
+  })
+    .then(rta => {
+      if (!rta.ok) {
+        throw Error(rta.statusText);
+      }
+      return rta;
+    })
+    .then(rta => rta.json())
+    .catch(err => {
+      return false;
+    });
+};
+
+const getOne = function (id) {
   return fetch(`${environment.apiUrl}/puzzles/${id}`, {
     method: "get",
     headers: {
@@ -23,10 +45,11 @@ const getOne = function(id) {
 
 /**
  * Servicio de autenticación.
- * @type {{getOne: (function(*=): Promise<Response | never>)}}
+ * @type {{getOne: (function(*=): Promise<Response | never>), getAll: (function(*=): Promise<Response | never>)}}
  */
 const PuzzleService = {
-  getOne: getOne
+  getOne: getOne,
+  getAll: getAll
 };
 
 export default PuzzleService;

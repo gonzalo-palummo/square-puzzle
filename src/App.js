@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "./App.css";
 import "./styles/buttons.css";
 import { BrowserRouter, Route } from "react-router-dom";
-import Navbar from "./components/Navbar/Navbar";
 import Jigsaw from "./pages/Jigsaw/Jigsaw";
 import JigsawSizes from "./pages/JigsawSizes/JigsawSizes";
 import Jigsaws from "./pages/Jigsaws/Jigsaws";
@@ -10,17 +9,15 @@ import Profile from "./components/Profile/Profile";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import Complete from "./pages/Complete/Complete";
-import environment from "./environment/environment";
 import AuthRoute from "./components/AuthRoute/AuthRoute";
 import JigsawStart from "./pages/JigsawStart/JigsawStart";
 import Home from "./pages/Home/Home";
+import PuzzleService from "./services/PuzzleService";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      puzzles: [],
-      isLoading: true,
       userData: {
         id: null,
         email: null,
@@ -33,21 +30,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch(`${environment.apiUrl}/puzzles`, {
-      method: "get",
-      headers: {
-        "X-Requested-With": "XMLHttpRequest",
-        "Content-Type": "application/json"
-      } /*,
-      credentials: "include" */ // TODO: CHECK THIS
-    })
-      .then(res => res.json())
-      .then(res => {
-        this.setState({
-          puzzles: res,
-          isLoading: false
-        });
-      }); // TODO: PUT IN A SERVICE
   }
 
   handleAuthenticated(user) {
@@ -75,7 +57,6 @@ class App extends Component {
             exact
             render={props => (
               <Jigsaws
-                puzzles={this.state.puzzles}
                 {...props}
                 onLogout={this.handleLogout}
               />
@@ -107,7 +88,7 @@ class App extends Component {
           <Route
             path="/login"
             render={props => (
-              <Login onAuthenticated={this.handleAuthenticated} />
+              <Login onAuthenticated={this.handleAuthenticated} {...props} />
             )}
           />
           <Route path="/register" component={Register} />

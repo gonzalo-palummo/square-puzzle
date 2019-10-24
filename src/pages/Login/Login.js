@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./Login.css";
 import { Link, Redirect } from "react-router-dom";
-import NotificationBox from "./../../components/NotificationBox/NotificationBox";
 import AuthService from "./../../services/AuthService";
 import CSSLoader from "./../../components/CSSLoader/CSSLoader";
 import ModalDialog from "../../components/ModalDialog/ModalDialog";

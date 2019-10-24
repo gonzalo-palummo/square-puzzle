@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./Register.css";
 import { Link, Redirect } from "react-router-dom";
 import UserService from "../../services/UserService";
-import NotificationBox from "./../../components/NotificationBox/NotificationBox";
+import ModalDialog from "../../components/ModalDialog/ModalDialog";
 import CSSLoader from "./../../components/CSSLoader/CSSLoader";
 
 class Register extends Component {
@@ -47,7 +47,12 @@ class Register extends Component {
     }).then(success => {
       if (success) {
         this.setState({
-          success: true
+          message: {
+            header: "Success",
+            text: "Your account was created succesfully",
+            type: "success"
+          },
+          isLoading: false
         });
       } else {
         this.setState({
@@ -61,6 +66,22 @@ class Register extends Component {
       }
     });
   };
+
+  handleRequestClose = () => {
+    let success = true;
+    if (this.state.message.type == 'error') {
+      success = false;
+    }
+    this.setState({
+      message: {
+        header: null,
+        text: null,
+        type: null
+      },
+      success: success
+    });
+  };
+
   render() {
     if (this.state.success) {
       return <Redirect to="/login" />;
@@ -71,20 +92,22 @@ class Register extends Component {
     }
 
     const message = this.state.message;
-    let notif = "";
+    let modal = "";
     if (message.text !== null) {
-      notif = (
-        <NotificationBox
-          type={message.type}
-          header={message.header}
-          text={message.text}
-        />
+      modal = (
+        <ModalDialog
+          isOpen={true}
+          onRequestClose={this.handleRequestClose}
+          title={this.state.message.header}
+          message={this.state.message.text}
+        ></ModalDialog>
       );
     }
 
+
     return (
       <main>
-        {notif}
+        {modal}
         <h1 className="h4">Register</h1>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">

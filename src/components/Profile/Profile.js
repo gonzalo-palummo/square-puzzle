@@ -99,7 +99,7 @@ class Profile extends Component {
           </li>
           <li className="col-6">
             <h2 className="h3">Record Time</h2>
-            <p className="m-0 h3">{this.state.userData.recordTime}</p>
+            <p className="m-0 h3">{this.state.userData.recordTime} s.</p>
           </li>
         </ul>
         <h2 className="h3 mt-4 mb-0">Effectiveness</h2>
