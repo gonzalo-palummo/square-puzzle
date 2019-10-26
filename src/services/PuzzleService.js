@@ -1,14 +1,13 @@
 import environment from "../environment/environment";
 
-
-const getAll = function () {
+const getAll = function() {
   return fetch(`${environment.apiUrl}/puzzles`, {
     method: "get",
     headers: {
       "X-Requested-With": "XMLHttpRequest",
       "Content-Type": "application/json"
-    }/*,
-    credentials: "include"*/ // TODO: UNCOMMENT
+    },
+    credentials: "include"
   })
     .then(rta => {
       if (!rta.ok) {
@@ -22,7 +21,7 @@ const getAll = function () {
     });
 };
 
-const getOne = function (id) {
+const getOne = function(id) {
   return fetch(`${environment.apiUrl}/puzzles/${id}`, {
     method: "get",
     headers: {

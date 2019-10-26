@@ -120,9 +120,7 @@ class Profile extends Component {
           }}
           rootProps={{ "data-testid": "3" }}
         />
-        <Link to={"/"} className="btn mt-2">
-          <span className="icon-back">&larr;</span>
-        </Link>
+        <Link to={"/"} className="btn btn-icon btn-back mt-2"></Link>
       </main>
     );
   }

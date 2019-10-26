@@ -1,5 +1,5 @@
 /* -- App -- */
-@import url("https://fonts.googleapis.com/css?family=Patrick+Hand+SC&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Staatliches&display=swap");
 
 body {
   max-width: 1920px;
@@ -38,7 +38,7 @@ label:focus,
 }
 
 *:not(input) {
-  font-family: "Patrick Hand SC";
+  font-family: "Staatliches", cursive;
   color: white;
   text-shadow: 2px 2px black;
 }
@@ -57,7 +57,7 @@ a:hover {
 }
 
 .container {
-  background: url("./images/nature-background.jpg");
+  background: url("./images/background.png");
   background-position: 359px 445px;
   height: 100%;
 }

@@ -4,6 +4,7 @@
   flex-wrap: wrap;
   max-width: 600px;
   justify-content: center;
+  margin-top: 45px;
 }
 
 .image {

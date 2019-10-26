@@ -1,0 +1,22 @@
+.form-control {
+  background-color: transparent !important;
+  border: none !important;
+}
+
+.form-group {
+  background-color: #ffffffe3;
+  border-radius: 7px;
+}
+
+.form-group label {
+  text-shadow: none;
+  color: #4a4a4a;
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+
+.form-group input {
+  font-size: 23px;
+  height: 32px;
+  padding-bottom: 30px;
+}

@@ -43,6 +43,9 @@ class Jigsaw extends Component {
 
   onComplete = () => {
     let time = this.secondsElapsed();
+    this.setState({
+      isLoading: true
+    });
 
     RecordService.create({
       puzzle_id: this.props.match.params.jigsawId,
@@ -86,11 +89,20 @@ class Jigsaw extends Component {
     return (
       <main className="text-center">
         {this.state.isLoading ? <CSSLoader /> : ""}
+        <div className="header">
+          <div className="row">
+            <div className="col-6">
+              <button className="btn btn-icon btn-eye mt-1"></button>
+            </div>
+            <div className="col-6">
+              <p className="timer font-weight-light">
+                <span id="timer">{this.secondsElapsed()}</span> |{" "}
+                {this.state.movements}
+              </p>
+            </div>
+          </div>
+        </div>
 
-        <p className="timer mx-auto text-center font-weight-light mt-2 pb-2 rounded">
-          <span id="timer">{this.secondsElapsed()}</span> |{" "}
-          {this.state.movements}
-        </p>
         <JigsawComponent
           size={this.props.match.params.size}
           jigsawId={this.props.match.params.jigsawId}
@@ -98,9 +110,7 @@ class Jigsaw extends Component {
           onMove={this.handleMove}
           onComplete={this.onComplete}
         />
-        <Link to={"/"} className="btn mt-2">
-          <span className="icon-back">&larr;</span>
-        </Link>
+        <Link to={"/"} className="btn btn-icon btn-back mt-2"></Link>
       </main>
     );
   }

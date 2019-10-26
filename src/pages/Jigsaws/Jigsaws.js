@@ -7,7 +7,6 @@ import PuzzleService from "../../services/PuzzleService";
 import CSSLoader from "../../components/CSSLoader/CSSLoader";
 
 class Jigsaws extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -37,21 +36,24 @@ class Jigsaws extends Component {
       <main className="text-center">
         <h1 className="d-none">Puzzles list</h1>
         <ul className="list-unstyled text-center w-50 m-auto">
-          {this.state.puzzles.length > 0 ? this.state.puzzles.map((puzzle, index) => (
-            <li key={index} className="puzzle-item p-2 rounded my-2 text-white">
-              <Link to={`/jigsaws/${puzzle.id}`}>
-                <img
-                  src={`${environment.publicUrl}/${puzzle.url}/complete.jpg`}
-                  className="puzzle-preview rounded"
-                  alt="Preview of Puzzle"
-                />
-              </Link>
-            </li>
-          )) : null}
+          {this.state.puzzles.length > 0
+            ? this.state.puzzles.map((puzzle, index) => (
+                <li
+                  key={index}
+                  className="puzzle-item p-2 rounded my-2 text-white"
+                >
+                  <Link to={`/jigsaws/${puzzle.id}`}>
+                    <img
+                      src={`${environment.publicUrl}/${puzzle.url}/complete.jpg`}
+                      className="puzzle-preview rounded"
+                      alt="Preview of Puzzle"
+                    />
+                  </Link>
+                </li>
+              ))
+            : null}
         </ul>
-        <Link to={"/"} className="btn mt-2">
-          <span className="icon-back">&larr;</span>
-        </Link>
+        <Link to={"/"} className="btn btn-icon btn-back mt-2"></Link>
       </main>
     );
   }

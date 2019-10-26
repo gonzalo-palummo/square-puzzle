@@ -13,8 +13,7 @@ const login = function(credentials) {
     headers: {
       "X-Requested-With": "XMLHttpRequest",
       "Content-Type": "application/json"
-    } /*,
-    credentials: "include"*/ // TODO : UNCOMMENT
+    }
   })
     .then(rta => {
       if (!rta.ok) {
@@ -63,7 +62,7 @@ const isAuthenticated = function() {
 const getUserData = function() {
   if (!(userData.id !== null)) {
     userData = JSON.parse(localStorage.user_data);
-    return { ...userData};
+    return { ...userData };
   } else {
     return { ...userData };
   }

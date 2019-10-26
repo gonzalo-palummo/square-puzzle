@@ -5,11 +5,48 @@
   font-size: 30px !important;
   padding: 0px 35px !important;
   border: 1px solid #0065d1 !important;
-  background-color: #008dff !important;
+  background-color: #008dffb3 !important;
   color: white !important;
+  text-transform: uppercase;
 }
 
 .btn-sm {
   font-size: 25px !important;
   padding: 0 !important;
+}
+
+.btn-icon {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 25px;
+  padding: 20px !important;
+}
+
+.form-group .btn-icon {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  background-size: 18px;
+  padding-bottom: 25px !important;
+}
+
+.btn-eye {
+  background-image: url("./../images/icons/eye.png");
+}
+
+.btn-back {
+  background-image: url("./../images/icons/back.png");
+  background-size: 15px;
+}
+
+.btn-email {
+  background-image: url("./../images/icons/email.png");
+}
+
+.btn-password {
+  background-image: url("./../images/icons/password.png");
+}
+
+.btn-user {
+  background-image: url("./../images/icons/user.png");
 }

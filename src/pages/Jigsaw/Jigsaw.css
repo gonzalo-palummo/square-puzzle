@@ -1,7 +1,13 @@
+.header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+
 .timer {
   color: white;
-  font-size: 40px;
-  width: 60%;
+  font-size: 30px;
 }
 
 #timer {

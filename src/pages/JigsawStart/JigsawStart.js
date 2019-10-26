@@ -22,9 +22,10 @@ class JigsawStart extends Component {
           Start Game
         </Link>
         <RecordsTable jigsawId={this.state.jigsawId} size={this.state.size} />
-        <Link to={`/jigsaws/${this.state.jigsawId}`} className="btn mt-2">
-          <span className="icon-back">&larr;</span>
-        </Link>
+        <Link
+          to={`/jigsaws/${this.state.jigsawId}`}
+          className="btn btn-icon btn-back mt-2"
+        ></Link>
       </main>
     );
   }

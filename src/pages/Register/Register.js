@@ -36,9 +36,21 @@ class Register extends Component {
 
   handleSubmit = ev => {
     ev.preventDefault();
+    if (this.state.formData.password != this.state.formData.confirm_password) {
+      this.setState({
+        message: {
+          header: "Error",
+          text: "The Passwords must match",
+          type: "error"
+        }
+      });
+      return false;
+    }
+
     this.setState({
       isLoading: true
     });
+
     UserService.register({
       user_name: this.state.formData.user_name,
       email: this.state.formData.email,
@@ -69,7 +81,7 @@ class Register extends Component {
 
   handleRequestClose = () => {
     let success = true;
-    if (this.state.message.type == 'error') {
+    if (this.state.message.type == "error") {
       success = false;
     }
     this.setState({
@@ -104,14 +116,15 @@ class Register extends Component {
       );
     }
 
-
     return (
       <main>
         {modal}
-        <h1 className="h4">Register</h1>
+        <h1 className="h2">Register</h1>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
-            <label htmlFor="user_name">User Name</label>
+            <label htmlFor="user_name">
+              <div className="btn btn-icon btn-user"></div>User Name
+            </label>
             <input
               type="text"
               id="user_name"
@@ -123,7 +136,9 @@ class Register extends Component {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">
+              <div className="btn btn-icon btn-email"></div>Email
+            </label>
             <input
               type="email"
               id="email"
@@ -135,7 +150,9 @@ class Register extends Component {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">
+              <div className="btn btn-icon btn-password"></div>Password
+            </label>
             <input
               type="password"
               id="password"
@@ -147,7 +164,9 @@ class Register extends Component {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="confirm_password">Confirm Password</label>
+            <label htmlFor="confirm_password">
+              <div className="btn btn-icon btn-email"></div>Confirm Password
+            </label>
             <input
               type="password"
               id="confirm_password"
@@ -158,10 +177,7 @@ class Register extends Component {
               required
             />
           </div>
-          <button
-            type="submit"
-            className="btn btn-block my-2 border-rounded"
-          >
+          <button type="submit" className="btn btn-block my-2 border-rounded">
             Register
           </button>
           <Link

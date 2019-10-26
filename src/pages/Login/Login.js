@@ -92,10 +92,12 @@ class Login extends Component {
     return (
       <main>
         {modal}
-        <h1 className="h4">Login</h1>
+        <h1 className="h2">Login</h1>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">
+              <div className="btn btn-icon btn-email"></div>Email
+            </label>
             <input
               type="email"
               id="email"
@@ -107,7 +109,9 @@ class Login extends Component {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">
+              <div className="btn btn-icon btn-password"></div>Password
+            </label>
             <input
               type="password"
               id="password"

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import "./styles/buttons.css";
+import "./styles/forms.css";
 import { BrowserRouter, Route } from "react-router-dom";
 import Jigsaw from "./pages/Jigsaw/Jigsaw";
 import JigsawSizes from "./pages/JigsawSizes/JigsawSizes";
@@ -29,8 +30,7 @@ class App extends Component {
     this.handleLogout = this.handleLogout.bind(this);
   }
 
-  componentDidMount() {
-  }
+  componentDidMount() {}
 
   handleAuthenticated(user) {
     this.setState({
@@ -56,10 +56,7 @@ class App extends Component {
             path="/jigsaws"
             exact
             render={props => (
-              <Jigsaws
-                {...props}
-                onLogout={this.handleLogout}
-              />
+              <Jigsaws {...props} onLogout={this.handleLogout} />
             )}
           />
           <AuthRoute
