@@ -4,19 +4,20 @@
 }
 
 .form-group {
-  background-color: #ffffffe3;
+  background-color: #ffffff40;
   border-radius: 7px;
 }
 
 .form-group label {
   text-shadow: none;
-  color: #4a4a4a;
+  color: white;
   margin-top: 10px;
   margin-bottom: 0;
 }
 
 .form-group input {
-  font-size: 23px;
-  height: 32px;
+  font-size: 22px;
+  height: 43px;
   padding-bottom: 30px;
+  color: white !important;
 }

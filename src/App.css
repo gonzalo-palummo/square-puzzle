@@ -3,7 +3,9 @@
 
 body {
   max-width: 1920px;
-  margin: auto;
+  margin: auto !important;
+  background-color: #08aeea;
+  background-image: linear-gradient(0deg, #086fea 0%, #2ae0f5 100%);
 }
 
 #root {
@@ -54,12 +56,6 @@ a {
 a:hover {
   text-decoration: none !important;
   color: inherit !important;
-}
-
-.container {
-  background: url("./images/background.png");
-  background-position: 359px 445px;
-  height: 100%;
 }
 
 rect {

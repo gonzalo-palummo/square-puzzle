@@ -19,4 +19,5 @@ a.unlink:hover {
   height: 60px;
   width: 60px;
   padding-top: 4px;
+  border: 1px solid #2ae0f5;
 }

@@ -177,12 +177,15 @@ class Register extends Component {
               required
             />
           </div>
-          <button type="submit" className="btn btn-block my-2 border-rounded">
+          <button
+            type="submit"
+            className="btn btn-block my-2 border-rounded w-75 mx-auto"
+          >
             Register
           </button>
           <Link
             to="/login"
-            className="btn btn-secondary btn-block my-2 border-rounded text-white"
+            className="btn btn-secondary btn-block my-2 border-rounded text-white w-75 mx-auto"
           >
             Go to Login
           </Link>

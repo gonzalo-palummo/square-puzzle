@@ -6,6 +6,8 @@ import { getUserData } from "./../../services/AuthService";
 import CSSLoader from "./../../components/CSSLoader/CSSLoader";
 import RecordService from "../../services/RecordService";
 import { Link } from "react-router-dom";
+import ModalDialog from "../../components/ModalDialog/ModalDialog";
+import environment from "../../environment/environment";
 
 class Jigsaw extends Component {
   constructor(props) {
@@ -17,7 +19,8 @@ class Jigsaw extends Component {
       isLoading: true,
       totalPieces:
         this.props.match.params.size * this.props.match.params.size - 1,
-      countLoadedPieces: 1
+      countLoadedPieces: 1,
+      showReference: false
     };
   }
 
@@ -39,6 +42,18 @@ class Jigsaw extends Component {
         isLoading: false
       });
     }
+  };
+
+  handleClickReference = () => {
+    this.setState({
+      showReference: true
+    });
+  };
+
+  handleRequestClose = () => {
+    this.setState({
+      showReference: false
+    });
   };
 
   onComplete = () => {
@@ -88,11 +103,26 @@ class Jigsaw extends Component {
   render() {
     return (
       <main className="text-center">
+        <ModalDialog
+          isOpen={this.state.showReference}
+          onRequestClose={this.handleRequestClose}
+          title="Image Reference"
+          message={
+            <img
+              src={`${environment.publicUrl}/images/puzzles/${this.props.match.params.jigsawId}/complete.jpg`}
+              alt="Reference Image"
+              className="reference"
+            />
+          }
+        ></ModalDialog>
         {this.state.isLoading ? <CSSLoader /> : ""}
         <div className="header">
           <div className="row">
             <div className="col-6">
-              <button className="btn btn-icon btn-eye mt-1"></button>
+              <button
+                className="btn btn-icon btn-eye mt-1"
+                onClick={this.handleClickReference}
+              ></button>
             </div>
             <div className="col-6">
               <p className="timer font-weight-light">

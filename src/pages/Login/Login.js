@@ -23,17 +23,15 @@ class Login extends Component {
       errors: {},
       isLoading: false
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
-  handleChange(ev) {
+  handleChange = ev => {
     const elem = ev.target;
     this.setState({
       formData: { ...this.state.formData, [elem.name]: elem.value }
     });
-  }
+  };
 
-  handleSubmit(ev) {
+  handleSubmit = ev => {
     ev.preventDefault();
     this.setState({ isLoading: true });
     AuthService.login({
@@ -56,7 +54,7 @@ class Login extends Component {
         });
       }
     });
-  }
+  };
 
   handleRequestClose = () => {
     this.setState({
@@ -122,13 +120,16 @@ class Login extends Component {
               onChange={this.handleChange}
             />
           </div>
-          <button type="submit" className="btn btn-block my-2 border-rounded">
+          <button
+            type="submit"
+            className="btn btn-block my-2 border-rounded w-75 mx-auto"
+          >
             Login
           </button>
         </form>
         <Link
           to="/register"
-          className="btn btn-secondary btn-block my-2 border-rounded"
+          className="btn btn-secondary btn-block my-2 border-rounded mx-auto"
         >
           Go to Register
         </Link>
