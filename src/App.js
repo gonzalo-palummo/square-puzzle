@@ -14,6 +14,7 @@ import AuthRoute from "./components/AuthRoute/AuthRoute";
 import JigsawStart from "./pages/JigsawStart/JigsawStart";
 import Home from "./pages/Home/Home";
 import PuzzleService from "./services/PuzzleService";
+import JigsawCreate from "./pages/JigsawCreate/JigsawCreate";
 
 class App extends Component {
   constructor(props) {
@@ -69,6 +70,7 @@ class App extends Component {
             exact
             render={props => <Profile myProfile={false} {...props} />}
           />
+          <AuthRoute path="/create" exact component={JigsawCreate} />
           <AuthRoute path="/jigsaws/:jigsawId" exact component={JigsawSizes} />
           <AuthRoute path="/jigsaws/:jigsawId/:size" exact component={Jigsaw} />
           <AuthRoute
@@ -82,6 +84,7 @@ class App extends Component {
             component={JigsawStart}
           />
           <AuthRoute path="/" exact component={Home} />
+
           <Route
             path="/login"
             render={props => (

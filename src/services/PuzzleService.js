@@ -42,13 +42,36 @@ const getOne = function(id) {
     });
 };
 
+const upload = function(data) {
+  return fetch(`${environment.apiUrl}/puzzles`, {
+    method: "post",
+    body: JSON.stringify(data),
+    headers: {
+      "X-Requested-With": "XMLHttpRequest",
+      "Content-Type": "application/json"
+    } /*,
+    credentials: "include"*/ // TODO : UNCOMMENT
+  })
+    .then(rta => {
+      if (!rta.ok) {
+        throw Error(rta.statusText);
+      }
+      return rta;
+    })
+    .then(rta => rta.ok)
+    .catch(err => {
+      return false;
+    });
+};
+
 /**
  * Servicio de autenticación.
- * @type {{getOne: (function(*=): Promise<Response | never>), getAll: (function(*=): Promise<Response | never>)}}
+ * @type {{getOne: (function(*=): Promise<Response | never>), getAll: (function(*=): Promise<Response | never>), upload: (function(*=): Promise<Response | never>)}}
  */
 const PuzzleService = {
   getOne: getOne,
-  getAll: getAll
+  getAll: getAll,
+  upload: upload
 };
 
 export default PuzzleService;
