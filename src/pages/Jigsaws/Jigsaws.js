@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "./Jigsaws.css";
 import { Link } from "react-router-dom";
 import environment from "../../environment/environment";
-import Cards from "../../components/Cards/Cards";
 import PuzzleService from "../../services/PuzzleService";
 import CSSLoader from "../../components/CSSLoader/CSSLoader";
 
@@ -57,15 +56,5 @@ class Jigsaws extends Component {
       </main>
     );
   }
-
-  /*
-  render() {
-    return (
-      <main>
-        <h1 className="d-none">Puzzles list</h1>
-        <Cards puzzles={this.props.puzzles} />
-      </main>
-    );
-  }*/
 }
 export default Jigsaws;

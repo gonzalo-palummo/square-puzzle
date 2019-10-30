@@ -21,10 +21,9 @@ class RecordsTable extends Component {
         this.setState({
           records: records,
           isLoading: false
-        })
-      }
-      else {
-        //this.props.history.push("/login"); // TODO: FIX THIS, SHOULD REDIRECT TO THE ERROR PAGE
+        });
+      } else {
+        this.props.history.push("/login"); // TODO: FIX THIS, SHOULD REDIRECT TO THE ERROR PAGE
       }
     });
   }
@@ -48,18 +47,23 @@ class RecordsTable extends Component {
           <tbody>
             {this.state.records.length > 0
               ? this.state.records.map((record, index) =>
-                index < 5 ? (
-                  <tr key={index} className="border-rounded mx-auto my-3">
-                    <td>
-                      <Link to={`/userprofile/${record.creator.id}`} className="h5">
-                        <span className="badge badge-pill badge-primary">{record.creator.user_name}</span>
-                      </Link>
-                    </td>
-                    <td>{record.time}</td>
-                    <td>{record.movements}</td>
-                  </tr>
-                ) : null
-              )
+                  index < 5 ? (
+                    <tr key={index} className="border-rounded mx-auto my-3">
+                      <td>
+                        <Link
+                          to={`/userprofile/${record.creator.id}`}
+                          className="h5"
+                        >
+                          <span className="badge badge-pill badge-primary">
+                            {record.creator.user_name}
+                          </span>
+                        </Link>
+                      </td>
+                      <td>{record.time}</td>
+                      <td>{record.movements}</td>
+                    </tr>
+                  ) : null
+                )
               : null}
           </tbody>
         </table>

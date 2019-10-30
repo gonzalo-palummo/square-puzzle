@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import "./JigsawCreate.css";
 import { Link, Redirect } from "react-router-dom";
-import UserService from "../../services/UserService";
 import ModalDialog from "../../components/ModalDialog/ModalDialog";
 import CSSLoader from "../../components/CSSLoader/CSSLoader";
 import AvatarEditor from "react-avatar-editor";
-import environment from "../../environment/environment";
 import PuzzleService from "../../services/PuzzleService";
 import { getUserData } from "../../services/AuthService";
 
@@ -89,6 +87,8 @@ class JigsawCreate extends Component {
 
             fr.readAsDataURL(blob);
           }).then(imageCroppedAsBase64 => {
+            console.log(this.state);
+            console.log(imageCroppedAsBase64);
             PuzzleService.upload({
               image: imageCroppedAsBase64,
               created_by: getUserData().id
@@ -173,7 +173,7 @@ class JigsawCreate extends Component {
           <AvatarEditor
             ref={this.setEditorRef}
             image={this.state.imageChosen}
-            border={0}
+            border={25}
             scale={this.state.imageData.scale}
             className="d-block mx-auto my-3"
           />

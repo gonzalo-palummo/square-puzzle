@@ -5,7 +5,11 @@ function CSSLoader(props) {
   return (
     <>
       <div className="container-loader"></div>
-      <img className="loader" src={require("../../images/logo.png")} />
+      <img
+        className="loader"
+        src={require("../../images/logo.png")}
+        alt="Logo for loading"
+      />
     </>
   );
 }

@@ -34,7 +34,7 @@ class Profile extends Component {
             completed: userData.records.length,
             lost: userData.plays - userData.records.length,
             recordTime: userData.records.length
-              ? this.getBestRecord(userData.records)
+              ? this.getBestRecord(userData.records) + " s."
               : "None",
             userName: userData.user_name
           }
@@ -59,6 +59,11 @@ class Profile extends Component {
     return bestRecord;
   }
 
+  onLogout = () => {
+    this.props.onLogout();
+    this.props.history.push("/login");
+  };
+
   render() {
     if (this.state.isLoading) {
       return <CSSLoader />;
@@ -77,9 +82,12 @@ class Profile extends Component {
 
           {this.props.myProfile ? (
             <div className="col">
-              <Link to="/login" className="btn btn-sm border-rounded col-sm-4">
+              <button
+                onClick={this.onLogout}
+                className="btn btn-sm border-rounded col-sm-4"
+              >
                 Log out
-              </Link>
+              </button>
             </div>
           ) : null}
         </div>
@@ -87,39 +95,46 @@ class Profile extends Component {
         <ul className="list-unstyled mt-4 row">
           <li className="col-6">
             <h2 className="h3">Played</h2>
-            <p className="h3">{this.state.userData.plays}</p>
+            <p className="h3 profileNumbers">{this.state.userData.plays}</p>
           </li>
           <li className="col-6">
             <h2 className="h3">Completed</h2>
-            <p className="h3">{this.state.userData.completed}</p>
+            <p className="h3 profileNumbers">{this.state.userData.completed}</p>
           </li>
           <li className="col-6">
             <h2 className="h3">Lost</h2>
-            <p className="m-0 h3">{this.state.userData.lost}</p>
+            <p className="m-0 h3 profileNumbers">{this.state.userData.lost}</p>
           </li>
           <li className="col-6">
-            <h2 className="h3">Record Time</h2>
-            <p className="m-0 h3">{this.state.userData.recordTime} s.</p>
+            <h2 className="h3">Record</h2>
+            <p className="m-0 h3 profileNumbers">
+              {this.state.userData.recordTime}
+            </p>
           </li>
         </ul>
-        <h2 className="h3 mt-4 mb-0">Effectiveness</h2>
-        <Chart
-          width={"250px"}
-          style={{ margin: "auto" }}
-          chartType="PieChart"
-          loader={<div>Loading Chart</div>}
-          data={[
-            ["Task", "Hours per Day"],
-            ["Completed Puzzles", this.state.userData.completed],
-            ["Lost Puzzles", this.state.userData.lost]
-          ]}
-          options={{
-            pieHole: 0.4,
-            legend: "none",
-            pieStartAngle: 100
-          }}
-          rootProps={{ "data-testid": "3" }}
-        />
+        {this.state.userData.plays > 0 ? (
+          <>
+            <h2 className="h3 mt-4 mb-0">Effectiveness</h2>
+            <Chart
+              width={"250px"}
+              style={{ margin: "auto" }}
+              chartType="PieChart"
+              loader={<div>Loading Chart</div>}
+              data={[
+                ["Task", "Hours per Day"],
+                ["Completed Puzzles", this.state.userData.completed],
+                ["Lost Puzzles", this.state.userData.lost]
+              ]}
+              options={{
+                pieHole: 0.4,
+                legend: "none",
+                pieStartAngle: 100
+              }}
+              rootProps={{ "data-testid": "3" }}
+            />
+          </>
+        ) : null}
+
         <Link to={"/"} className="btn btn-icon btn-back mt-2"></Link>
       </main>
     );

@@ -6,8 +6,8 @@ const getAll = function() {
     headers: {
       "X-Requested-With": "XMLHttpRequest",
       "Content-Type": "application/json"
-    },
-    credentials: "include"
+    } /*,
+    credentials: "include"*/
   })
     .then(rta => {
       if (!rta.ok) {

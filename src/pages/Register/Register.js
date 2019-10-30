@@ -129,7 +129,7 @@ class Register extends Component {
               type="text"
               id="user_name"
               name="user_name"
-              className="form-control border-rounded"
+              className="form-control"
               value={this.state.formData.user_name}
               onChange={this.handleChange}
               required
@@ -143,7 +143,7 @@ class Register extends Component {
               type="email"
               id="email"
               name="email"
-              className="form-control border-rounded"
+              className="form-control"
               value={this.state.formData.email}
               onChange={this.handleChange}
               required
@@ -157,7 +157,7 @@ class Register extends Component {
               type="password"
               id="password"
               name="password"
-              className="form-control border-rounded"
+              className="form-control"
               value={this.state.formData.password}
               onChange={this.handleChange}
               required
@@ -171,7 +171,7 @@ class Register extends Component {
               type="password"
               id="confirm_password"
               name="confirm_password"
-              className="form-control border-rounded"
+              className="form-control"
               value={this.state.formData.confirm_password}
               onChange={this.handleChange}
               required

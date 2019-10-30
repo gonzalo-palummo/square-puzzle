@@ -13,7 +13,6 @@ import Complete from "./pages/Complete/Complete";
 import AuthRoute from "./components/AuthRoute/AuthRoute";
 import JigsawStart from "./pages/JigsawStart/JigsawStart";
 import Home from "./pages/Home/Home";
-import PuzzleService from "./services/PuzzleService";
 import JigsawCreate from "./pages/JigsawCreate/JigsawCreate";
 
 class App extends Component {
@@ -39,7 +38,8 @@ class App extends Component {
     });
   }
 
-  handleLogout(user) {
+  handleLogout() {
+    localStorage.clear();
     this.setState({
       userData: {
         id: null,
@@ -56,14 +56,18 @@ class App extends Component {
           <AuthRoute
             path="/jigsaws"
             exact
-            render={props => (
-              <Jigsaws {...props} onLogout={this.handleLogout} />
-            )}
+            render={props => <Jigsaws {...props} />}
           />
           <AuthRoute
             path="/myprofile/"
             exact
-            render={props => <Profile myProfile={true} {...props} />}
+            render={props => (
+              <Profile
+                myProfile={true}
+                onLogout={this.handleLogout}
+                {...props}
+              />
+            )}
           />
           <AuthRoute
             path="/userprofile/:userId"

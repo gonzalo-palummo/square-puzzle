@@ -21,7 +21,11 @@ class JigsawStart extends Component {
         >
           Start Game
         </Link>
-        <RecordsTable jigsawId={this.state.jigsawId} size={this.state.size} />
+        <RecordsTable
+          {...this.props}
+          jigsawId={this.state.jigsawId}
+          size={this.state.size}
+        />
         <Link
           to={`/jigsaws/${this.state.jigsawId}`}
           className="btn btn-icon btn-back mt-2"

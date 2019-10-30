@@ -100,7 +100,7 @@ class Login extends Component {
               type="email"
               id="email"
               name="email"
-              className="form-control border-rounded"
+              className="form-control"
               value={this.state.formData.email}
               onChange={this.handleChange}
               required
@@ -115,7 +115,7 @@ class Login extends Component {
               id="password"
               name="password"
               required
-              className="form-control border-rounded"
+              className="form-control"
               value={this.state.formData.password}
               onChange={this.handleChange}
             />
