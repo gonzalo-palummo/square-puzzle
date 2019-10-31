@@ -2,5 +2,11 @@
   max-width: 100%;
 }
 
-.puzzle-item {
+.btn-back-fixed {
+  position: fixed;
+  right: 0px;
+  left: 0px;
+  bottom: 25px;
+  width: 1px;
+  margin: auto;
 }

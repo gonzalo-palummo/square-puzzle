@@ -13,3 +13,4 @@ User: gon@gmail.com
 Password: 1234
 
 La página /create no es accesible desde la app porque está en proceso (en el back también está en proceso)
+Fijate que la url la tengo en localhost:8080, capaz la tenes que cambiar.

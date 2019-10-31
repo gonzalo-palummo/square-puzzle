@@ -109,7 +109,7 @@ class Jigsaw extends Component {
           title="Image Reference"
           message={
             <img
-              src={`${environment.publicUrl}/images/puzzles/${this.props.match.params.jigsawId}/complete.jpg`}
+              src={`${environment.publicUrl}/images/puzzles/${this.props.match.params.jigsawId}/complete.png`}
               alt="Reference Image"
               className="reference"
             />
@@ -140,7 +140,7 @@ class Jigsaw extends Component {
           onMove={this.handleMove}
           onComplete={this.onComplete}
         />
-        <Link to={"/"} className="btn btn-icon btn-back mt-2"></Link>
+        <Link to={"/"} className="btn btn-icon btn-back mt-4"></Link>
       </main>
     );
   }

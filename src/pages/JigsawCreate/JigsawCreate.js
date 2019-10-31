@@ -87,8 +87,6 @@ class JigsawCreate extends Component {
 
             fr.readAsDataURL(blob);
           }).then(imageCroppedAsBase64 => {
-            console.log(this.state);
-            console.log(imageCroppedAsBase64);
             PuzzleService.upload({
               image: imageCroppedAsBase64,
               created_by: getUserData().id
@@ -145,7 +143,7 @@ class JigsawCreate extends Component {
 
   render() {
     if (this.state.success) {
-      return <Redirect to="/login" />;
+      return <Redirect to="/jigsaws" />;
     }
 
     if (this.state.isLoading) {
@@ -205,7 +203,7 @@ class JigsawCreate extends Component {
         {modal}
         <h1 className="h2">Select Image</h1>
         <form onSubmit={this.handleSubmit}>
-          <div className="file-upload mx-auto">
+          <div className="file-upload mx-auto my-5">
             <input
               type="file"
               id="image"
@@ -216,7 +214,7 @@ class JigsawCreate extends Component {
           </div>
           {avatarEditor}
         </form>
-        <Link to={"/"} className="btn btn-icon btn-back mt-2"></Link>
+        <Link to={"/"} className="btn btn-icon btn-back mt-4"></Link>
       </main>
     );
   }

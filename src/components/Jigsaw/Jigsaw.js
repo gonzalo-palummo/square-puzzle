@@ -22,7 +22,7 @@ class Jigsaw extends Component {
       (_, i) => ({
         img: `${environment.publicUrl}/images/puzzles/${this.state.jigsawId}/${
           this.state.size
-        }/img_${("0" + (i + 1)).substr(-2)}.jpg`,
+        }/img_${("0" + (i + 1)).substr(-2)}.png`,
         order: i - 1
       })
     );

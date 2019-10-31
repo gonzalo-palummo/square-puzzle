@@ -43,7 +43,7 @@ class Jigsaws extends Component {
                 >
                   <Link to={`/jigsaws/${puzzle.id}`}>
                     <img
-                      src={`${environment.publicUrl}/${puzzle.url}/complete.jpg`}
+                      src={`${environment.publicUrl}/${puzzle.url}/complete.png`}
                       className="puzzle-preview rounded"
                       alt="Preview of Puzzle"
                     />
@@ -52,7 +52,10 @@ class Jigsaws extends Component {
               ))
             : null}
         </ul>
-        <Link to={"/"} className="btn btn-icon btn-back mt-2"></Link>
+        <Link
+          to={"/"}
+          className="btn btn-icon btn-back mt-2 btn-back-fixed"
+        ></Link>
       </main>
     );
   }
