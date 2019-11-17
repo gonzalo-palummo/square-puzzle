@@ -3,11 +3,13 @@ import "./Jigsaw.css";
 import JigsawComponent from "../../components/Jigsaw/Jigsaw";
 import UserService from "./../../services/UserService";
 import { getUserData } from "./../../services/AuthService";
-import CSSLoader from "./../../components/CSSLoader/CSSLoader";
+import CSSLoader from "../../components/CSSLoader/CSSLoader";
 import RecordService from "../../services/RecordService";
 import { Link } from "react-router-dom";
 import ModalDialog from "../../components/ModalDialog/ModalDialog";
 import environment from "../../environment/environment";
+import Explosion from "../../components/Explosion/Explosion";
+import Advert from "../../components/Advert/Advert";
 
 class Jigsaw extends Component {
   constructor(props) {
@@ -20,7 +22,10 @@ class Jigsaw extends Component {
       totalPieces:
         this.props.match.params.size * this.props.match.params.size - 1,
       countLoadedPieces: 1,
-      showReference: false
+      showReference: false,
+      completed: false,
+      advert: true,
+      counter: 5
     };
   }
 
@@ -58,28 +63,33 @@ class Jigsaw extends Component {
 
   onComplete = () => {
     let time = this.secondsElapsed();
-    this.setState({
-      isLoading: true
-    });
+    clearInterval(this.timer);
+    this.setState({ completed: true });
 
-    RecordService.create({
-      puzzle_id: this.props.match.params.jigsawId,
-      size: this.props.match.params.size,
-      time: time,
-      movements: this.state.movements,
-      created_by: getUserData().id
-    }).then(success => {
-      if (success) {
-        this.setState({
-          isLoading: false
-        });
-        this.props.history.push(
-          `/jigsaws/${this.props.match.params.jigsawId}/${this.props.match.params.size}/complete/${time}/${this.state.movements}`
-        );
-      } else {
-        this.props.history.push("/login"); // TODO: FIX THIS, SHOULD REDIRECT TO THE ERROR PAGE
-      }
-    });
+    setTimeout(() => {
+      this.setState({
+        isLoading: true
+      });
+
+      RecordService.create({
+        puzzle_id: this.props.match.params.jigsawId,
+        size: this.props.match.params.size,
+        time: time,
+        movements: this.state.movements,
+        created_by: getUserData().id
+      }).then(success => {
+        if (success) {
+          this.setState({
+            isLoading: false
+          });
+          this.props.history.push(
+            `/jigsaws/${this.props.match.params.jigsawId}/${this.props.match.params.size}/complete/${time}/${this.state.movements}`
+          );
+        } else {
+          this.props.history.push("/login"); // TODO: FIX THIS, SHOULD REDIRECT TO THE ERROR PAGE
+        }
+      });
+    }, 5000);
   };
 
   componentDidMount() {
@@ -90,6 +100,14 @@ class Jigsaw extends Component {
         this.props.history.push("/login"); // TODO: FIX THIS, SHOULD REDIRECT TO THE ERROR PAGE
       }
     });
+
+    setTimeout(() => {
+      this.setState({ advert: false });
+    }, 5000);
+
+    window.setInterval(() => {
+      this.setState({ counter: this.state.counter - 1 });
+    }, 1000);
   }
 
   componentWillUnmount() {
@@ -101,6 +119,9 @@ class Jigsaw extends Component {
   };
 
   render() {
+    if (this.state.advert) {
+      return <Advert counter={this.state.counter} />;
+    }
     return (
       <main className="text-center">
         <ModalDialog
@@ -109,13 +130,24 @@ class Jigsaw extends Component {
           title="Image Reference"
           message={
             <img
-              src={`${environment.publicUrl}/images/puzzles/${this.props.match.params.jigsawId}/complete.png`}
+              src={`${environment.publicUrl}/images/puzzles/${this.props.match.params.jigsawId}/complete.jpg`}
               alt="Reference Image"
               className="reference"
             />
           }
         ></ModalDialog>
         {this.state.isLoading ? <CSSLoader /> : ""}
+        {this.state.completed ? (
+          <>
+            <Explosion />
+            <div className="wrapper"></div>
+            <p className="congratulations h2 slide-in-elliptic-top-fwd">
+              Congratulations !
+            </p>
+          </>
+        ) : (
+          ""
+        )}
         <div className="header">
           <div className="row">
             <div className="col-6">

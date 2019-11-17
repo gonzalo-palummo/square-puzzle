@@ -13,7 +13,7 @@ function JigsawSizes(props) {
           <li key={index} className="size border-rounded mx-auto my-3">
             <Link
               to={`/jigsaws/${jigsawId}/${size}/start`}
-              className="text-white font-weight-light h1"
+              className="text-white font-weight-light"
             >
               {size}
             </Link>

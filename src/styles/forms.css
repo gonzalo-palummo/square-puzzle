@@ -1,11 +1,12 @@
 .form-control {
-  background-color: transparent !important;
+  background: rgba(253, 253, 255, 0) !important;
   border: none !important;
 }
 
 .form-group {
   background-color: #ffffff40;
   border-radius: 7px;
+  margin: 1.3rem 0.8rem !important;
 }
 
 .form-group label {

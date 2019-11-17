@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./Login.css";
 import { Link, Redirect } from "react-router-dom";
 import AuthService from "./../../services/AuthService";
-import CSSLoader from "./../../components/CSSLoader/CSSLoader";
+import CSSLoader from "../../components/CSSLoader/CSSLoader";
 import ModalDialog from "../../components/ModalDialog/ModalDialog";
 
 class Login extends Component {
@@ -47,7 +47,7 @@ class Login extends Component {
       } else {
         this.setState({
           message: {
-            header: "Error",
+            header: "Oops!",
             text: "The credentials are invalid.",
             type: "error"
           }
@@ -90,7 +90,7 @@ class Login extends Component {
     return (
       <main>
         {modal}
-        <h1 className="h2">Login</h1>
+        <h1 className="h2 text-center">Login</h1>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label htmlFor="email">
@@ -122,14 +122,14 @@ class Login extends Component {
           </div>
           <button
             type="submit"
-            className="btn btn-block my-2 border-rounded w-75 mx-auto"
+            className="btn btn-block mb-3 border-rounded w-75 mx-auto"
           >
             Login
           </button>
         </form>
         <Link
           to="/register"
-          className="btn btn-secondary btn-block my-2 border-rounded mx-auto"
+          className="btn btn-secondary w-75 btn-block border-rounded mx-auto"
         >
           Go to Register
         </Link>

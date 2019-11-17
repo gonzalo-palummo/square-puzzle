@@ -1,5 +1,5 @@
 /* -- App -- */
-@import url("https://fonts.googleapis.com/css?family=Staatliches&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Black+Han+Sans&display=swap");
 
 body {
   max-width: 1920px;
@@ -40,9 +40,9 @@ label:focus,
 }
 
 *:not(input) {
-  font-family: "Staatliches", cursive;
+  font-family: "Black Han Sans", serif;
   color: white;
-  text-shadow: 2px 2px black;
+  text-shadow: 1px 1px black;
 }
 
 .shadow-none {

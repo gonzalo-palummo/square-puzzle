@@ -34,7 +34,7 @@ class Jigsaws extends Component {
     return (
       <main className="text-center">
         <h1 className="d-none">Puzzles list</h1>
-        <ul className="list-unstyled text-center w-50 m-auto">
+        <ul className="list-unstyled text-center puzzleSlider">
           {this.state.puzzles.length > 0
             ? this.state.puzzles.map((puzzle, index) => (
                 <li
@@ -42,8 +42,11 @@ class Jigsaws extends Component {
                   className="puzzle-item p-2 rounded my-2 text-white"
                 >
                   <Link to={`/jigsaws/${puzzle.id}`}>
+                    <h2 className="h5 mb-4">
+                      Creator: {puzzle.user.user_name}
+                    </h2>
                     <img
-                      src={`${environment.publicUrl}/${puzzle.url}/complete.png`}
+                      src={`${environment.publicUrl}/${puzzle.url}/complete.jpg`}
                       className="puzzle-preview rounded"
                       alt="Preview of Puzzle"
                     />

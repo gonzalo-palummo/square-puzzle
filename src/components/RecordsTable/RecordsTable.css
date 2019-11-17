@@ -4,7 +4,8 @@
   padding-top: 35px;
   padding-bottom: 10px;
   /*background-image: linear-gradient(to top, #0276f3 10%, #05c7e5 80%);*/
-  background-image: linear-gradient(to top, #007bffd1 10%, #98f1ffdb 80%);
+  background: linear-gradient(to top, #007bffd1 10%, #98f1ffdb 80%),
+    url("../../images/logopattern.png") center/8%;
   /*background-image: linear-gradient(to top, #d3890ebd 10%, #ffd877d1 80%);*/
   border-radius: 12px;
   box-shadow: 0px 5px #0276f35e;
@@ -18,18 +19,23 @@
 
 .container-table img {
   position: absolute;
-  top: -30px;
+  top: -23px;
   left: 50%;
-  margin-left: -36px;
+  margin-left: -29px;
 }
 
 th {
-  font-size: 23px;
+  font-size: 14px;
   border: none !important;
-  color: black;
-  text-shadow: 1px 1px #ffffff;
+  color: black !important;
+  text-shadow: 1px 1px white;
+  padding: 0 !important;
 }
 
 td {
   border-top-color: #ffffff5c !important;
+}
+
+.badge {
+  font-size: 0.8rem !important;
 }

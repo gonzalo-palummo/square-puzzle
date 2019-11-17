@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Chart from "react-google-charts";
 import UserService from "../../services/UserService";
 import AuthService from "../../services/AuthService";
-import CSSLoader from "./../../components/CSSLoader/CSSLoader";
+import CSSLoader from "../CSSLoader/CSSLoader";
 
 class Profile extends Component {
   constructor(props) {
@@ -33,9 +33,8 @@ class Profile extends Component {
             plays: userData.plays,
             completed: userData.records.length,
             lost: userData.plays - userData.records.length,
-            recordTime: userData.records.length
-              ? this.getBestRecord(userData.records) + " s."
-              : "None",
+            recordTime2: this.getBestRecordSize(2, userData.records),
+            recordTime3: this.getBestRecordSize(3, userData.records),
             userName: userData.user_name
           }
         });
@@ -45,17 +44,22 @@ class Profile extends Component {
     });
   }
 
-  getBestRecord(records) {
-    let bestRecord;
+  getBestRecordSize(size, records) {
+    records = records.filter(record => {
+      return record.size == size;
+    });
+
+    let bestRecord = "None";
     records.forEach((record, index) => {
       if (index == 0) {
-        bestRecord = parseFloat(record.time);
+        bestRecord = parseFloat(record.time) + " s.";
         return;
       }
       if (record.time < bestRecord) {
-        bestRecord = parseFloat(record.time);
+        bestRecord = parseFloat(record.time) + " s.";
       }
     });
+
     return bestRecord;
   }
 
@@ -71,9 +75,9 @@ class Profile extends Component {
 
     return (
       <main className="text-center">
-        <div className="row">
+        <div className="row align-items-center">
           <div className="col">
-            <h1 className="h4 shadow-none font-weight-bold text-dark">
+            <h1 className="h4 m-0 font-weight-bold">
               {this.props.myProfile
                 ? "My Profile"
                 : this.state.userData.userName}
@@ -94,36 +98,38 @@ class Profile extends Component {
 
         <ul className="list-unstyled mt-4 row">
           <li className="col-6">
-            <h2 className="h3">Played</h2>
-            <p className="h3 profileNumbers">{this.state.userData.plays}</p>
+            <h2 className="h5">Played</h2>
+            <p className="h4 profileNumbers">{this.state.userData.plays}</p>
           </li>
           <li className="col-6">
-            <h2 className="h3">Completed</h2>
-            <p className="h3 profileNumbers">{this.state.userData.completed}</p>
+            <h2 className="h5">Completed</h2>
+            <p className="h4 profileNumbers">{this.state.userData.completed}</p>
           </li>
-          <li className="col-6">
-            <h2 className="h3">Lost</h2>
-            <p className="m-0 h3 profileNumbers">{this.state.userData.lost}</p>
+          <li className="col-6 bg-record py-4 px-0">
+            <h2 className="h6">Record Size 2</h2>
+            <p className="m-0 h6 profileNumbers">
+              {this.state.userData.recordTime2}
+            </p>
           </li>
-          <li className="col-6">
-            <h2 className="h3">Record</h2>
-            <p className="m-0 h3 profileNumbers">
-              {this.state.userData.recordTime}
+          <li className="col-6 bg-record py-4 px-0">
+            <h2 className="h6">Record Size 3</h2>
+            <p className="m-0 h6 profileNumbers">
+              {this.state.userData.recordTime3}
             </p>
           </li>
         </ul>
         {this.state.userData.plays > 0 ? (
           <>
-            <h2 className="h3 mt-4 mb-0">Effectiveness</h2>
+            <h2 className="h5 mt-4 mb-0">Effectiveness</h2>
             <Chart
               width={"250px"}
               style={{ margin: "auto" }}
               chartType="PieChart"
               loader={<div>Loading Chart</div>}
               data={[
-                ["Task", "Hours per Day"],
-                ["Completed Puzzles", this.state.userData.completed],
-                ["Lost Puzzles", this.state.userData.lost]
+                ["Puzzles", "Completed puzzles"],
+                ["Win", this.state.userData.completed],
+                ["Lost", this.state.userData.lost]
               ]}
               options={{
                 pieHole: 0.4,

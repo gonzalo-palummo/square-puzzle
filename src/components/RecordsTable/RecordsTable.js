@@ -35,7 +35,7 @@ class RecordsTable extends Component {
 
     return (
       <div className="container-table">
-        <img width="80" src={require("./../../images/logo.png")} alt="logo" />
+        <img width="60" src={require("./../../images/logo.png")} alt="logo" />
         <table className="table">
           <thead>
             <tr>
@@ -50,6 +50,7 @@ class RecordsTable extends Component {
                   index < 5 ? (
                     <tr key={index} className="border-rounded mx-auto my-3">
                       <td>
+                        {index + 1 + ". "}
                         <Link
                           to={`/userprofile/${record.creator.id}`}
                           className="h5"

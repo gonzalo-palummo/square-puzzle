@@ -28,7 +28,7 @@ class JigsawStart extends Component {
         />
         <Link
           to={`/jigsaws/${this.state.jigsawId}`}
-          className="btn btn-icon btn-back mt-2"
+          className="btn btn-icon btn-back mt-4"
         ></Link>
       </main>
     );

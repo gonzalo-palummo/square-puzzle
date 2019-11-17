@@ -18,11 +18,12 @@ class Jigsaw extends Component {
 
   componentDidMount() {
     window.addEventListener("resize", this.updateDimensions);
+    this.updateDimensions();
     const pieces = [...Array(this.state.size * this.state.size)].map(
       (_, i) => ({
         img: `${environment.publicUrl}/images/puzzles/${this.state.jigsawId}/${
           this.state.size
-        }/img_${("0" + (i + 1)).substr(-2)}.png`,
+        }/img_${("0" + (i + 1)).substr(-2)}.jpg`,
         order: i - 1
       })
     );
@@ -111,8 +112,16 @@ class Jigsaw extends Component {
   shufflePieces(pieces) {
     const shuffled = [...pieces];
 
-    shuffle();
+    var whileCont = 0; // FOR TEST
 
+    shuffle();
+    /*
+    while (isComplete(shuffled) || whileCont == 5) {
+      console.log("shuffle again");
+      whileCont++;
+      shuffle();
+    }
+*/
     while (!isSolvable(shuffled, this.state.size)) {
       shuffle();
     }
@@ -125,6 +134,22 @@ class Jigsaw extends Component {
         shuffled[j] = tmp;
       }
     }
+
+    /*
+
+    function isComplete(shuffledPieces) {
+      console.log(shuffledPieces);
+      for (let i = 0; i < shuffledPieces.length; i++) {
+        console.log(shuffledPieces[i].order);
+        if (shuffledPieces[i].order !== i) {
+          console.log(shuffledPieces[i].order + " " + i);
+          return false;
+        }
+      }
+      return true;
+    }
+
+    */
 
     function isSolvable(shuffledPieces, size) {
       let inversionCount = 0;

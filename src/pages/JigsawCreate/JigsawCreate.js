@@ -6,6 +6,7 @@ import CSSLoader from "../../components/CSSLoader/CSSLoader";
 import AvatarEditor from "react-avatar-editor";
 import PuzzleService from "../../services/PuzzleService";
 import { getUserData } from "../../services/AuthService";
+import Resizer from "react-image-file-resizer";
 
 class JigsawCreate extends Component {
   constructor(props) {
@@ -13,7 +14,8 @@ class JigsawCreate extends Component {
 
     this.state = {
       imageData: {
-        scale: 1
+        scale: 1,
+        rotate: 0
       },
       imageChosen: null,
       message: {
@@ -31,32 +33,24 @@ class JigsawCreate extends Component {
 
   handleChooseFile = () => {
     const fileToUpload = this.imageInput.current.files[0];
-
-    new Promise((resolve, reject) => {
-      if (fileToUpload === undefined) {
-        resolve("");
-        this.setState({
-          imageChosen: null
-        });
-        return;
-      }
-
-      const fr = new FileReader();
-
-      fr.addEventListener("load", function() {
-        resolve(fr.result);
-      });
-
-      fr.addEventListener("abort", function() {
-        reject();
-      });
-
-      fr.readAsDataURL(fileToUpload);
-    }).then(imageAsBase64 => {
+    if (
+      fileToUpload.type != "image/jpg" &&
+      fileToUpload.type != "image/jpeg" &&
+      fileToUpload != "image/png"
+    ) {
       this.setState({
-        imageChosen: imageAsBase64
+        message: {
+          header: "Oops!",
+          text: "You must upload an image.",
+          type: "error"
+        },
+        imageChosen: null
       });
-    });
+    } else {
+      this.setState({
+        imageChosen: fileToUpload
+      });
+    }
   };
 
   handleSubmit = ev => {
@@ -69,48 +63,40 @@ class JigsawCreate extends Component {
         .then(blob => {
           //let imageCropped = window.URL.createObjectURL(blob);
 
-          new Promise((resolve, reject) => {
-            if (blob === undefined) {
-              resolve("");
-              return;
-            }
-
-            const fr = new FileReader();
-
-            fr.addEventListener("load", function() {
-              resolve(fr.result);
-            });
-
-            fr.addEventListener("abort", function() {
-              reject();
-            });
-
-            fr.readAsDataURL(blob);
-          }).then(imageCroppedAsBase64 => {
-            PuzzleService.upload({
-              image: imageCroppedAsBase64,
-              created_by: getUserData().id
-            }).then(success => {
-              this.setState({ isLoading: false });
-              if (success) {
-                this.setState({
-                  message: {
-                    header: "Success",
-                    text: "Your puzzle was uploaded succesfully.",
-                    type: "success"
-                  }
-                });
-              } else {
-                this.setState({
-                  message: {
-                    header: "Error",
-                    text: "Your puzzle cannot be uploaded.",
-                    type: "error"
-                  }
-                });
-              }
-            });
-          });
+          Resizer.imageFileResizer(
+            blob,
+            500,
+            500,
+            "JPEG",
+            30,
+            0,
+            uri => {
+              PuzzleService.upload({
+                image: uri,
+                created_by: getUserData().id
+              }).then(success => {
+                this.setState({ isLoading: false });
+                if (success) {
+                  this.setState({
+                    message: {
+                      header: "Success",
+                      text: "Your puzzle was uploaded succesfully.",
+                      type: "success"
+                    }
+                  });
+                } else {
+                  this.setState({
+                    message: {
+                      header: "Oops!",
+                      text: "Your puzzle cannot be uploaded.",
+                      type: "error"
+                    }
+                  });
+                }
+              });
+            },
+            "base64"
+          );
         });
     }
 
@@ -140,6 +126,15 @@ class JigsawCreate extends Component {
   };
 
   setEditorRef = editor => (this.editor = editor);
+
+  rotateImage = () => {
+    this.setState({
+      imageData: {
+        ...this.state.imageData,
+        rotate: this.state.imageData.rotate + 90
+      }
+    });
+  };
 
   render() {
     if (this.state.success) {
@@ -172,20 +167,32 @@ class JigsawCreate extends Component {
             ref={this.setEditorRef}
             image={this.state.imageChosen}
             border={25}
+            rotate={this.state.imageData.rotate}
             scale={this.state.imageData.scale}
             className="d-block mx-auto my-3"
           />
-          <input
-            type="range"
-            onChange={this.handleChange}
-            value={this.state.imageData.scale}
-            id="scale"
-            name="scale"
-            min="1"
-            step="0.01"
-            max="2"
-            className="slider"
-          />
+          <label className="d-block">
+            Scale
+            <input
+              type="range"
+              onChange={this.handleChange}
+              value={this.state.imageData.scale}
+              id="scale"
+              name="scale"
+              min="1"
+              step="0.01"
+              max="2"
+              className="slider"
+            />
+          </label>
+          <button
+            className="btn my-2 border-rounded mx-auto"
+            type="button"
+            onClick={this.rotateImage}
+          >
+            Rotate
+          </button>
+
           <button
             type="submit"
             className="btn btn-block my-2 border-rounded mx-auto"
@@ -208,6 +215,8 @@ class JigsawCreate extends Component {
               type="file"
               id="image"
               name="image"
+              accept="image/*;capture=camera"
+              capture="camera"
               ref={this.imageInput}
               onChange={this.handleChooseFile}
             />

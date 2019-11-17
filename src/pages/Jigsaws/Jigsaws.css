@@ -1,7 +1,3 @@
-.puzzle-preview {
-  max-width: 100%;
-}
-
 .btn-back-fixed {
   position: fixed;
   right: 0px;
@@ -9,4 +5,17 @@
   bottom: 25px;
   width: 1px;
   margin: auto;
+}
+
+.puzzleSlider {
+  display: flex;
+  overflow-x: auto;
+}
+
+.puzzleSlider img {
+  height: 50vh;
+}
+
+.puzzle-item h2 {
+  margin-top: 8vh;
 }

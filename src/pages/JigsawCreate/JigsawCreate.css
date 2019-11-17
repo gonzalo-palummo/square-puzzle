@@ -64,5 +64,17 @@ canvas {
 }
 
 .file-upload:hover {
-  background-position: 0 -100%;
+  animation: anim 1s linear 1;
+}
+
+@keyframes anim {
+  0% {
+    background-position: center;
+  }
+  50% {
+    background-position: center -125%;
+  }
+  100% {
+    background-position: center;
+  }
 }

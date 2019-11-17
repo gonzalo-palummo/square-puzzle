@@ -1,0 +1,17 @@
+.advert {
+  max-width: 100%;
+  position: fixed;
+  top: 0;
+  right: 0px;
+  left: 0px;
+}
+
+.advertTime {
+  z-index: 500000;
+  position: fixed;
+  top: 50px;
+  right: 0px;
+  font-size: 35px;
+  left: 0px;
+  text-align: center;
+}

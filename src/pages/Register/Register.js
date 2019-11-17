@@ -3,7 +3,7 @@ import "./Register.css";
 import { Link, Redirect } from "react-router-dom";
 import UserService from "../../services/UserService";
 import ModalDialog from "../../components/ModalDialog/ModalDialog";
-import CSSLoader from "./../../components/CSSLoader/CSSLoader";
+import CSSLoader from "../../components/CSSLoader/CSSLoader";
 
 class Register extends Component {
   constructor(props) {
@@ -39,7 +39,7 @@ class Register extends Component {
     if (this.state.formData.password != this.state.formData.confirm_password) {
       this.setState({
         message: {
-          header: "Error",
+          header: "Oops!",
           text: "The Passwords must match",
           type: "error"
         }
@@ -69,7 +69,7 @@ class Register extends Component {
       } else {
         this.setState({
           message: {
-            header: "Error",
+            header: "Oops!",
             text: "An error was ocurred. Try again",
             type: "error"
           },
@@ -119,7 +119,7 @@ class Register extends Component {
     return (
       <main>
         {modal}
-        <h1 className="h2">Register</h1>
+        <h1 className="h2 text-center">Register</h1>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label htmlFor="user_name">
@@ -165,7 +165,7 @@ class Register extends Component {
           </div>
           <div className="form-group">
             <label htmlFor="confirm_password">
-              <div className="btn btn-icon btn-email"></div>Confirm Password
+              <div className="btn btn-icon btn-password"></div>Confirm Password
             </label>
             <input
               type="password"

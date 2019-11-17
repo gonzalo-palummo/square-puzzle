@@ -1,6 +1,7 @@
 import React from "react";
 import "./Home.css";
 import { Link } from "react-router-dom";
+import Cards from "../../components/Cards/Cards";
 
 function Home(props) {
   return (
@@ -12,11 +13,11 @@ function Home(props) {
         width={150}
         className="d-block mx-auto"
       />
-      <Link
-        to={`/jigsaws`}
-        className="btn vibrate-2 p-1 mt-5 d-block w-75 mx-auto"
-      >
+      <Link to={`/jigsaws`} className="btn vibrate-2 mt-5 w-75">
         Select Puzzle
+      </Link>
+      <Link to={`/create`} className="btn mt-2 w-75">
+        Create one !
       </Link>
     </main>
   );
