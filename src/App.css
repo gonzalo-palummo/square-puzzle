@@ -1,5 +1,6 @@
 /* -- App -- */
 @import url("https://fonts.googleapis.com/css?family=Black+Han+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Luckiest+Guy&display=swap");
 
 body {
   max-width: 1920px;
@@ -40,9 +41,19 @@ label:focus,
 }
 
 *:not(input) {
-  font-family: "Black Han Sans", serif;
+  font-family: "Black Han Sans", "Luckiest Guy";
   color: white;
   text-shadow: 1px 1px black;
+}
+
+.text-black {
+  color: black;
+  text-shadow: 1px 1px white;
+}
+
+.dots {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .shadow-none {
@@ -60,6 +71,56 @@ a:hover {
 
 rect {
   fill: #ffffff00;
+}
+
+.checkbox-custom,
+.radio-custom {
+  opacity: 0;
+  position: absolute;
+}
+
+.checkbox-custom,
+.checkbox-custom-label,
+.radio-custom,
+.radio-custom-label {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.checkbox-custom-label,
+.radio-custom-label {
+  position: relative;
+}
+
+.checkbox-custom + .checkbox-custom-label:before,
+.radio-custom + .radio-custom-label:before {
+  content: "";
+  border: 1px solid white;
+  display: inline-block;
+  vertical-align: middle;
+  width: 25px;
+  height: 25px;
+  padding: 1px;
+  margin-right: 10px;
+  text-align: center;
+}
+
+.checkbox-custom:checked + .checkbox-custom-label:before {
+  content: "\2713";
+  background: transparent;
+  color: #fff;
+}
+
+.radio-custom + .radio-custom-label:before {
+  border-radius: 50%;
+}
+
+.radio-custom:checked + .radio-custom-label:before {
+  content: "\f00c";
+  font-family: "FontAwesome";
+  color: #bbb;
 }
 
 /* ----------------------------------------------

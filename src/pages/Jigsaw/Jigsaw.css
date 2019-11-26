@@ -10,13 +10,12 @@
   font-size: 30px;
 }
 
-#timer {
-  display: inline-block;
-  width: 50%;
-}
-
 .reference {
   max-width: 100%;
+}
+
+.btn-eye {
+  padding: 1.35rem !important;
 }
 
 .congratulations {
@@ -24,9 +23,19 @@
   top: 160px;
   right: 0px;
   left: 0px;
-  transform: translate(-50%, -50%);
+  margin: auto;
   text-shadow: 3px 3px black;
   z-index: 12;
+}
+
+.icon-win {
+  width: 45%;
+  position: fixed;
+  top: 260px;
+  right: 0;
+  left: 0;
+  z-index: 12;
+  margin: auto;
 }
 
 .slide-in-elliptic-top-fwd {

@@ -116,12 +116,12 @@ class Jigsaw extends Component {
 
     shuffle();
     /*
-    while (isComplete(shuffled) || whileCont == 5) {
+    while (isCompleteStart(shuffled) || whileCont == 5) {
       console.log("shuffle again");
       whileCont++;
       shuffle();
     }
-*/
+    */
     while (!isSolvable(shuffled, this.state.size)) {
       shuffle();
     }
@@ -134,23 +134,25 @@ class Jigsaw extends Component {
         shuffled[j] = tmp;
       }
     }
-
     /*
-
-    function isComplete(shuffledPieces) {
+    function isCompleteStart(shuffledPieces) {
       console.log(shuffledPieces);
       for (let i = 0; i < shuffledPieces.length; i++) {
         console.log(shuffledPieces[i].order);
+        console.log(i);
         if (shuffledPieces[i].order !== i) {
-          console.log(shuffledPieces[i].order + " " + i);
+          console.log(
+            "Is complete on start function. Order: " +
+              shuffledPieces[i].order +
+              " | Counter: " +
+              i
+          );
           return false;
         }
       }
       return true;
     }
-
-    */
-
+*/
     function isSolvable(shuffledPieces, size) {
       let inversionCount = 0;
 

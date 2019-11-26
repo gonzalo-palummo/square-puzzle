@@ -4,7 +4,9 @@
   padding-top: 35px;
   padding-bottom: 10px;
   /*background-image: linear-gradient(to top, #0276f3 10%, #05c7e5 80%);*/
-  background: linear-gradient(to top, #007bffd1 10%, #98f1ffdb 80%),
+  /*background: linear-gradient(to top, #007bffd1 10%, #98f1ffdb 80%),
+    url("../../images/logopattern.png") center/8%;*/
+  background: linear-gradient(to bottom, #007bffd1 10%, #98f1ffdb 90%),
     url("../../images/logopattern.png") center/8%;
   /*background-image: linear-gradient(to top, #d3890ebd 10%, #ffd877d1 80%);*/
   border-radius: 12px;

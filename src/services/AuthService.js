@@ -3,7 +3,8 @@ import environment from "./../environment/environment";
 let userData = {
   email: null,
   id: null,
-  user_name: null
+  user_name: null,
+  token: null
 };
 
 const login = function(credentials) {
@@ -26,7 +27,8 @@ const login = function(credentials) {
       userData = {
         email: credentials.email,
         id: rta.id,
-        user_name: rta.user_name
+        user_name: rta.user_name,
+        token: rta.token
       };
       localStorage.user_data = JSON.stringify(userData);
       return userData;
@@ -70,7 +72,7 @@ const getUserData = function() {
 
 /**
  * Authentication Service.
- * @type {{login: (function(*=): Promise<Response | never>), logout: (function(): Promise<boolean | never>), isAuthenticated: (function(): boolean), getUserData: (function(): {email: null, id: null, user_name: null})}}
+ * @type {{login: (function(*=): Promise<Response | never>), logout: (function(): Promise<boolean | never>), isAuthenticated: (function(): boolean), getUserData: (function(): {email: null, id: null, user_name: null, token: null})}}
  */
 const AuthService = {
   login: login,

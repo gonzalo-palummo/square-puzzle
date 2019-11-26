@@ -7,6 +7,7 @@ import AvatarEditor from "react-avatar-editor";
 import PuzzleService from "../../services/PuzzleService";
 import { getUserData } from "../../services/AuthService";
 import Resizer from "react-image-file-resizer";
+import { get } from "../../services/MultilingualService";
 
 class JigsawCreate extends Component {
   constructor(props) {
@@ -15,7 +16,8 @@ class JigsawCreate extends Component {
     this.state = {
       imageData: {
         scale: 1,
-        rotate: 0
+        rotate: 0,
+        public: false
       },
       imageChosen: null,
       message: {
@@ -73,13 +75,14 @@ class JigsawCreate extends Component {
             uri => {
               PuzzleService.upload({
                 image: uri,
-                created_by: getUserData().id
+                created_by: getUserData().id,
+                public: this.state.imageData.public
               }).then(success => {
                 this.setState({ isLoading: false });
                 if (success) {
                   this.setState({
                     message: {
-                      header: "Success",
+                      header: get("success"),
                       text: "Your puzzle was uploaded succesfully.",
                       type: "success"
                     }
@@ -120,9 +123,18 @@ class JigsawCreate extends Component {
 
   handleChange = ev => {
     const elem = ev.target;
-    this.setState({
-      imageData: { ...this.state.imageData, [elem.name]: elem.value }
-    });
+    if (elem.name == "public") {
+      this.setState({
+        imageData: {
+          ...this.state.imageData,
+          [elem.name]: !this.state.imageData[elem.name]
+        }
+      });
+    } else {
+      this.setState({
+        imageData: { ...this.state.imageData, [elem.name]: elem.value }
+      });
+    }
   };
 
   setEditorRef = editor => (this.editor = editor);
@@ -172,7 +184,7 @@ class JigsawCreate extends Component {
             className="d-block mx-auto my-3"
           />
           <label className="d-block">
-            Scale
+            {get("scale")}
             <input
               type="range"
               onChange={this.handleChange}
@@ -186,29 +198,43 @@ class JigsawCreate extends Component {
             />
           </label>
           <button
-            className="btn my-2 border-rounded mx-auto"
+            className="btn my-2 border-rounded mx-auto btn-secondary"
             type="button"
             onClick={this.rotateImage}
           >
-            Rotate
+            {get("rotate")}
           </button>
-
+          <div class="form-check my-3 mb-4">
+            <input
+              type="checkbox"
+              class="form-check-input checkbox-custom"
+              id="public"
+              name="public"
+              onChange={this.handleChange}
+              value={this.state.imageData.public}
+            />
+            <label class="form-check-label checkbox-custom-label" for="public">
+              {get("makePublic")}
+            </label>
+          </div>
           <button
             type="submit"
             className="btn btn-block my-2 border-rounded mx-auto"
           >
-            Upload Puzzle
+            {get("upload")} {get("puzzle")}
           </button>
         </>
       );
     } else {
-      avatarEditor = ""; // CHECK WHY THIS DON'T WORK
+      avatarEditor = ""; // TODO: CHECK WHY THIS DON'T WORK
     }
 
     return (
       <main className="text-center">
         {modal}
-        <h1 className="h2">Select Image</h1>
+        <h1 className="h2">
+          {get("select")} {get("image")}
+        </h1>
         <form onSubmit={this.handleSubmit}>
           <div className="file-upload mx-auto my-5">
             <input

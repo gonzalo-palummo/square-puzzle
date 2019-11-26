@@ -1,5 +1,6 @@
 import React from "react";
 import "./Advert.css";
+import { get } from "../../services/MultilingualService";
 
 function Advert(props) {
   return (
@@ -8,7 +9,7 @@ function Advert(props) {
       <img
         src={require("./../../images/advice.jpg")}
         className="advert"
-        alt="advert"
+        alt={get("advert")}
       />
     </>
   );

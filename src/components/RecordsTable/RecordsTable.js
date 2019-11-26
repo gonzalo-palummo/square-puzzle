@@ -3,6 +3,7 @@ import "./RecordsTable.css";
 import CSSLoader from "../CSSLoader/CSSLoader";
 import { Link } from "react-router-dom";
 import RecordService from "../../services/RecordService";
+import { get } from "../../services/MultilingualService";
 
 class RecordsTable extends Component {
   constructor(props) {
@@ -35,13 +36,17 @@ class RecordsTable extends Component {
 
     return (
       <div className="container-table">
-        <img width="60" src={require("./../../images/logo.png")} alt="logo" />
+        <img
+          width="60"
+          src={require("./../../images/logo.png")}
+          alt={get("logo")}
+        />
         <table className="table">
           <thead>
             <tr>
-              <th>User Name</th>
-              <th>Time</th>
-              <th>Movements</th>
+              <th>{get("userName")}</th>
+              <th>{get("time")}</th>
+              <th>{get("movements")}</th>
             </tr>
           </thead>
           <tbody>
@@ -68,7 +73,7 @@ class RecordsTable extends Component {
               : null}
           </tbody>
         </table>
-        {this.state.records.length == 0 ? <p>No records yet</p> : null}
+        {this.state.records.length == 0 ? <p>{get("noRecords")}</p> : null}
       </div>
     );
   }

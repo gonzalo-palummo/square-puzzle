@@ -4,6 +4,7 @@ import { Link, Redirect } from "react-router-dom";
 import AuthService from "./../../services/AuthService";
 import CSSLoader from "../../components/CSSLoader/CSSLoader";
 import ModalDialog from "../../components/ModalDialog/ModalDialog";
+import { get } from "../../services/MultilingualService";
 
 class Login extends Component {
   constructor(props) {
@@ -48,7 +49,7 @@ class Login extends Component {
         this.setState({
           message: {
             header: "Oops!",
-            text: "The credentials are invalid.",
+            text: get("invalidCredentials") + ".",
             type: "error"
           }
         });
@@ -90,11 +91,12 @@ class Login extends Component {
     return (
       <main>
         {modal}
-        <h1 className="h2 text-center">Login</h1>
+        <h1 className="h2 text-center">{get("login")}</h1>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label htmlFor="email">
-              <div className="btn btn-icon btn-email"></div>Email
+              <div className="btn btn-icon btn-email"></div>
+              {get("email")}
             </label>
             <input
               type="email"
@@ -108,7 +110,8 @@ class Login extends Component {
           </div>
           <div className="form-group">
             <label htmlFor="password">
-              <div className="btn btn-icon btn-password"></div>Password
+              <div className="btn btn-icon btn-password"></div>
+              {get("password")}
             </label>
             <input
               type="password"
@@ -122,16 +125,16 @@ class Login extends Component {
           </div>
           <button
             type="submit"
-            className="btn btn-block mb-3 border-rounded w-75 mx-auto"
+            className="btn btn-block my-2 border-rounded w-75 mx-auto"
           >
-            Login
+            {get("login")}
           </button>
         </form>
         <Link
           to="/register"
-          className="btn btn-secondary w-75 btn-block border-rounded mx-auto"
+          className="btn btn-secondary my-2 w-75 btn-block border-rounded mx-auto"
         >
-          Go to Register
+          {get("goRegister")}
         </Link>
       </main>
     );

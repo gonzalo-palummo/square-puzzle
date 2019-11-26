@@ -1,5 +1,6 @@
 import React from "react";
 import "./CSSLoader.css";
+import { get } from "../../services/MultilingualService";
 
 function CSSLoader(props) {
   return (
@@ -8,7 +9,7 @@ function CSSLoader(props) {
       <img
         className="loader"
         src={require("../../images/logo.png")}
-        alt="Logo for loading"
+        alt={get("logo")}
       />
     </>
   );

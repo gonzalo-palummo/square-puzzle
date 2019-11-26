@@ -1,11 +1,13 @@
 import environment from "../environment/environment";
+import AuthService from "./AuthService";
 
 const getAll = function() {
   return fetch(`${environment.apiUrl}/puzzles`, {
     method: "get",
     headers: {
       "X-Requested-With": "XMLHttpRequest",
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + AuthService.getUserData().token
     } /*,
     credentials: "include"*/
   })
@@ -48,7 +50,8 @@ const upload = function(data) {
     body: JSON.stringify(data),
     headers: {
       "X-Requested-With": "XMLHttpRequest",
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + AuthService.getUserData().token
     } /*,
     credentials: "include"*/ // TODO : UNCOMMENT
   })

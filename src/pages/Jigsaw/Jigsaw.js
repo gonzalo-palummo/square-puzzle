@@ -10,6 +10,7 @@ import ModalDialog from "../../components/ModalDialog/ModalDialog";
 import environment from "../../environment/environment";
 import Explosion from "../../components/Explosion/Explosion";
 import Advert from "../../components/Advert/Advert";
+import { get } from "../../services/MultilingualService";
 
 class Jigsaw extends Component {
   constructor(props) {
@@ -127,11 +128,11 @@ class Jigsaw extends Component {
         <ModalDialog
           isOpen={this.state.showReference}
           onRequestClose={this.handleRequestClose}
-          title="Image Reference"
+          title={get("imageReference")}
           message={
             <img
               src={`${environment.publicUrl}/images/puzzles/${this.props.match.params.jigsawId}/complete.jpg`}
-              alt="Reference Image"
+              alt={get("imageReference")}
               className="reference"
             />
           }
@@ -141,22 +142,26 @@ class Jigsaw extends Component {
           <>
             <Explosion />
             <div className="wrapper"></div>
-            <p className="congratulations h2 slide-in-elliptic-top-fwd">
-              Congratulations !
+            <p className="congratulations h3 slide-in-elliptic-top-fwd">
+              {get("congratulations")} !
             </p>
+            <img
+              src={require("../../images/win.svg")}
+              className="icon-win slide-in-elliptic-top-fwd"
+            />
           </>
         ) : (
           ""
         )}
         <div className="header">
           <div className="row">
-            <div className="col-6">
+            <div className="col-4">
               <button
-                className="btn btn-icon btn-eye mt-1"
+                className="btn btn-icon btn-eye"
                 onClick={this.handleClickReference}
               ></button>
             </div>
-            <div className="col-6">
+            <div className="col-8">
               <p className="timer font-weight-light">
                 <span id="timer">{this.secondsElapsed()}</span> |{" "}
                 {this.state.movements}

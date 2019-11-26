@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./JigsawStart.css";
 import { Link } from "react-router-dom";
 import RecordsTable from "../../components/RecordsTable/RecordsTable";
+import { get } from "../../services/MultilingualService";
 
 class JigsawStart extends Component {
   constructor(props) {
@@ -19,7 +20,7 @@ class JigsawStart extends Component {
           to={`/jigsaws/${this.state.jigsawId}/${this.state.size}`}
           className="btn vibrate-2"
         >
-          Start Game
+          {get("start")} {get("game")}
         </Link>
         <RecordsTable
           {...this.props}

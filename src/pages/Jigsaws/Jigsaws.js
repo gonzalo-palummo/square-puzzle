@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import environment from "../../environment/environment";
 import PuzzleService from "../../services/PuzzleService";
 import CSSLoader from "../../components/CSSLoader/CSSLoader";
+import { get } from "../../services/MultilingualService";
 
 class Jigsaws extends Component {
   constructor(props) {
@@ -43,12 +44,12 @@ class Jigsaws extends Component {
                 >
                   <Link to={`/jigsaws/${puzzle.id}`}>
                     <h2 className="h5 mb-4">
-                      Creator: {puzzle.user.user_name}
+                      {get("creator")}: {puzzle.user.user_name}
                     </h2>
                     <img
                       src={`${environment.publicUrl}/${puzzle.url}/complete.jpg`}
                       className="puzzle-preview rounded"
-                      alt="Preview of Puzzle"
+                      alt={get("puzzlePreview")}
                     />
                   </Link>
                 </li>

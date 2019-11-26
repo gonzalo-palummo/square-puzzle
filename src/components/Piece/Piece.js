@@ -1,11 +1,12 @@
 import React from "react";
+import { get } from "../../services/MultilingualService";
 function Piece(props) {
   if (props.piece) {
     return (
       <img
         onClick={() => props.onClickPiece()}
         className="image"
-        alt="Piece of puzzle"
+        alt={get("puzzlePiece")}
         style={props.imgStyle}
         src={props.piece.img}
         onLoad={() => props.onLoad()}

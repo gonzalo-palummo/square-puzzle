@@ -4,6 +4,7 @@ import { Link, Redirect } from "react-router-dom";
 import UserService from "../../services/UserService";
 import ModalDialog from "../../components/ModalDialog/ModalDialog";
 import CSSLoader from "../../components/CSSLoader/CSSLoader";
+import { get } from "../../services/MultilingualService";
 
 class Register extends Component {
   constructor(props) {
@@ -40,7 +41,7 @@ class Register extends Component {
       this.setState({
         message: {
           header: "Oops!",
-          text: "The Passwords must match",
+          text: get("pwdMustMatch") + ".",
           type: "error"
         }
       });
@@ -60,8 +61,8 @@ class Register extends Component {
       if (success) {
         this.setState({
           message: {
-            header: "Success",
-            text: "Your account was created succesfully",
+            header: get("success"),
+            text: get("accountCreated") + ".",
             type: "success"
           },
           isLoading: false
@@ -70,7 +71,7 @@ class Register extends Component {
         this.setState({
           message: {
             header: "Oops!",
-            text: "An error was ocurred. Try again",
+            text: get("error") + ".",
             type: "error"
           },
           isLoading: false
@@ -119,11 +120,12 @@ class Register extends Component {
     return (
       <main>
         {modal}
-        <h1 className="h2 text-center">Register</h1>
+        <h1 className="h2 text-center">{get("register")}</h1>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label htmlFor="user_name">
-              <div className="btn btn-icon btn-user"></div>User Name
+              <div className="btn btn-icon btn-user"></div>
+              {get("userName")}
             </label>
             <input
               type="text"
@@ -137,7 +139,8 @@ class Register extends Component {
           </div>
           <div className="form-group">
             <label htmlFor="email">
-              <div className="btn btn-icon btn-email"></div>Email
+              <div className="btn btn-icon btn-email"></div>
+              {get("email")}
             </label>
             <input
               type="email"
@@ -151,7 +154,8 @@ class Register extends Component {
           </div>
           <div className="form-group">
             <label htmlFor="password">
-              <div className="btn btn-icon btn-password"></div>Password
+              <div className="btn btn-icon btn-password"></div>
+              {get("password")}
             </label>
             <input
               type="password"
@@ -165,7 +169,8 @@ class Register extends Component {
           </div>
           <div className="form-group">
             <label htmlFor="confirm_password">
-              <div className="btn btn-icon btn-password"></div>Confirm Password
+              <div className="btn btn-icon btn-password"></div>
+              {get("confirm")} {get("password")}
             </label>
             <input
               type="password"
@@ -181,13 +186,13 @@ class Register extends Component {
             type="submit"
             className="btn btn-block my-2 border-rounded w-75 mx-auto"
           >
-            Register
+            {get("goRegister")}
           </button>
           <Link
             to="/login"
             className="btn btn-secondary btn-block my-2 border-rounded text-white w-75 mx-auto"
           >
-            Go to Login
+            {get("goLogin")}
           </Link>
         </form>
       </main>
