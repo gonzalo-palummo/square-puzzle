@@ -14,6 +14,7 @@ import AuthRoute from "./components/AuthRoute/AuthRoute";
 import JigsawStart from "./pages/JigsawStart/JigsawStart";
 import Home from "./pages/Home/Home";
 import JigsawCreate from "./pages/JigsawCreate/JigsawCreate";
+import AuthService from "./services/AuthService";
 
 class App extends Component {
   constructor(props) {
@@ -27,7 +28,6 @@ class App extends Component {
     };
 
     this.handleAuthenticated = this.handleAuthenticated.bind(this);
-    this.handleLogout = this.handleLogout.bind(this);
   }
 
   componentDidMount() {}
@@ -38,7 +38,7 @@ class App extends Component {
     });
   }
 
-  handleLogout() {
+  handleLogout = () => {
     localStorage.clear();
     this.setState({
       userData: {
@@ -47,7 +47,11 @@ class App extends Component {
         user_name: null
       }
     });
-  }
+    /*
+    AuthService.logout().then(success => {
+      console.log("success", success);
+    });*/
+  };
 
   render() {
     return (

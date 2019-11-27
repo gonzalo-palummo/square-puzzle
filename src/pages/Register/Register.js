@@ -58,6 +58,7 @@ class Register extends Component {
       password: this.state.formData.password,
       plays: 0
     }).then(rta => {
+      console.log(rta);
       if (rta.success) {
         this.setState({
           message: {
@@ -68,7 +69,6 @@ class Register extends Component {
           isLoading: false
         });
       } else {
-        console.log(rta);
         if (rta.errors) {
           this.setState({
             message: {

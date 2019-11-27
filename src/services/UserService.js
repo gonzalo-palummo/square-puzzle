@@ -48,11 +48,8 @@ const register = function(data) {
       "Content-Type": "application/json"
     }
   })
-    .then(rta =>
-      rta.status !== 400 && rta.status !== 201 ? { success: false } : rta.json()
-    )
+    .then(rta => (rta.status !== 400 && rta.status !== 201 ? rta : rta.json()))
     .then(rta => {
-      console.log("RTA REQUEST: ", rta);
       if (rta[Object.keys(rta)[0]].length >= 0) {
         return { success: false, errors: rta };
       } else {
@@ -67,7 +64,7 @@ const register = function(data) {
 };
 
 /**
- * Servicio de autenticación.
+ * User Service.
  * @type {{getOne: (function(*=): Promise<Response | never>), incrementPlays: (function(*=): Promise<Response | never>), register: (function(*=): Promise<Response | never>)}}
  */
 const UserService = {
