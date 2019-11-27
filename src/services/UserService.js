@@ -1,13 +1,14 @@
 import environment from "../environment/environment";
+import AuthService from "./AuthService";
 
 const getOne = function(id) {
   return fetch(`${environment.apiUrl}/users/${id}`, {
     method: "get",
     headers: {
       "X-Requested-With": "XMLHttpRequest",
-      "Content-Type": "application/json"
-    } /*
-    credentials: "include"*/ // TODO: CHECK THIS
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + AuthService.getUserData().token
+    }
   })
     .then(rta => {
       if (!rta.ok) {
@@ -26,9 +27,9 @@ const incrementPlays = function(userId) {
     method: "put",
     headers: {
       "X-Requested-With": "XMLHttpRequest",
-      "Content-Type": "application/json"
-    } /*,
-    credentials: "include"*/ // TODO : UNCOMMENT
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + AuthService.getUserData().token
+    }
   })
     .then(rta => {
       return rta.ok;
@@ -45,14 +46,23 @@ const register = function(data) {
     headers: {
       "X-Requested-With": "XMLHttpRequest",
       "Content-Type": "application/json"
-    } /*,
-    credentials: "include"*/ // TODO : UNCOMMENT
+    }
   })
+    .then(rta =>
+      rta.status !== 400 && rta.status !== 201 ? { success: false } : rta.json()
+    )
     .then(rta => {
-      return rta.ok;
+      console.log("RTA REQUEST: ", rta);
+      if (rta[Object.keys(rta)[0]].length >= 0) {
+        return { success: false, errors: rta };
+      } else {
+        return { success: true };
+      }
     })
     .catch(err => {
-      return false;
+      return {
+        success: false
+      };
     });
 };
 

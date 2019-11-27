@@ -1,14 +1,14 @@
 import environment from "../environment/environment";
+import AuthService from "./AuthService";
 
-
-const get = function (id, size) {
+const get = function(id, size) {
   return fetch(`${environment.apiUrl}/puzzles/records/${id}/${size}`, {
     method: "get",
     headers: {
       "X-Requested-With": "XMLHttpRequest",
-      "Content-Type": "application/json"
-    } /*,
-    credentials: "include"*/ // TODO : UNCOMMENT
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + AuthService.getUserData().token
+    }
   })
     .then(rta => {
       if (!rta.ok) {
@@ -22,15 +22,15 @@ const get = function (id, size) {
     });
 };
 
-const create = function (data) {
+const create = function(data) {
   return fetch(`${environment.apiUrl}/puzzles/records`, {
     method: "post",
     body: JSON.stringify(data),
     headers: {
       "X-Requested-With": "XMLHttpRequest",
-      "Content-Type": "application/json"
-    } /*,
-    credentials: "include"*/ // TODO : UNCOMMENT
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + AuthService.getUserData().token
+    }
   })
     .then(rta => {
       return rta.ok;

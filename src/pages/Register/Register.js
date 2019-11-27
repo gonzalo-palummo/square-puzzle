@@ -57,8 +57,8 @@ class Register extends Component {
       email: this.state.formData.email,
       password: this.state.formData.password,
       plays: 0
-    }).then(success => {
-      if (success) {
+    }).then(rta => {
+      if (rta.success) {
         this.setState({
           message: {
             header: get("success"),
@@ -68,14 +68,26 @@ class Register extends Component {
           isLoading: false
         });
       } else {
-        this.setState({
-          message: {
-            header: "Oops!",
-            text: get("error") + ".",
-            type: "error"
-          },
-          isLoading: false
-        });
+        console.log(rta);
+        if (rta.errors) {
+          this.setState({
+            message: {
+              header: "Oops!",
+              text: rta.errors[Object.keys(rta.errors)[0]],
+              type: "error"
+            },
+            isLoading: false
+          });
+        } else {
+          this.setState({
+            message: {
+              header: "Oops!",
+              text: get("error") + ".",
+              type: "error"
+            },
+            isLoading: false
+          });
+        }
       }
     });
   };
@@ -186,7 +198,7 @@ class Register extends Component {
             type="submit"
             className="btn btn-block my-2 border-rounded w-75 mx-auto"
           >
-            {get("goRegister")}
+            {get("register")}
           </button>
           <Link
             to="/login"

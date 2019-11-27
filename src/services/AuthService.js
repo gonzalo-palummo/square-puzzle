@@ -43,9 +43,9 @@ const logout = function() {
     method: "post",
     headers: {
       "X-Requested-With": "XMLHttpRequest",
-      "Content-Type": "application/json"
-    } /*,
-    credentials: "include"*/ // TODO : UNCOMMENT
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + AuthService.getUserData().token
+    }
   })
     .then(rta => {
       return rta.ok;

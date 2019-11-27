@@ -92,7 +92,7 @@ const phrases = {
     recordsTable: "Tabla de records",
     seconds: "segundos",
     login: "Iniciar Sesión",
-    register: "Registro",
+    register: "Registrarse",
     goRegister: "Ir al Registro",
     goLogin: "Ir al Login",
     email: "Email",

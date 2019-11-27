@@ -28,9 +28,9 @@ const getOne = function(id) {
     method: "get",
     headers: {
       "X-Requested-With": "XMLHttpRequest",
-      "Content-Type": "application/json"
-    } /*,
-    credentials: "include"*/ // TODO : UNCOMMENT
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + AuthService.getUserData().token
+    }
   })
     .then(rta => {
       if (!rta.ok) {
@@ -52,8 +52,7 @@ const upload = function(data) {
       "X-Requested-With": "XMLHttpRequest",
       "Content-Type": "application/json",
       Authorization: "Bearer " + AuthService.getUserData().token
-    } /*,
-    credentials: "include"*/ // TODO : UNCOMMENT
+    }
   })
     .then(rta => {
       if (!rta.ok) {
