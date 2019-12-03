@@ -99,12 +99,12 @@ class Profile extends Component {
 
         <ul className="list-unstyled mt-5 row">
           <li className="col-6">
-            <h2 className="h5">{get("played")}</h2>
-            <p className="h4 profileNumbers">{this.state.userData.plays}</p>
+            <h2 className="h6">{get("played")}</h2>
+            <p className="h5 profileNumbers">{this.state.userData.plays}</p>
           </li>
           <li className="col-6">
-            <h2 className="h5 dots">{get("completed")}</h2>
-            <p className="h4 profileNumbers">{this.state.userData.completed}</p>
+            <h2 className="h6 dots">{get("completed")}</h2>
+            <p className="h5 profileNumbers">{this.state.userData.completed}</p>
           </li>
           <li className="col-6 bg-record py-4 px-0">
             <h2 className="h6">
