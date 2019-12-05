@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import "./Jigsaws.css";
-import { Link } from "react-router-dom";
-import environment from "../../environment/environment";
-import PuzzleService from "../../services/PuzzleService";
-import CSSLoader from "../../components/CSSLoader/CSSLoader";
-import { get } from "../../services/MultilingualService";
+import React, { Component } from 'react';
+import './Jigsaws.css';
+import { Link } from 'react-router-dom';
+import environment from '../../environment/environment';
+import PuzzleService from '../../services/PuzzleService';
+import CSSLoader from '../../components/CSSLoader/CSSLoader';
+import { get } from '../../services/MultilingualService';
 
 class Jigsaws extends Component {
   constructor(props) {
@@ -17,13 +17,13 @@ class Jigsaws extends Component {
 
   componentDidMount() {
     PuzzleService.getAll().then(puzzles => {
-      if (typeof puzzles === "object") {
+      if (typeof puzzles === 'object') {
         this.setState({
           puzzles: puzzles,
           isLoading: false
         });
       } else {
-        this.props.history.push("/login"); // TODO: FIX THIS, SHOULD REDIRECT TO THE ERROR PAGE
+        this.props.history.push('/login'); // TODO: FIX THIS, SHOULD REDIRECT TO THE ERROR PAGE
       }
     });
   }
@@ -44,12 +44,12 @@ class Jigsaws extends Component {
                 >
                   <Link to={`/jigsaws/${puzzle.id}`}>
                     <h2 className="h5 mb-4">
-                      {get("creator")}: {puzzle.user.user_name}
+                      {get('creator')}: {puzzle.user.user_name}
                     </h2>
                     <img
                       src={`${environment.publicUrl}/${puzzle.url}/complete.jpg`}
                       className="puzzle-preview rounded"
-                      alt={get("puzzlePreview")}
+                      alt={get('puzzlePreview')}
                     />
                   </Link>
                 </li>
@@ -57,7 +57,7 @@ class Jigsaws extends Component {
             : null}
         </ul>
         <Link
-          to={"/"}
+          to={'/'}
           className="btn btn-icon btn-back mt-2 btn-back-fixed"
         ></Link>
       </main>

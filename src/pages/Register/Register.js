@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import "./Register.css";
-import { Link, Redirect } from "react-router-dom";
-import UserService from "../../services/UserService";
-import ModalDialog from "../../components/ModalDialog/ModalDialog";
-import CSSLoader from "../../components/CSSLoader/CSSLoader";
-import { get } from "../../services/MultilingualService";
+import React, { Component } from 'react';
+import './Register.css';
+import { Link, Redirect } from 'react-router-dom';
+import UserService from '../../services/UserService';
+import ModalDialog from '../../components/ModalDialog/ModalDialog';
+import CSSLoader from '../../components/CSSLoader/CSSLoader';
+import { get } from '../../services/MultilingualService';
 
 class Register extends Component {
   constructor(props) {
@@ -12,10 +12,10 @@ class Register extends Component {
 
     this.state = {
       formData: {
-        user_name: "",
-        email: "",
-        password: "",
-        confirm_password: ""
+        user_name: '',
+        email: '',
+        password: '',
+        confirm_password: ''
       },
       message: {
         header: null,
@@ -40,9 +40,9 @@ class Register extends Component {
     if (this.state.formData.password != this.state.formData.confirm_password) {
       this.setState({
         message: {
-          header: "Oops!",
-          text: get("pwdMustMatch") + ".",
-          type: "error"
+          header: 'Oops!',
+          text: get('pwdMustMatch') + '.',
+          type: 'error'
         }
       });
       return false;
@@ -62,9 +62,9 @@ class Register extends Component {
       if (rta.success) {
         this.setState({
           message: {
-            header: get("success"),
-            text: get("accountCreated") + ".",
-            type: "success"
+            header: get('success'),
+            text: get('accountCreated') + '.',
+            type: 'success'
           },
           isLoading: false
         });
@@ -72,18 +72,18 @@ class Register extends Component {
         if (rta.errors) {
           this.setState({
             message: {
-              header: "Oops!",
+              header: 'Oops!',
               text: rta.errors[Object.keys(rta.errors)[0]],
-              type: "error"
+              type: 'error'
             },
             isLoading: false
           });
         } else {
           this.setState({
             message: {
-              header: "Oops!",
-              text: get("error") + ".",
-              type: "error"
+              header: 'Oops!',
+              text: get('error') + '.',
+              type: 'error'
             },
             isLoading: false
           });
@@ -94,7 +94,7 @@ class Register extends Component {
 
   handleRequestClose = () => {
     let success = true;
-    if (this.state.message.type == "error") {
+    if (this.state.message.type == 'error') {
       success = false;
     }
     this.setState({
@@ -117,7 +117,7 @@ class Register extends Component {
     }
 
     const message = this.state.message;
-    let modal = "";
+    let modal = '';
     if (message.text !== null) {
       modal = (
         <ModalDialog
@@ -132,12 +132,12 @@ class Register extends Component {
     return (
       <main>
         {modal}
-        <h1 className="h2 text-center">{get("register")}</h1>
+        <h1 className="h2 text-center">{get('register')}</h1>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label htmlFor="user_name">
               <div className="btn btn-icon btn-user"></div>
-              {get("userName")}
+              {get('userName')}
             </label>
             <input
               type="text"
@@ -152,7 +152,7 @@ class Register extends Component {
           <div className="form-group">
             <label htmlFor="email">
               <div className="btn btn-icon btn-email"></div>
-              {get("email")}
+              {get('email')}
             </label>
             <input
               type="email"
@@ -167,7 +167,7 @@ class Register extends Component {
           <div className="form-group">
             <label htmlFor="password">
               <div className="btn btn-icon btn-password"></div>
-              {get("password")}
+              {get('password')}
             </label>
             <input
               type="password"
@@ -182,7 +182,7 @@ class Register extends Component {
           <div className="form-group">
             <label htmlFor="confirm_password">
               <div className="btn btn-icon btn-password"></div>
-              {get("confirm")} {get("password")}
+              {get('confirm')} {get('password')}
             </label>
             <input
               type="password"
@@ -198,13 +198,13 @@ class Register extends Component {
             type="submit"
             className="btn btn-block my-2 border-rounded w-75 mx-auto"
           >
-            {get("register")}
+            {get('register')}
           </button>
           <Link
             to="/login"
             className="btn btn-secondary btn-block my-2 border-rounded text-white w-75 mx-auto"
           >
-            {get("goLogin")}
+            {get('goLogin')}
           </Link>
         </form>
       </main>
