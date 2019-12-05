@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import "./RecordsTable.css";
-import CSSLoader from "../CSSLoader/CSSLoader";
-import { Link } from "react-router-dom";
-import RecordService from "../../services/RecordService";
-import { get } from "../../services/MultilingualService";
+import React, { Component } from 'react';
+import './RecordsTable.css';
+import CSSLoader from '../CSSLoader/CSSLoader';
+import { Link } from 'react-router-dom';
+import RecordService from '../../services/RecordService';
+import { get } from '../../services/MultilingualService';
 
 class RecordsTable extends Component {
   constructor(props) {
@@ -18,13 +18,13 @@ class RecordsTable extends Component {
 
   componentDidMount() {
     RecordService.get(this.state.jigsawId, this.state.size).then(records => {
-      if (typeof records === "object") {
+      if (typeof records === 'object') {
         this.setState({
           records: records,
           isLoading: false
         });
       } else {
-        this.props.history.push("/login"); // TODO: FIX THIS, SHOULD REDIRECT TO THE ERROR PAGE
+        this.props.history.push('/login'); // TODO: FIX THIS, SHOULD REDIRECT TO THE ERROR PAGE
       }
     });
   }
@@ -38,15 +38,15 @@ class RecordsTable extends Component {
       <div className="container-table">
         <img
           width="60"
-          src={require("./../../images/logo.png")}
-          alt={get("logo")}
+          src={require('./../../images/logo.png')}
+          alt={get('logo')}
         />
         <table className="table">
           <thead>
             <tr>
-              <th>{get("userName")}</th>
-              <th>{get("time")}</th>
-              <th>{get("movements")}</th>
+              <th>{get('userName')}</th>
+              <th>{get('time')}</th>
+              <th>{get('movements')}</th>
             </tr>
           </thead>
           <tbody>
@@ -55,7 +55,7 @@ class RecordsTable extends Component {
                   index < 5 ? (
                     <tr key={index} className="border-rounded mx-auto my-3">
                       <td>
-                        {index + 1 + ". "}
+                        {index + 1 + '. '}
                         <Link
                           to={`/userprofile/${record.creator.id}`}
                           className="h5"
@@ -73,7 +73,9 @@ class RecordsTable extends Component {
               : null}
           </tbody>
         </table>
-        {this.state.records.length == 0 ? <p>{get("noRecords")}</p> : null}
+        {this.state.records.length == 0 ? (
+          <p className="mt-4">{get('noRecords')}</p>
+        ) : null}
       </div>
     );
   }

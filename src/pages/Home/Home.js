@@ -1,16 +1,17 @@
-import React, { Component } from "react";
-import "./Home.css";
-import { Link } from "react-router-dom";
-import Cards from "../../components/Cards/Cards";
-import ModalDialog from "../../components/ModalDialog/ModalDialog";
-import { get, setLanguage } from "../../services/MultilingualService";
+import React, { Component } from 'react';
+import './Home.css';
+import { Link } from 'react-router-dom';
+import Cards from '../../components/Cards/Cards';
+import ModalDialog from '../../components/ModalDialog/ModalDialog';
+import { get, setLanguage } from '../../services/MultilingualService';
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isLoading: true,
-      showSettings: false
+      showSettings: false,
+      sound: false
     };
   }
 
@@ -32,51 +33,62 @@ class Home extends Component {
         <ModalDialog
           isOpen={this.state.showSettings}
           onRequestClose={this.handleRequestClose}
-          title={get("settings")}
+          title={get('settings')}
           message={
             <div className="text-center">
-              <h2 className="h5 text-black shadow-none">{get("language")}</h2>
+              <h2 className="h5 text-black shadow-none">{get('language')}</h2>
               <button
                 className="btn btn-xs m-2"
                 onClick={() => {
-                  setLanguage("en");
+                  setLanguage('en');
                   this.setState({ showSettings: false });
                 }}
               >
-                {get("english")}
+                {get('english')}
               </button>
               <button
                 className="btn btn-xs m-2"
                 onClick={() => {
-                  setLanguage("es");
+                  setLanguage('es');
                   this.setState({ showSettings: false });
                 }}
               >
-                {get("spanish")}
+                {get('spanish')}
+              </button>
+
+              <h2 className="h5 text-black shadow-none mt-4">{get('sound')}</h2>
+              <button
+                className="btn btn-xs m-2"
+                onClick={() => {
+                  this.props.onChangeSound();
+                  this.setState({ sound: !this.state.sound });
+                }}
+              >
+                {this.state.sound ? get('no') : get('yes')}
               </button>
             </div>
           }
         ></ModalDialog>
         <Link
-          to={"/myprofile"}
+          to={'/myprofile'}
           className="btn btn-icon btn-user mb-5 mx-3"
         ></Link>
         <button
-          to={"/settings"}
+          to={'/settings'}
           className="btn btn-icon btn-settings mb-5 mx-3"
           onClick={this.handleClickSettings}
         ></button>
         <img
-          src={require("../../images/logofull.png")}
-          alt={get("logo")}
+          src={require('../../images/logofull.png')}
+          alt={get('logo')}
           width={150}
           className="d-block mx-auto"
         />
         <Link to={`/jigsaws`} className="btn vibrate-2 mt-5 w-75">
-          {get("select")} {get("puzzle")}
+          {get('select')} {get('puzzle')}
         </Link>
         <Link to={`/create`} className="btn btn-secondary mt-2 w-75">
-          {get("create")} {get("one")} !
+          {get('create')} {get('one')} !
         </Link>
       </main>
     );
