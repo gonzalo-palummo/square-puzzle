@@ -6,9 +6,9 @@ const getOne = function(id) {
     method: "get",
     headers: {
       "X-Requested-With": "XMLHttpRequest",
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + AuthService.getUserData().token
-    }
+      "Content-Type": "application/json"
+    },
+    credentials: "include"
   })
     .then(rta => {
       if (!rta.ok) {
@@ -27,9 +27,9 @@ const incrementPlays = function(userId) {
     method: "put",
     headers: {
       "X-Requested-With": "XMLHttpRequest",
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + AuthService.getUserData().token
-    }
+      "Content-Type": "application/json"
+    },
+    credentials: "include"
   })
     .then(rta => {
       return rta.ok;

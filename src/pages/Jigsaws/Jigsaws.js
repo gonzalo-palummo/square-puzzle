@@ -5,13 +5,15 @@ import environment from '../../environment/environment';
 import PuzzleService from '../../services/PuzzleService';
 import CSSLoader from '../../components/CSSLoader/CSSLoader';
 import { get } from '../../services/MultilingualService';
+import Coverflow from 'react-coverflow';
 
 class Jigsaws extends Component {
   constructor(props) {
     super(props);
     this.state = {
       puzzles: [],
-      isLoading: true
+      isLoading: true,
+      puzzleActive: 0
     };
   }
 
@@ -28,6 +30,10 @@ class Jigsaws extends Component {
     });
   }
 
+  goTo = puzzleId => {
+    this.props.history.push(`/jigsaws/${puzzleId}`);
+  };
+
   render() {
     if (this.state.isLoading) {
       return <CSSLoader />;
@@ -35,27 +41,40 @@ class Jigsaws extends Component {
     return (
       <main className="text-center">
         <h1 className="d-none">Puzzles list</h1>
-        <ul className="list-unstyled text-center puzzleSlider">
+        <Coverflow
+          displayQuantityOfSide={1}
+          infiniteScroll
+          enableHeading
+          navigation
+          active={this.state.puzzleActive}
+          media={{
+            '@media (max-width: 900px)': {
+              width: '100vw',
+              height: '100vh',
+              background: 'none',
+              position: 'fixed',
+              top: '0',
+              left: '0',
+              right: '0'
+            },
+            '@media (min-width: 900px)': {
+              width: '960px',
+              height: '600px'
+            }
+          }}
+        >
           {this.state.puzzles.length > 0
             ? this.state.puzzles.map((puzzle, index) => (
-                <li
-                  key={index}
-                  className="puzzle-item p-2 rounded my-2 text-white"
-                >
-                  <Link to={`/jigsaws/${puzzle.id}`}>
-                    <h2 className="h5 mb-4">
-                      {get('creator')}: {puzzle.user.user_name}
-                    </h2>
-                    <img
-                      src={`${environment.publicUrl}/${puzzle.url}/complete.jpg`}
-                      className="puzzle-preview rounded"
-                      alt={get('puzzlePreview')}
-                    />
-                  </Link>
-                </li>
+                <img
+                  src={`${environment.publicUrl}/${puzzle.url}/complete.jpg`}
+                  alt={puzzle.user.user_name}
+                  onClick={() => this.goTo(puzzle.id)}
+                  key={puzzle.id}
+                />
               ))
             : null}
-        </ul>
+        </Coverflow>
+
         <Link
           to={'/'}
           className="btn btn-icon btn-back mt-2 btn-back-fixed"

@@ -204,16 +204,16 @@ class JigsawCreate extends Component {
           >
             {get("rotate")}
           </button>
-          <div class="form-check my-3 mb-4">
+          <div className="form-check my-3 mb-4">
             <input
               type="checkbox"
-              class="form-check-input checkbox-custom"
+              className="form-check-input checkbox-custom"
               id="public"
               name="public"
               onChange={this.handleChange}
               value={this.state.imageData.public}
             />
-            <label class="form-check-label checkbox-custom-label" for="public">
+            <label className="form-check-label checkbox-custom-label" htmlFor="public">
               {get("makePublic")}
             </label>
           </div>
@@ -237,6 +237,7 @@ class JigsawCreate extends Component {
         </h1>
         <form onSubmit={this.handleSubmit}>
           <div className="file-upload mx-auto my-5">
+          <label>
             <input
               type="file"
               id="image"
@@ -246,6 +247,7 @@ class JigsawCreate extends Component {
               ref={this.imageInput}
               onChange={this.handleChooseFile}
             />
+          </label>
           </div>
           {avatarEditor}
         </form>

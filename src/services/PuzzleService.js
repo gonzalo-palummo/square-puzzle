@@ -6,10 +6,9 @@ const getAll = function() {
     method: "get",
     headers: {
       "X-Requested-With": "XMLHttpRequest",
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + AuthService.getUserData().token
-    } /*,
-    credentials: "include"*/
+      "Content-Type": "application/json"
+    },
+    credentials: "include"
   })
     .then(rta => {
       if (!rta.ok) {
@@ -28,9 +27,9 @@ const getOne = function(id) {
     method: "get",
     headers: {
       "X-Requested-With": "XMLHttpRequest",
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + AuthService.getUserData().token
-    }
+      "Content-Type": "application/json"
+    },
+    credentials: "include"
   })
     .then(rta => {
       if (!rta.ok) {
@@ -50,9 +49,9 @@ const upload = function(data) {
     body: JSON.stringify(data),
     headers: {
       "X-Requested-With": "XMLHttpRequest",
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + AuthService.getUserData().token
-    }
+      "Content-Type": "application/json"
+    },
+    credentials: "include"
   })
     .then(rta => {
       if (!rta.ok) {

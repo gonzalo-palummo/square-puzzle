@@ -19,3 +19,16 @@
 .puzzle-item h2 {
   margin-top: 8vh;
 }
+
+div[class^='coverflow__text'] {
+  padding: 0 5px;
+  background: none;
+  bottom: 2px;
+  word-break: break-all;
+}
+
+*[class^='coverflow__figure'] {
+  box-shadow: none !important;
+  backface-visibility: unset !important;
+  transition: transform 500ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
