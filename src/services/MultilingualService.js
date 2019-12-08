@@ -120,9 +120,11 @@ const setLanguage = function(language) {
   if (language == 'es') {
     language = 'es';
     localStorage.language = 'es';
+    document.documentElement.lang = 'es';
   } else {
     language = 'en';
     localStorage.language = 'en';
+    document.documentElement.lang = 'en';
   }
 };
 
