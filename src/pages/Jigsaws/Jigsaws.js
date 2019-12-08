@@ -44,11 +44,11 @@ class Jigsaws extends Component {
         <Coverflow
           displayQuantityOfSide={1}
           infiniteScroll
-          enableHeading
           navigation
+          enableHeading
           active={this.state.puzzleActive}
           media={{
-            '@media (max-width: 900px)': {
+            '@media (max-width: 100000px)': {
               width: '100vw',
               height: '100vh',
               background: 'none',
@@ -56,10 +56,6 @@ class Jigsaws extends Component {
               top: '0',
               left: '0',
               right: '0'
-            },
-            '@media (min-width: 900px)': {
-              width: '960px',
-              height: '600px'
             }
           }}
         >
