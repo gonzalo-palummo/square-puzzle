@@ -38,6 +38,18 @@ div[class^='coverflow__arrow'] {
   height: 100vh;
 }
 
+.coverflow__right__1tzAF {
+  right: 0px !important;
+}
+
+div[class^='coverflow__stage'] {
+  width: 88%;
+}
+
+img[class^='coverflow__cover'] {
+  max-width: 100% !important;
+}
+
 .coverflow__left__PhMc6 {
   left: 15px !important;
 }

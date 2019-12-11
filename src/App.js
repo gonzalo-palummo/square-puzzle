@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import './styles/buttons.css';
 import './styles/forms.css';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { HashRouter, Route, Redirect } from 'react-router-dom';
 import Jigsaw from './pages/Jigsaw/Jigsaw';
 import JigsawSizes from './pages/JigsawSizes/JigsawSizes';
 import Jigsaws from './pages/Jigsaws/Jigsaws';
@@ -14,7 +14,6 @@ import AuthRoute from './components/AuthRoute/AuthRoute';
 import JigsawStart from './pages/JigsawStart/JigsawStart';
 import Home from './pages/Home/Home';
 import JigsawCreate from './pages/JigsawCreate/JigsawCreate';
-import AuthService from './services/AuthService';
 
 class App extends Component {
   constructor(props) {
@@ -66,7 +65,7 @@ class App extends Component {
   render() {
     return (
       <>
-        <BrowserRouter>
+        <HashRouter>
           <div className="app container">
             <AuthRoute
               path="/jigsaws"
@@ -117,7 +116,6 @@ class App extends Component {
                 <Home onChangeSound={this.playStopSound} {...props} />
               )}
             />
-
             <Route
               path="/login"
               render={props => (
@@ -125,8 +123,9 @@ class App extends Component {
               )}
             />
             <Route path="/register" component={Register} />
+            <Redirect to="/" />
           </div>
-        </BrowserRouter>
+        </HashRouter>
         <audio
           ref={input => {
             this.audioRef = input;

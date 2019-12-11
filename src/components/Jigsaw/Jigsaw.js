@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import "./Jigsaw.css";
-import Piece from "../Piece/Piece";
-import { withRouter } from "react-router-dom";
-import environment from "../../environment/environment";
+import React, { Component } from 'react';
+import './Jigsaw.css';
+import Piece from '../Piece/Piece';
+import { withRouter } from 'react-router-dom';
+import environment from '../../environment/environment';
 
 class Jigsaw extends Component {
   constructor(props) {
@@ -17,13 +17,13 @@ class Jigsaw extends Component {
   }
 
   componentDidMount() {
-    window.addEventListener("resize", this.updateDimensions);
+    window.addEventListener('resize', this.updateDimensions);
     this.updateDimensions();
     const pieces = [...Array(this.state.size * this.state.size)].map(
       (_, i) => ({
         img: `${environment.publicUrl}/images/puzzles/${this.state.jigsawId}/${
           this.state.size
-        }/img_${("0" + (i + 1)).substr(-2)}.jpg`,
+        }/img_${('0' + (i + 1)).substr(-2)}.jpg`,
         order: i - 1
       })
     );
@@ -48,7 +48,7 @@ class Jigsaw extends Component {
     let imgStyle = {
       width: `${pieceWidth}px`,
       height: `${pieceWidth}px`,
-      outline: "1px solid"
+      outline: '1px solid'
     };
 
     return (
