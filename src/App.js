@@ -123,9 +123,9 @@ class App extends Component {
               )}
             />
             <Route path="/register" component={Register} />
-            <Redirect to="/" />
           </div>
         </HashRouter>
+
         <audio
           ref={input => {
             this.audioRef = input;
