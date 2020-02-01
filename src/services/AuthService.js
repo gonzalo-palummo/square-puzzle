@@ -1,21 +1,21 @@
-import environment from "./../environment/environment";
+import environment from './../environment/environment';
 
 let userData = {
   email: null,
   id: null,
   user_name: null,
-  token: null
+  first_game: null
 };
 
 const login = function(credentials) {
   return fetch(`${environment.apiUrl}/login`, {
-    method: "post",
+    method: 'post',
     body: JSON.stringify(credentials),
     headers: {
-      "X-Requested-With": "XMLHttpRequest",
-      "Content-Type": "application/json"
+      'X-Requested-With': 'XMLHttpRequest',
+      'Content-Type': 'application/json'
     },
-    credentials: "include"
+    credentials: 'include'
   })
     .then(rta => {
       if (!rta.ok) {
@@ -29,7 +29,7 @@ const login = function(credentials) {
         email: credentials.email,
         id: rta.id,
         user_name: rta.user_name,
-        token: rta.token
+        first_game: true
       };
       localStorage.user_data = JSON.stringify(userData);
       return userData;
@@ -39,14 +39,14 @@ const login = function(credentials) {
     });
 };
 const logout = function() {
-  localStorage.removeItem("user_data"); // TODO: MOVE THIS TO THE COMPONENT AFTER
+  localStorage.removeItem('user_data'); // TODO: MOVE THIS TO THE COMPONENT AFTER
   return fetch(`${environment.apiUrl}/logout`, {
-    method: "post",
+    method: 'post',
     headers: {
-      "X-Requested-With": "XMLHttpRequest",
-      "Content-Type": "application/json"
+      'X-Requested-With': 'XMLHttpRequest',
+      'Content-Type': 'application/json'
     },
-    credentials: "include"
+    credentials: 'include'
   })
     .then(rta => {
       return rta.ok;
@@ -71,9 +71,14 @@ const getUserData = function() {
   }
 };
 
+const setUserData = function(newUserData) {
+  localStorage.user_data = JSON.stringify(newUserData);
+  userData = newUserData;
+};
+
 /**
  * Authentication Service.
- * @type {{login: (function(*=): Promise<Response | never>), logout: (function(): Promise<boolean | never>), isAuthenticated: (function(): boolean), getUserData: (function(): {email: null, id: null, user_name: null, token: null})}}
+ * @type {{login: (function(*=): Promise<Response | never>), logout: (function(): Promise<boolean | never>), isAuthenticated: (function(): boolean), getUserData: (function(): {email: null, id: null, user_name: null, first_game: null}, setUserData: (function(): void)}}
  */
 const AuthService = {
   login: login,
@@ -82,8 +87,9 @@ const AuthService = {
 
   isAuthenticated: isAuthenticated,
 
-  getUserData: getUserData
+  getUserData: getUserData,
+  setUserData: setUserData
 };
 
 export default AuthService;
-export { login, logout, isAuthenticated, getUserData };
+export { login, logout, isAuthenticated, getUserData, setUserData };

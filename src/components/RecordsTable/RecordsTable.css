@@ -7,7 +7,7 @@
   /*background: linear-gradient(to top, #007bffd1 10%, #98f1ffdb 80%),
     url("../../images/logopattern.png") center/8%;*/
   background: linear-gradient(to bottom, #007bffd1 10%, #98f1ffdb 90%),
-    url("../../images/logopattern.png") center/8%;
+    url('../../images/logopattern.png') center/8%;
   /*background-image: linear-gradient(to top, #d3890ebd 10%, #ffd877d1 80%);*/
   border-radius: 12px;
   box-shadow: 0px 5px #0276f35e;
@@ -38,6 +38,12 @@ td {
   border-top-color: #ffffff5c !important;
 }
 
+th,
+td {
+  font-weight: normal;
+}
+
 .badge {
   font-size: 0.8rem !important;
+  font-weight: normal !important;
 }

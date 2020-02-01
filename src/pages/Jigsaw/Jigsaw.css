@@ -8,14 +8,24 @@
 .timer {
   color: white;
   font-size: 30px;
+  margin-top: 3px;
 }
 
 .reference {
   max-width: 100%;
 }
 
+.tutorial {
+  max-width: 80%;
+}
+
+.modal-body {
+  text-align: center;
+}
+
 .btn-eye {
   padding: 1.35rem !important;
+  margin-right: 20px;
 }
 
 .congratulations {

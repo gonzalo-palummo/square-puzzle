@@ -44,7 +44,8 @@ class App extends Component {
       userData: {
         id: null,
         email: null,
-        user_name: null
+        user_name: null,
+        first_game: null
       }
     });
     /*

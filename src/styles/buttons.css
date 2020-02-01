@@ -39,27 +39,32 @@
 }
 
 .btn-eye {
-  background-image: url("./../images/icons/eye.png");
+  background-image: url('./../images/icons/eye.png');
   border: none !important;
 }
 
 .btn-back {
-  background-image: url("./../images/icons/back.png");
+  background-image: url('./../images/icons/back.png');
   background-size: 27px;
 }
 
 .btn-email {
-  background-image: url("./../images/icons/email.png");
+  background-image: url('./../images/icons/email.png');
 }
 
 .btn-password {
-  background-image: url("./../images/icons/password.png");
+  background-image: url('./../images/icons/password.png');
 }
 
 .btn-user {
-  background-image: url("./../images/icons/user.png");
+  background-image: url('./../images/icons/user.png');
 }
 
 .btn-settings {
-  background-image: url("./../images/icons/wheel.png");
+  background-image: url('./../images/icons/wheel.png');
+}
+
+.btn-reload {
+  background-image: url('./../images/icons/reload.png');
+  border: none !important;
 }

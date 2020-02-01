@@ -55,7 +55,8 @@ const phrases = {
     success: 'Success',
     sound: 'Sound',
     yes: 'Yes',
-    no: 'No'
+    no: 'No',
+    howToPlay: 'How to play'
   },
   es: {
     close: 'Cerrar',
@@ -112,7 +113,8 @@ const phrases = {
     success: 'Éxito',
     sound: 'Sonido',
     yes: 'Sí',
-    no: 'No'
+    no: 'No',
+    howToPlay: 'Cómo jugar'
   }
 };
 

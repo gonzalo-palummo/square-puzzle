@@ -1,16 +1,16 @@
-import React, { Component } from "react";
-import "./Jigsaw.css";
-import JigsawComponent from "../../components/Jigsaw/Jigsaw";
-import UserService from "./../../services/UserService";
-import { getUserData } from "./../../services/AuthService";
-import CSSLoader from "../../components/CSSLoader/CSSLoader";
-import RecordService from "../../services/RecordService";
-import { Link } from "react-router-dom";
-import ModalDialog from "../../components/ModalDialog/ModalDialog";
-import environment from "../../environment/environment";
-import Explosion from "../../components/Explosion/Explosion";
-import Advert from "../../components/Advert/Advert";
-import { get } from "../../services/MultilingualService";
+import React, { Component } from 'react';
+import './Jigsaw.css';
+import JigsawComponent from '../../components/Jigsaw/Jigsaw';
+import UserService from './../../services/UserService';
+import { getUserData, setUserData } from './../../services/AuthService';
+import CSSLoader from '../../components/CSSLoader/CSSLoader';
+import RecordService from '../../services/RecordService';
+import { Link } from 'react-router-dom';
+import ModalDialog from '../../components/ModalDialog/ModalDialog';
+import environment from '../../environment/environment';
+import Explosion from '../../components/Explosion/Explosion';
+import Advert from '../../components/Advert/Advert';
+import { get } from '../../services/MultilingualService';
 
 class Jigsaw extends Component {
   constructor(props) {
@@ -24,6 +24,8 @@ class Jigsaw extends Component {
         this.props.match.params.size * this.props.match.params.size - 1,
       countLoadedPieces: 1,
       showReference: false,
+      showTutorial: getUserData().first_game,
+      showJigsaw: true,
       completed: false,
       advert: true,
       counter: 5
@@ -56,10 +58,33 @@ class Jigsaw extends Component {
     });
   };
 
-  handleRequestClose = () => {
+  handleClickReload = () => {
+    this.setState({
+      showJigsaw: false
+    });
+
+    setTimeout(
+      () =>
+        this.setState({
+          showJigsaw: true
+        }),
+      1
+    );
+  };
+
+  handleRequestReferenceClose = () => {
     this.setState({
       showReference: false
     });
+  };
+
+  handleRequestTutorialClose = () => {
+    this.setState({
+      showTutorial: false
+    });
+    const userData = JSON.parse(localStorage.user_data);
+    userData.first_game = false;
+    setUserData(userData);
   };
 
   onComplete = () => {
@@ -87,7 +112,7 @@ class Jigsaw extends Component {
             `/jigsaws/${this.props.match.params.jigsawId}/${this.props.match.params.size}/complete/${time}/${this.state.movements}`
           );
         } else {
-          this.props.history.push("/login"); // TODO: FIX THIS, SHOULD REDIRECT TO THE ERROR PAGE
+          this.props.history.push('/login'); // TODO: FIX THIS, SHOULD REDIRECT TO THE ERROR PAGE
         }
       });
     }, 5000);
@@ -98,7 +123,7 @@ class Jigsaw extends Component {
     UserService.incrementPlays(getUserData().id).then(success => {
       if (success) {
       } else {
-        this.props.history.push("/login"); // TODO: FIX THIS, SHOULD REDIRECT TO THE ERROR PAGE
+        this.props.history.push('/login'); // TODO: FIX THIS, SHOULD REDIRECT TO THE ERROR PAGE
       }
     });
 
@@ -127,57 +152,77 @@ class Jigsaw extends Component {
       <main className="text-center">
         <ModalDialog
           isOpen={this.state.showReference}
-          onRequestClose={this.handleRequestClose}
-          title={get("imageReference")}
+          onRequestClose={this.handleRequestReferenceClose}
+          title={get('imageReference')}
           message={
             <img
               src={`${environment.publicUrl}/images/puzzles/${this.props.match.params.jigsawId}/complete.jpg`}
-              alt={get("imageReference")}
+              alt={get('imageReference')}
               className="reference"
             />
           }
         ></ModalDialog>
-        {this.state.isLoading ? <CSSLoader /> : ""}
+        <ModalDialog
+          isOpen={this.state.showTutorial}
+          onRequestClose={this.handleRequestTutorialClose}
+          title={get('howToPlay')}
+          message={
+            <img
+              src={require('../../images/gameplay.gif')}
+              alt={get('howToPlay')}
+              className="tutorial"
+            />
+          }
+        ></ModalDialog>
+        {this.state.isLoading ? <CSSLoader /> : ''}
         {this.state.completed ? (
           <>
             <Explosion />
             <div className="wrapper"></div>
             <p className="congratulations h3 slide-in-elliptic-top-fwd">
-              {get("congratulations")} !
+              {get('congratulations')} !
             </p>
             <img
-              src={require("../../images/win.svg")}
+              src={require('../../images/win.svg')}
               className="icon-win slide-in-elliptic-top-fwd"
             />
           </>
         ) : (
-          ""
+          ''
         )}
         <div className="header">
           <div className="row">
-            <div className="col-4">
+            <div className="col-6">
               <button
                 className="btn btn-icon btn-eye"
                 onClick={this.handleClickReference}
               ></button>
+              <button
+                className="btn btn-icon btn-reload"
+                onClick={this.handleClickReload}
+              ></button>
             </div>
-            <div className="col-8">
+            <div className="col-6">
               <p className="timer font-weight-light">
-                <span id="timer">{this.secondsElapsed()}</span> |{" "}
+                <span id="timer">{this.secondsElapsed()}</span> |{' '}
                 {this.state.movements}
               </p>
             </div>
           </div>
         </div>
+        {this.state.showJigsaw ? (
+          <JigsawComponent
+            size={this.props.match.params.size}
+            jigsawId={this.props.match.params.jigsawId}
+            onLoad={this.handleLoad}
+            onMove={this.handleMove}
+            onComplete={this.onComplete}
+          />
+        ) : (
+          ''
+        )}
 
-        <JigsawComponent
-          size={this.props.match.params.size}
-          jigsawId={this.props.match.params.jigsawId}
-          onLoad={this.handleLoad}
-          onMove={this.handleMove}
-          onComplete={this.onComplete}
-        />
-        <Link to={"/"} className="btn btn-icon btn-back mt-4"></Link>
+        <Link to={'/'} className="btn btn-icon btn-back mt-4"></Link>
       </main>
     );
   }
