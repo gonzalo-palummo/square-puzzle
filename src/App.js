@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import './styles/buttons.css';
 import './styles/forms.css';
-import { HashRouter, Route, Redirect } from 'react-router-dom';
+import { HashRouter, Route } from 'react-router-dom';
 import Jigsaw from './pages/Jigsaw/Jigsaw';
 import JigsawSizes from './pages/JigsawSizes/JigsawSizes';
 import Jigsaws from './pages/Jigsaws/Jigsaws';
@@ -22,11 +22,9 @@ class App extends Component {
       userData: {
         id: null,
         email: null,
-        user_name: null,
-        sound: false
+        user_name: null
       }
     };
-    this.audioRef = React.createRef();
     this.handleAuthenticated = this.handleAuthenticated.bind(this);
   }
 
@@ -52,15 +50,6 @@ class App extends Component {
     AuthService.logout().then(success => {
       console.log("success", success);
     });*/
-  };
-
-  playStopSound = () => {
-    if (this.state.sound == true) {
-      this.audioRef.pause();
-    } else {
-      this.audioRef.play();
-    }
-    this.setState({ sound: !this.state.sound });
   };
 
   render() {
@@ -110,13 +99,7 @@ class App extends Component {
               exact
               component={JigsawStart}
             />
-            <AuthRoute
-              path="/"
-              exact
-              render={props => (
-                <Home onChangeSound={this.playStopSound} {...props} />
-              )}
-            />
+            <AuthRoute path="/" exact render={props => <Home {...props} />} />
             <Route
               path="/login"
               render={props => (
@@ -126,15 +109,6 @@ class App extends Component {
             <Route path="/register" component={Register} />
           </div>
         </HashRouter>
-
-        <audio
-          ref={input => {
-            this.audioRef = input;
-          }}
-          loop
-          src="http://soundimage.org/wp-content/uploads/2016/01/Surreal-Chase_Looping.mp3"
-          style={{ display: 'none' }}
-        />
       </>
     );
   }

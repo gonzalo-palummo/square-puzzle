@@ -10,8 +10,7 @@ class Home extends Component {
     super(props);
     this.state = {
       isLoading: true,
-      showSettings: false,
-      sound: false
+      showSettings: false
     };
   }
 
@@ -54,17 +53,6 @@ class Home extends Component {
                 }}
               >
                 {get('spanish')}
-              </button>
-
-              <h2 className="h5 text-black shadow-none mt-4">{get('sound')}</h2>
-              <button
-                className="btn btn-xs m-2"
-                onClick={() => {
-                  this.props.onChangeSound();
-                  this.setState({ sound: !this.state.sound });
-                }}
-              >
-                {this.state.sound ? get('no') : get('yes')}
               </button>
             </div>
           }
