@@ -26,28 +26,11 @@ class App extends Component {
         sound: false
       }
     };
-    //this.audioRef = React.createRef();
+    this.audioRef = React.createRef();
     this.handleAuthenticated = this.handleAuthenticated.bind(this);
   }
 
   componentDidMount() {}
-
-  myMedia = new Media(
-    'http://soundimage.org/wp-content/uploads/2016/01/Surreal-Chase_Looping.mp3',
-    function() {},
-    function(e) {
-      alert('Media Error: ' + JSON.stringify(e));
-    }
-  );
-
-  playMP3() {
-    this.myMedia.play();
-    this.myMedia.setVolume('1.0');
-  }
-
-  pauseMP3() {
-    this.myMedia.pause();
-  }
 
   handleAuthenticated(user) {
     this.setState({
@@ -73,9 +56,9 @@ class App extends Component {
 
   playStopSound = () => {
     if (this.state.sound == true) {
-      this.pauseMP3();
+      this.audioRef.pause();
     } else {
-      this.playMP3();
+      this.audioRef.play();
     }
     this.setState({ sound: !this.state.sound });
   };
@@ -143,20 +126,18 @@ class App extends Component {
             <Route path="/register" component={Register} />
           </div>
         </HashRouter>
+
+        <audio
+          ref={input => {
+            this.audioRef = input;
+          }}
+          loop
+          src="http://soundimage.org/wp-content/uploads/2016/01/Surreal-Chase_Looping.mp3"
+          style={{ display: 'none' }}
+        />
       </>
     );
   }
 }
 
 export default App;
-
-/*
-  <audio
-    ref={input => {
-      this.audioRef = input;
-    }}
-    loop
-    src="http://soundimage.org/wp-content/uploads/2016/01/Surreal-Chase_Looping.mp3"
-    style={{ display: 'none' }}
-  />
-*/
