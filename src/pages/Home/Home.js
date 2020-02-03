@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './Home.css';
 import { Link } from 'react-router-dom';
-import Cards from '../../components/Cards/Cards';
 import ModalDialog from '../../components/ModalDialog/ModalDialog';
 import { get, setLanguage } from '../../services/MultilingualService';
 
@@ -62,7 +61,6 @@ class Home extends Component {
           className="btn btn-icon btn-user mb-5 mx-3"
         ></Link>
         <button
-          to={'/settings'}
           className="btn btn-icon btn-settings mb-5 mx-3"
           onClick={this.handleClickSettings}
         ></button>

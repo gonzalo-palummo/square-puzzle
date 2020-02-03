@@ -1,14 +1,14 @@
-import environment from "../environment/environment";
-import AuthService from "./AuthService";
+import environment from '../environment/environment';
+import AuthService from './AuthService';
 
 const getAll = function() {
   return fetch(`${environment.apiUrl}/puzzles`, {
-    method: "get",
+    method: 'get',
     headers: {
-      "X-Requested-With": "XMLHttpRequest",
-      "Content-Type": "application/json"
+      'X-Requested-With': 'XMLHttpRequest',
+      'Content-Type': 'application/json'
     },
-    credentials: "include"
+    credentials: 'include'
   })
     .then(rta => {
       if (!rta.ok) {
@@ -24,12 +24,12 @@ const getAll = function() {
 
 const getOne = function(id) {
   return fetch(`${environment.apiUrl}/puzzles/${id}`, {
-    method: "get",
+    method: 'get',
     headers: {
-      "X-Requested-With": "XMLHttpRequest",
-      "Content-Type": "application/json"
+      'X-Requested-With': 'XMLHttpRequest',
+      'Content-Type': 'application/json'
     },
-    credentials: "include"
+    credentials: 'include'
   })
     .then(rta => {
       if (!rta.ok) {
@@ -45,13 +45,13 @@ const getOne = function(id) {
 
 const upload = function(data) {
   return fetch(`${environment.apiUrl}/puzzles`, {
-    method: "post",
+    method: 'post',
     body: JSON.stringify(data),
     headers: {
-      "X-Requested-With": "XMLHttpRequest",
-      "Content-Type": "application/json"
+      'X-Requested-With': 'XMLHttpRequest',
+      'Content-Type': 'application/json'
     },
-    credentials: "include"
+    credentials: 'include'
   })
     .then(rta => {
       if (!rta.ok) {
@@ -66,7 +66,6 @@ const upload = function(data) {
 };
 
 /**
- * Servicio de autenticación.
  * @type {{getOne: (function(*=): Promise<Response | never>), getAll: (function(*=): Promise<Response | never>), upload: (function(*=): Promise<Response | never>)}}
  */
 const PuzzleService = {

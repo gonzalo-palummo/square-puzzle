@@ -56,7 +56,12 @@ const phrases = {
     sound: 'Sound',
     yes: 'Yes',
     no: 'No',
-    howToPlay: 'How to play'
+    howToPlay: 'How to play',
+    puzzlesList: 'Puzzles List',
+    filters: 'Filters',
+    myPuzzles: 'My puzzles',
+    mostWon: 'Most won',
+    mostLost: 'Most lost'
   },
   es: {
     close: 'Cerrar',
@@ -114,7 +119,12 @@ const phrases = {
     sound: 'Sonido',
     yes: 'Sí',
     no: 'No',
-    howToPlay: 'Cómo jugar'
+    howToPlay: 'Cómo jugar',
+    puzzlesList: 'Lista de Rompecabezas',
+    filters: 'Filtros',
+    myPuzzles: 'Mis rompecabezas',
+    mostWon: 'Más ganados',
+    mostLost: 'Más perdidos'
   }
 };
 

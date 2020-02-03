@@ -7,6 +7,11 @@
   margin: auto;
 }
 
+#filters {
+  z-index: 2;
+  position: relative;
+}
+
 .puzzleSlider {
   display: flex;
   overflow-x: auto;
