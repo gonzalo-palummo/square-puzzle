@@ -80,7 +80,8 @@ class Jigsaw extends Component {
 
   handleRequestTutorialClose = () => {
     this.setState({
-      showTutorial: false
+      showTutorial: false,
+      start: Date.now()
     });
     const userData = JSON.parse(localStorage.user_data);
     userData.first_game = false;
