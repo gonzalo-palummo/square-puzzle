@@ -35,7 +35,6 @@ class Jigsaws extends Component {
       if (typeof puzzles === 'object') {
         this.setState({
           puzzles: puzzles,
-          filterPuzzles: puzzles,
           isLoading: false,
           filterCounter: this.state.filterCounter + 1
         });

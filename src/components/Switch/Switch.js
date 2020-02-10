@@ -15,7 +15,7 @@ class Switch extends Component {
           checked={this.props.checked}
           onChange={this.props.onInputChange}
         />
-        <span className="slider round"></span>
+        <span className="slider-switch round"></span>
         <span className="labelText">{this.props.label}</span>
       </label>
     );
