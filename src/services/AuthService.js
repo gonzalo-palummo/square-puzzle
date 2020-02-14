@@ -88,6 +88,7 @@ const AuthService = {
   isAuthenticated: isAuthenticated,
 
   getUserData: getUserData,
+
   setUserData: setUserData
 };
 
