@@ -1,15 +1,15 @@
-import React from "react";
-import "./JigsawSizes.css";
-import { Link } from "react-router-dom";
-import { get } from "../../services/MultilingualService";
+import React from 'react';
+import './JigsawSizes.css';
+import { Link } from 'react-router-dom';
+import { get } from '../../services/MultilingualService';
 
 function JigsawSizes(props) {
   let jigsawId = props.match.params.jigsawId;
-  let sizes = [2, 3, 4];
+  let sizes = [3, 4];
   return (
     <main className="text-center">
       <h1 className="h3 mb-4">
-        {get("choose")} {get("size")}
+        {get('choose')} {get('size')}
       </h1>
       <ul className="list-unstyled w-50 m-auto">
         {sizes.map((size, index) => (
